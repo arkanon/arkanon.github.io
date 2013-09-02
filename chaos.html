@@ -64,18 +64,12 @@
     function init1()
     {
 
-      body         = document.getElementsByTagName('body')[0];
-      marginTop    = computed('margin-top'   );
-      marginRight  = computed('margin-right' );
-      marginBottom = computed('margin-bottom');
-      marginLeft   = computed('margin-left'  );
+      W = window.innerWidth;
+      H = window.innerHeight;
 
-      W            = window.innerWidth  - ( marginLeft + marginRight  );
-      H            = window.innerHeight - ( marginTop  + marginBottom );
+      semente  = [ 350+(W-700)*Math.random(), 350+(H-700)*Math.random() ];
 
-      semente      = [ 350+(W-700)*Math.random(), 350+(H-700)*Math.random() ];
-
-      vertices     =
+      vertices =
       [
         [  50+(W-100)*Math.random(),  50+(H-100)*Math.random() ] ,
         [ 150+(W-300)*Math.random(), 150+(H-300)*Math.random() ] ,
@@ -141,13 +135,6 @@
       context.moveTo(x0,y0);
       context.lineTo(x1,y1);
       context.stroke();
-    }
-
-
-
-    function computed(prop)
-    {
-      return parseFloat(window.getComputedStyle(body).getPropertyValue(prop));
     }
 
 
