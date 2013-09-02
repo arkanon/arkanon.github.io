@@ -70,16 +70,16 @@
       marginBottom = computed('margin-bottom');
       marginLeft   = computed('margin-left'  );
 
-      W            = window.innerWidth  - ( marginLeft + marginRight  + 700 );
-      H            = window.innerHeight - ( marginTop  + marginBottom + 700 );
+      W            = window.innerWidth  - ( marginLeft + marginRight  );
+      H            = window.innerHeight - ( marginTop  + marginBottom );
 
-      semente      = [ 350+W*Math.random(), 350+H*Math.random() ];
+      semente      = [ 350+(W-700)*Math.random(), 350+(H-700)*Math.random() ];
 
       vertices     =
       [
-        [  50+W*Math.random(),  50+H*Math.random() ] ,
-        [ 150+W*Math.random(), 150+H*Math.random() ] ,
-        [ 250+W*Math.random(), 250+H*Math.random() ]
+        [  50+(W-100)*Math.random(),  50+(H-100)*Math.random() ] ,
+        [ 150+(W-300)*Math.random(), 150+(H-300)*Math.random() ] ,
+        [ 250+(W-500)*Math.random(), 250+(H-500)*Math.random() ]
       ];
 
     }
