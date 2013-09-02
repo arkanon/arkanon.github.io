@@ -16,11 +16,26 @@
   <meta charset="utf-8">
 
   <script>
+  
+    var body         = document.getElementsByTagName('body')[0];
+    var marginTop    = computed('margin-top'   );
+    var marginRight  = computed('margin-right' );
+    var marginBottom = computed('margin-bottom');
+    var marginLeft   = computed('margin-left'  );
 
-    var vertices   = [ [ 300, 150 ] , [ 50, 550 ] , [ 950, 350 ] ];
-    var cores      = [ 'red'        , 'green'     , 'blue'       ];
-    var semente    = [ 900, 100 ];
-    var parametros =
+    var W            = window.innerWidth  - ( marginLeft + marginRight  );
+    var H            = window.innerHeight - ( marginTop  + marginBottom );
+
+    var vertices     =
+    [
+      [ Math.random()*W, Math.random()*H ] ,
+      [ Math.random()*W, Math.random()*H ] ,
+      [ Math.random()*W, Math.random()*H ]
+    ];
+
+    var cores        = [ 'red'        , 'green'     , 'blue'       ];
+    var semente      = [ Math.random()*W, Math.random()*H ];
+    var parametros   =
     {
 
       'estado'  : {
@@ -60,15 +75,6 @@
 
     function init()
     {
-
-      body          = document.getElementsByTagName('body')[0];
-      marginTop     = computed('margin-top'   );
-      marginRight   = computed('margin-right' );
-      marginBottom  = computed('margin-bottom');
-      marginLeft    = computed('margin-left'  );
-
-      W             = window.innerWidth  - ( marginLeft + marginRight  );
-      H             = window.innerHeight - ( marginTop  + marginBottom );
 
       canvas        = document.getElementById('plano');
       canvas.width  = W;
