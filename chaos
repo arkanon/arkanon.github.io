@@ -1,0 +1,166 @@
+<html>
+
+<!--
+
+     Arkanon <arkanon@lsd.org.br>
+     2013/09/02 (Seg) 03:41:50 (BRS) - 0.2
+     2013/09/01 (Sun) 21:09:33 (BRS) - 0.1
+
+     <http://en.wikipedia.org/wiki/Sierpinski_triangle>
+     <http://math.bu.edu/DYSYS/chaos-game/node1.html>
+
+-->
+
+<head>
+
+  <meta charset="utf-8">
+
+  <script>
+
+    var vertices   = [ [ 300, 150 ] , [ 50, 550 ] , [ 950, 350 ] ];
+    var cores      = [ 'red'        , 'green'     , 'blue'       ];
+    var semente    = [ 900, 100 ];
+    var parametros =
+    {
+
+      'estado'  : {
+                    'Iniciar' : function() { draw() },
+                    'Parar'   : function() { clearTimeout(tout) }
+                  },
+
+      'delay'   : {
+                    'Rápido'  : 1,
+                    'Lento'   : 1000
+                  },
+
+      'tamanho' : {
+                    'Ponto'   : 0.5,
+                    'Círculo' : 3.0
+                  },
+
+      'linha'   : {
+                    'Com Linha' : '#aaa',
+                    'Sem Linha' : 'white'
+                  }
+
+    };
+
+    var valor =
+    {
+      'delay'   : 1000,
+      'tamanho' : 2.0,
+      'linha'   : '#aaa'
+    };
+
+    var body, marginTop, marginRight, marginBottom, marginLeft;
+    var canvas, context, tout;
+    var W, H;
+
+    window.onload = function(){ init() }
+
+    function init()
+    {
+
+      body          = document.getElementsByTagName('body')[0];
+      marginTop     = computed('margin-top'   );
+      marginRight   = computed('margin-right' );
+      marginBottom  = computed('margin-bottom');
+      marginLeft    = computed('margin-left'  );
+
+      W             = window.innerWidth  - ( marginLeft + marginRight  );
+      H             = window.innerHeight - ( marginTop  + marginBottom );
+
+      canvas        = document.getElementById('plano');
+      canvas.width  = W;
+      canvas.height = H;
+      context       =  canvas.getContext('2d');
+
+      circ( vertices[0][0], vertices[0][1], 5, cores[0] );
+      circ( vertices[1][0], vertices[1][1], 5, cores[1] );
+      circ( vertices[2][0], vertices[2][1], 5, cores[2] );
+      circ(     semente[0],     semente[1], 5, 'black'  );
+
+    }
+
+
+
+    function draw()
+    {
+
+      init();
+      var semente0  = semente;
+      var i = 0;
+      function mainloop()
+      {
+        var cor = Math.floor((Math.random()*10))%3;
+        semente1 = [ (semente0[0]+vertices[cor][0])/2 , (semente0[1]+vertices[cor][1])/2 ];
+        line( semente0[0], semente0[1], semente1[0], semente1[1], 0.2, valor['linha'] );
+        circ( semente1[0], semente1[1], valor['tamanho'], cores[cor] );
+        semente0 = semente1;
+        console.log( i + ' - delay=' + valor['delay'] + ' - tamanho=' + valor['tamanho'] + ' - linha=' + valor['linha'] + ' - semente=(' + semente0[0] + ',' + semente0[1] + ') - ' + cores[cor] + '=(' + vertices[cor][0] + ',' + vertices[cor][1] + ')' );
+        i++;
+        tout = setTimeout(mainloop, valor['delay']);
+      }
+
+      tout = setTimeout(mainloop, valor['delay']);
+
+    }
+
+
+
+    function circ(cx, cy, raio, cor)
+    {
+      context.beginPath();
+      context.fillStyle = cor;
+      context.arc(cx, cy, raio, 0, 2*Math.PI, false);
+      context.fill();
+    }
+
+    function line(x0, y0, x1, y1, espessura, cor)
+    {
+      context.beginPath();
+      context.strokeStyle = cor;
+      context.lineWidth = espessura;
+      context.moveTo(x0,y0);
+      context.lineTo(x1,y1);
+      context.stroke();
+    }
+
+
+
+    function computed(prop)
+    {
+      return parseFloat(window.getComputedStyle(body).getPropertyValue(prop));
+    }
+
+
+
+    function toogle(obj)
+    {
+      var id    = obj.id;
+      var p     = parametros[id];
+      var ids   = Object.keys(p);
+      var i     = ids.indexOf(obj.value);
+      obj.value =  ids[(i+1)%2];
+      if (typeof p[ids[(i+1)%2]] === 'function') p[ids[i]]();
+      else                           valor[id] = p[ids[i]];
+    }
+
+
+
+  </script>
+
+</head>
+
+<body>
+
+  <input type="button" id="estado"  value="Iniciar"   onclick="toogle(this)" />
+  <input type="button" id="delay"   value="Rápido"    onclick="toogle(this)" />
+  <input type="button" id="tamanho" value="Ponto"     onclick="toogle(this)" />
+  <input type="button" id="linha"   value="Sem Linha" onclick="toogle(this)" />
+
+  <canvas id="plano"></canvas>
+
+</body>
+
+</html>
