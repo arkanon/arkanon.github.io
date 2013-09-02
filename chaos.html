@@ -71,12 +71,12 @@
 
       vertices      =
       [
-        [ Math.random()*W, Math.random()*H ] ,
-        [ Math.random()*W, Math.random()*H ] ,
-        [ Math.random()*W, Math.random()*H ]
+        [ 50+(W-50)*Math.random(), 50+(H-50)*Math.random() ] ,
+        [ 50+(W-50)*Math.random(), 50+(H-50)*Math.random() ] ,
+        [ 50+(W-50)*Math.random(), 50+(H-50)*Math.random() ]
       ];
 
-      semente       = [ Math.random()*W, Math.random()*H ];
+      semente       = [ 50+(W-50)*Math.random(), 50+(H-50)*Math.random() ];
 
       canvas        = document.getElementById('plano');
       canvas.width  = W;
@@ -100,7 +100,7 @@
       var i = 0;
       function mainloop()
       {
-        var cor = Math.floor((Math.random()*10))%3;
+        var cor = Math.floor((10*Math.random()))%3;
         semente1 = [ (semente0[0]+vertices[cor][0])/2 , (semente0[1]+vertices[cor][1])/2 ];
         if (valor['linha']) line( semente0[0], semente0[1], semente1[0], semente1[1], 0.2, '#aaa' );
         circ( semente1[0], semente1[1], valor['tamanho'], cores[cor] );
