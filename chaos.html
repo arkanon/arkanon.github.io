@@ -17,24 +17,7 @@
 
   <script>
   
-    var body         = document.getElementsByTagName('body')[0];
-    var marginTop    = computed('margin-top'   );
-    var marginRight  = computed('margin-right' );
-    var marginBottom = computed('margin-bottom');
-    var marginLeft   = computed('margin-left'  );
-
-    var W            = window.innerWidth  - ( marginLeft + marginRight  );
-    var H            = window.innerHeight - ( marginTop  + marginBottom );
-
-    var vertices     =
-    [
-      [ Math.random()*W, Math.random()*H ] ,
-      [ Math.random()*W, Math.random()*H ] ,
-      [ Math.random()*W, Math.random()*H ]
-    ];
-
     var cores        = [ 'red'        , 'green'     , 'blue'       ];
-    var semente      = [ Math.random()*W, Math.random()*H ];
     var parametros   =
     {
 
@@ -75,6 +58,24 @@
 
     function init()
     {
+
+      var body         = document.getElementsByTagName('body')[0];
+      var marginTop    = computed('margin-top'   );
+      var marginRight  = computed('margin-right' );
+      var marginBottom = computed('margin-bottom');
+      var marginLeft   = computed('margin-left'  );
+
+      var W            = window.innerWidth  - ( marginLeft + marginRight  );
+      var H            = window.innerHeight - ( marginTop  + marginBottom );
+
+      var vertices     =
+      [
+        [ Math.random()*W, Math.random()*H ] ,
+        [ Math.random()*W, Math.random()*H ] ,
+        [ Math.random()*W, Math.random()*H ]
+      ];
+
+      var semente      = [ Math.random()*W, Math.random()*H ];
 
       canvas        = document.getElementById('plano');
       canvas.width  = W;
