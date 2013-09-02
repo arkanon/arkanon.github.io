@@ -55,9 +55,13 @@
     var canvas, context, tout, vertices, semente;
     var W, H;
 
-    window.onload = function(){ init() }
+    window.onload = function()
+    {
+      init1();
+      init2();
+    }
 
-    function init()
+    function init1()
     {
 
       body          = document.getElementsByTagName('body')[0];
@@ -78,6 +82,11 @@
 
       semente       = [ 50+W*Math.random(), 50+H*Math.random() ];
 
+    }
+
+    function init2()
+    {
+
       canvas        = document.getElementById('plano');
       canvas.width  = W;
       canvas.height = H;
@@ -95,7 +104,7 @@
     function draw()
     {
 
-      init();
+      init2();
       var semente0  = semente;
       var i = 0;
       function mainloop()
