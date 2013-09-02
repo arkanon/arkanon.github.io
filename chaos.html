@@ -64,22 +64,22 @@
     function init1()
     {
 
-      body          = document.getElementsByTagName('body')[0];
-      marginTop     = computed('margin-top'   );
-      marginRight   = computed('margin-right' );
-      marginBottom  = computed('margin-bottom');
-      marginLeft    = computed('margin-left'  );
+      body         = document.getElementsByTagName('body')[0];
+      marginTop    = computed('margin-top'   );
+      marginRight  = computed('margin-right' );
+      marginBottom = computed('margin-bottom');
+      marginLeft   = computed('margin-left'  );
 
-      W             = window.innerWidth  - ( marginLeft + marginRight  + 100 );
-      H             = window.innerHeight - ( marginTop  + marginBottom + 100 );
+      W            = window.innerWidth  - ( marginLeft + marginRight  + 700 );
+      H            = window.innerHeight - ( marginTop  + marginBottom + 700 );
 
-      semente       = [ 50+W*Math.random(), 50+H*Math.random() ];
+      semente      = [ 350+W*Math.random(), 350+H*Math.random() ];
 
-      vertices      =
+      vertices     =
       [
-        [ 50+W*Math.random(), 50+H*Math.random() ] ,
-        [ 50+W*Math.random(), 50+H*Math.random() ] ,
-        [ 50+W*Math.random(), 50+H*Math.random() ]
+        [  50+W*Math.random(),  50+H*Math.random() ] ,
+        [ 150+W*Math.random(), 150+H*Math.random() ] ,
+        [ 250+W*Math.random(), 250+H*Math.random() ]
       ];
 
     }
