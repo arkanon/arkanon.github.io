@@ -66,17 +66,17 @@
       marginBottom  = computed('margin-bottom');
       marginLeft    = computed('margin-left'  );
 
-      W             = window.innerWidth  - ( marginLeft + marginRight  );
-      H             = window.innerHeight - ( marginTop  + marginBottom );
+      W             = window.innerWidth  - ( marginLeft + marginRight  + 100 );
+      H             = window.innerHeight - ( marginTop  + marginBottom + 100 );
 
       vertices      =
       [
-        [ 50+(W-50)*Math.random(), 50+(H-50)*Math.random() ] ,
-        [ 50+(W-50)*Math.random(), 50+(H-50)*Math.random() ] ,
-        [ 50+(W-50)*Math.random(), 50+(H-50)*Math.random() ]
+        [ 50+W*Math.random(), 50+H*Math.random() ] ,
+        [ 50+W*Math.random(), 50+H*Math.random() ] ,
+        [ 50+W*Math.random(), 50+H*Math.random() ]
       ];
 
-      semente       = [ 50+(W-50)*Math.random(), 50+(H-50)*Math.random() ];
+      semente       = [ 50+W*Math.random(), 50+H*Math.random() ];
 
       canvas        = document.getElementById('plano');
       canvas.width  = W;
