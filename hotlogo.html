@@ -26,7 +26,7 @@
     WMSX.DISKA_FILES_URL = git( 'arkanon','dipohlo','webmsx-disk.zip'        )
  // WMSX.STATE_URL       = git( 'arkanon','dipohlo','webmsx-hotlogo.wst'     )
 
-    WMSX.SCREEN_CONTROL_BAR    = 0
+    WMSX.SCREEN_CONTROL_BAR    = 1
     WMSX.SCREEN_DEFAULT_ASPECT = 1.0
     WMSX.SCREEN_DEFAULT_SCALE  = 0.5
  // WMSX.SCREEN_DEFAULT_SCALE  = 2.2
@@ -46,18 +46,25 @@
       ocr.insertBefore(line, ocr.firstChild)
     }
 
-    function recognizeFile(file)
-    {
-      document.querySelector('#ss-screen').src = file
-      document.querySelector('#ocr-tesseract').innerHTML = ''
-      Tesseract.recognize( file, { lang: 'por' } ).then( function(data) { progressUpdate( data ) } )
-    }
+ // function recognizeFile(file)
+ // {
+ //   document.querySelector('#ss-screen').src = file
+ //   document.querySelector('#ocr-tesseract').innerHTML = ''
+ //   Tesseract.recognize( file, { lang: 'por' } ).then( function(data) { progressUpdate( data ) } )
+ // }
 
     function capture()
     {
+
       s.src = c.toDataURL('image/png')
-      recognizeFile(s.src)
+
       document.querySelector('#ocr-ocrad').innerHTML = OCRAD(c)
+
+   // recognizeFile(s.src)
+      document.querySelector('#ss-screen').src = s.src
+      document.querySelector('#ocr-tesseract').innerHTML = ''
+      Tesseract.recognize( s.src, { lang: 'por' } ).then( function(data) { progressUpdate( data ) } )
+
     }
 
     window.onload = function()
@@ -82,7 +89,7 @@
     body
     {
       margin: 5px;
-      background: black;
+      background: #292929 ;
     }
 
     a
@@ -122,12 +129,6 @@
       color: red;
     }
 
-    #input-box
-    {
-      width: 300px;
-      height: 200px;
-    }
-
     #wmsx
     {
       text-align: center;
@@ -138,30 +139,31 @@
       margin: 0;
     }
 
+    #wmsx-screen
+    {
+      border: 0 !important;
+    }
+
     #input-box,
-    #wmsx-screen,
+    #wmsx-screen-canvas-outer,
     #ss,
     .ocr
     {
-      margin: 0;
-      border: 1px solid red !important;
+      border: 1px solid red;
     }
 
     #input-box,
     .ocr
     {
       font-family: monospace;
+      font-size: 9px;
       white-space: pre;
       padding: 5px;
-      min-width: 50px;
-      min-height: 50px;
       color: black;
       background: white;
-    }
-
-    #ocr-ocrad
-    {
-      max-width: 200px;
+      width: 262px;
+      height: 198px;
+      margin: 0;
     }
 
   </style>
@@ -178,6 +180,9 @@
   <div id="wmsx-block">
     <a id="wmsx-header" href="http://webmsx.org" target="_blank">WebMSX</a>
     <div id="wmsx"><div id="wmsx-screen"></div></div>
+    <input type="button" value="Internacional" onclick="WMSX.CARTRIDGE1_URL=''; WMSX.room.machine.reset()">
+    <input type="button" value="HotBit"        onclick="WMSX.CARTRIDGE1_URL=url('msxpro.com/hardware/roms/hotbit12.zip'); WMSX.room.machine.reset()">
+    <input type="button" value="Expert"        onclick="WMSX.CARTRIDGE1_URL=url('msxpro.com/hardware/roms/expert11.zip'); WMSX.room.machine.reset()">
   </div>
 
   <div id="ss-block" onclick="capture()">
@@ -186,13 +191,13 @@
   </div>
 
   <div class="ocr-block">
-    <a class="ocr-header" href="http://tesseract.projectnaptha.com/" target="_blank">OCR (tesseract)</a>
-    <div class="ocr" id="ocr-tesseract"></div>
+    <a class="ocr-header" href="http://antimatter15.com/ocrad.js/demo.html" target="_blank">OCR (ocrad)</a>
+    <div class="ocr" id="ocr-ocrad"></div>
   </div>
 
   <div class="ocr-block">
-    <a class="ocr-header" href="http://antimatter15.com/ocrad.js/demo.html" target="_blank">OCR (ocrad)</a>
-    <div class="ocr" id="ocr-ocrad"></div>
+    <a class="ocr-header" href="http://tesseract.projectnaptha.com/" target="_blank">OCR (tesseract)</a>
+    <div class="ocr" id="ocr-tesseract"></div>
   </div>
 
 </body>
