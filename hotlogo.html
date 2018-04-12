@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <title>HotLogo@WebMSX</title>
+
+  <meta charset="UTF-8">
+
+  <script src="https://rawgit.com/ppeccin/WebMSX/master/release/stable/4.0/embedded/wmsx.js"></script>
+  <script src="https://rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
+  <script src="https://rawgit.com/antimatter15/ocrad.js/master/ocrad.js"></script>
+
+  <script>
+
+    WMSX.BASIC_ENTER     = cmd('mudecor 15 1 mudecf 15 mudect 6 mudecl 4 esc proporção')
+    WMSX.BASIC_TYPE      = cmd('un pt 30 ul repita 360 [ pf 1 pe 1 ] mudeproporção 1 repita 360 [ pf 1 pd 1 ]')
+
+    WMSX.MACHINE         = 'MSX1A'
+    WMSX.CPU_TURBO_MODE  = 1
+
+ // WMSX.CARTRIDGE1_URL  = url( 'msxpro.com/hardware/roms/hotbit12.zip'      )
+ // WMSX.CARTRIDGE1_URL  = url( 'msxpro.com/hardware/roms/expert11.zip'      )
+    WMSX.CARTRIDGE2_URL  = url( 'icongames.com.br/msxfiles/apps/hotlogo.zip' )
+    WMSX.DISKA_FILES_URL = git( 'arkanon','dipohlo','webmsx-disk.zip'        )
+ // WMSX.STATE_URL       = git( 'arkanon','dipohlo','webmsx-hotlogo.wst'     )
+
+    WMSX.SCREEN_CONTROL_BAR    = 0
+    WMSX.SCREEN_DEFAULT_ASPECT = 1.0
+    WMSX.SCREEN_DEFAULT_SCALE  = 0.5
+ // WMSX.SCREEN_DEFAULT_SCALE  = 2.2
+
+    function cmd(str)            { return str.replace(/ç/g,'').replace(/ã/g,'±') }
+    function url(url)            { return 'https://cors-anywhere.herokuapp.com/' + url } // <http://alternativeto.net/software/cors-proxy>
+    function git(user,repo,path) { return 'https://rawgit.com/' + user + '/' + repo + '/gh-pages/' + path }
+
+    function progressUpdate(data)
+    {
+      var ocr  = document.getElementById('ocr-tesseract');
+      var line = document.createElement('div');
+      var pre  = document.createElement('pre')
+      pre.appendChild(document.createTextNode(data.text))
+      line.innerHTML = ''
+      line.appendChild(pre)
+      ocr.insertBefore(line, ocr.firstChild)
+    }
+
+    function recognizeFile(file)
+    {
+      document.querySelector('#ss-screen').src = file
+      document.querySelector('#ocr-tesseract').innerHTML = ''
+      Tesseract.recognize( file, { lang: 'por' } ).then( function(data) { progressUpdate( data ) } )
+    }
+
+    function capture()
+    {
+      s.src = c.toDataURL('image/png')
+      recognizeFile(s.src)
+      document.querySelector('#ocr-ocrad').innerHTML = OCRAD(c)
+    }
+
+    window.onload = function()
+    {
+      c = document.getElementById('wmsx-screen-canvas')
+      s = document.getElementById('ss')
+      var i = document.getElementById('ss-screen')
+      var w = WMSX.SCREEN_DEFAULT_SCALE * c.width
+      var h = WMSX.SCREEN_DEFAULT_SCALE * c.height
+      s.style.width  = w + 'px'
+      s.style.height = h + 'px'
+      i.width        = w
+      i.height       = h
+    }
+
+    var c, s
+
+  </script>
+
+  <style>
+
+    body
+    {
+      margin: 5px;
+      background: black;
+    }
+
+    a
+    {
+      text-decoration: none;
+      outline: none;
+      color: white;
+    }
+
+    #input-block,
+    #wmsx-block,
+    #ss-block,
+    .ocr-block
+    {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    #ss-block
+    {
+      cursor: url(https://www.carambis.com/static/new/programs/icon/ss_icon.png), auto !important;
+    }
+
+    #input-header,
+    #wmsx-header,
+    #ss-header,
+    .ocr-header
+    {
+      font-family: sans-serif;
+      color: white;
+      display: block;
+    }
+
+    #wmsx-header:hover,
+    .ocr-header:hover
+    {
+      color: red;
+    }
+
+    #input-box
+    {
+      width: 300px;
+      height: 200px;
+    }
+
+    #wmsx
+    {
+      text-align: center;
+    }
+
+    pre
+    {
+      margin: 0;
+    }
+
+    #input-box,
+    #wmsx-screen,
+    #ss,
+    .ocr
+    {
+      margin: 0;
+      border: 1px solid red !important;
+    }
+
+    #input-box,
+    .ocr
+    {
+      font-family: monospace;
+      white-space: pre;
+      padding: 5px;
+      min-width: 50px;
+      min-height: 50px;
+      color: black;
+      background: white;
+    }
+
+    #ocr-ocrad
+    {
+      max-width: 200px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div id="input-block">
+    <div id="input-header">Input</div>
+    <div id="input"><textarea id="input-box"></textarea></div>
+  </div>
+
+  <div id="wmsx-block">
+    <a id="wmsx-header" href="http://webmsx.org" target="_blank">WebMSX</a>
+    <div id="wmsx"><div id="wmsx-screen"></div></div>
+  </div>
+
+  <div id="ss-block" onclick="capture()">
+    <div id="ss-header">ScreenShot</div>
+    <div id="ss"><img id="ss-screen"></div>
+  </div>
+
+  <div class="ocr-block">
+    <a class="ocr-header" href="http://tesseract.projectnaptha.com/" target="_blank">OCR (tesseract)</a>
+    <div class="ocr" id="ocr-tesseract"></div>
+  </div>
+
+  <div class="ocr-block">
+    <a class="ocr-header" href="http://antimatter15.com/ocrad.js/demo.html" target="_blank">OCR (ocrad)</a>
+    <div class="ocr" id="ocr-ocrad"></div>
+  </div>
+
+</body>
+
+</html>
