@@ -8,6 +8,10 @@
 
   <meta charset="UTF-8">
 
+  <link rel="shortcut icon" type="image/x-icon" href="https://github.com/arkanon/arkanon.github.io/blob/master/favicon.ico?raw=true">
+
+  <script src="https://rawgit.com/turuslan/HackTimer/master/HackTimer.min.js"></script>
+  <script src="https://rawgit.com/turuslan/HackTimer/master/HackTimerWorker.min.js"></script>
   <script src="https://rawgit.com/ppeccin/WebMSX/master/release/stable/4.0/embedded/wmsx.js"></script>
   <script src="https://rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
   <script src="https://rawgit.com/antimatter15/ocrad.js/master/ocrad.js"></script>
@@ -15,10 +19,8 @@
   <script>
 
     WMSX.BASIC_ENTER     = cmd('mudecor 15 1 mudecf 15 mudect 6 mudecl 4 esc proporção')
+ // WMSX.BASIC_ENTER     = cmd('esc proporção')
     WMSX.BASIC_TYPE      = cmd('un pt 30 ul repita 360 [ pf 1 pe 1 ] mudeproporção 1 repita 360 [ pf 1 pd 1 ]')
-
-    WMSX.MACHINE         = 'MSX1A'
-    WMSX.CPU_TURBO_MODE  = 1
 
  // WMSX.CARTRIDGE1_URL  = url( 'msxpro.com/hardware/roms/hotbit12.zip'      )
  // WMSX.CARTRIDGE1_URL  = url( 'msxpro.com/hardware/roms/expert11.zip'      )
@@ -26,6 +28,9 @@
     WMSX.DISKA_FILES_URL = git( 'arkanon','dipohlo','webmsx-disk.zip'        )
  // WMSX.STATE_URL       = git( 'arkanon','dipohlo','webmsx-hotlogo.wst'     )
 
+    WMSX.MACHINE               = 'MSX1A'
+    WMSX.CPU_TURBO_MODE        = 1
+    WMSX.AUTO_POWER_ON_DELAY   = 0
     WMSX.SCREEN_CONTROL_BAR    = 1
     WMSX.SCREEN_DEFAULT_ASPECT = 1.0
     WMSX.SCREEN_DEFAULT_SCALE  = 0.5
@@ -37,7 +42,7 @@
 
     function progressUpdate(data)
     {
-      var ocr  = document.getElementById('ocr-tesseract');
+      var ocr  = document.getElementById('ocr-box-tesseract');
       var line = document.createElement('div');
       var pre  = document.createElement('pre')
       pre.appendChild(document.createTextNode(data.text))
@@ -46,23 +51,15 @@
       ocr.insertBefore(line, ocr.firstChild)
     }
 
- // function recognizeFile(file)
- // {
- //   document.querySelector('#ss-screen').src = file
- //   document.querySelector('#ocr-tesseract').innerHTML = ''
- //   Tesseract.recognize( file, { lang: 'por' } ).then( function(data) { progressUpdate( data ) } )
- // }
-
     function capture()
     {
 
       s.src = c.toDataURL('image/png')
 
-      document.querySelector('#ocr-ocrad').innerHTML = OCRAD(c)
+      document.querySelector('#ocr-box-ocrad').innerHTML = OCRAD(c)
 
-   // recognizeFile(s.src)
       document.querySelector('#ss-screen').src = s.src
-      document.querySelector('#ocr-tesseract').innerHTML = ''
+      document.querySelector('#ocr-box-tesseract').innerHTML = ''
       Tesseract.recognize( s.src, { lang: 'por' } ).then( function(data) { progressUpdate( data ) } )
 
     }
@@ -85,6 +82,18 @@
   </script>
 
   <style>
+
+    @font-face
+    {
+      font-family: screen0;
+      src: url(https://cors-anywhere.herokuapp.com/ateijelo.com/assets/misc/MSX-Screen0.ttf);
+    }
+
+    @font-face
+    {
+      font-family: screen1;
+      src: url(https://cors-anywhere.herokuapp.com/ateijelo.com/assets/misc/MSX-Screen1.ttf);
+    }
 
     body
     {
@@ -123,6 +132,7 @@
       display: block;
     }
 
+    #input-header:hover,
     #wmsx-header:hover,
     .ocr-header:hover
     {
@@ -144,7 +154,7 @@
       border: 0 !important;
     }
 
-    #input-box,
+    #input,
     #wmsx-screen-canvas-outer,
     #ss,
     .ocr
@@ -152,18 +162,41 @@
       border: 1px solid red;
     }
 
-    #input-box,
+    #input,
+    #wmsx-screen-canvas-outer,
     .ocr
     {
-      font-family: monospace;
-      font-size: 9px;
-      white-space: pre;
-      padding: 5px;
-      color: black;
       background: white;
-      width: 262px;
-      height: 198px;
+    }
+
+    #input-box,
+    #ocr-box-ocrad,
+    #ocr-box-tesseract pre
+    {
+      font-family: screen1;
+      font-size: 7px;
+      transform: scale(1.14,1);
+      transform-origin: 0 0;
+      color: black;
+      border: 0;
       margin: 0;
+      padding: 0;
+      white-space: pre;
+    }
+
+    #input,
+    .ocr
+    {
+      padding: 8px 16px;
+      width: 240px;
+      height: 192px;
+      margin: 0;
+    }
+
+    #input-box
+    {
+      overflow: hidden;
+      resize: none;
     }
 
   </style>
@@ -173,8 +206,20 @@
 <body>
 
   <div id="input-block">
-    <div id="input-header">Input</div>
-    <div id="input"><textarea id="input-box"></textarea></div>
+    <a id="input-header" href="http://ateijelo.com/blog/2016/09/13/making-an-msx-font" target="_blank">Input</a>
+    <div id="input">
+      <textarea id="input-box" rows="24" cols="30" wrap="soft" spellcheck="false">
+HOT-LOGO versão 1.1
+EPCOM 1986
+Benvindo ao Logo
+?mudecor 15 1 mudecf 15 mudec➜
+t 6 mudecl 4 esc proporção
+1,1
+?un pt 30 ul repita 360 [ pf ➜
+1 pe 1 ] mudeproporção 1 repi➜
+ta 360 [ pf 1 pd 1 ]
+</textarea>
+    </div>
   </div>
 
   <div id="wmsx-block">
@@ -192,12 +237,18 @@
 
   <div class="ocr-block">
     <a class="ocr-header" href="http://antimatter15.com/ocrad.js/demo.html" target="_blank">OCR (ocrad)</a>
-    <div class="ocr" id="ocr-ocrad"></div>
+    <div class="ocr">
+      <div id="ocr-box-ocrad">
+      </div>
+    </div>
   </div>
 
   <div class="ocr-block">
     <a class="ocr-header" href="http://tesseract.projectnaptha.com/" target="_blank">OCR (tesseract)</a>
-    <div class="ocr" id="ocr-tesseract"></div>
+    <div class="ocr">
+      <div id="ocr-box-tesseract">
+      </div>
+    </div>
   </div>
 
 </body>
