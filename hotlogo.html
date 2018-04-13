@@ -12,14 +12,15 @@
 
   <script src="https://rawgit.com/turuslan/HackTimer/master/HackTimer.min.js"></script>
   <script src="https://rawgit.com/turuslan/HackTimer/master/HackTimerWorker.min.js"></script>
-  <script src="https://rawgit.com/ppeccin/WebMSX/master/release/stable/4.0/embedded/wmsx.js"></script>
+  <!--script src="https://rawgit.com/ppeccin/WebMSX/master/release/stable/4.0/embedded/wmsx.js"></script-->
+  <script src="wmsx.js"></script>
   <script src="https://rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
   <script src="https://rawgit.com/antimatter15/ocrad.js/master/ocrad.js"></script>
 
   <script>
 
-    WMSX.BASIC_ENTER     = cmd('mudecor 15 1 mudecf 15 mudect 6 mudecl 4 esc proporção')
- // WMSX.BASIC_ENTER     = cmd('esc proporção')
+ // WMSX.BASIC_ENTER     = cmd('mudecor 15 1 mudecf 15 mudect 6 mudecl 4 esc proporção')
+    WMSX.BASIC_ENTER     = cmd('esc proporção')
     WMSX.BASIC_TYPE      = cmd('un pt 30 ul repita 360 [ pf 1 pe 1 ] mudeproporção 1 repita 360 [ pf 1 pd 1 ]')
 
  // WMSX.CARTRIDGE1_URL  = url( 'msxpro.com/hardware/roms/hotbit12.zip'      )
@@ -78,6 +79,8 @@
     }
 
     var c, s
+
+   console.log(WMSX);
 
   </script>
 
@@ -175,6 +178,9 @@
     {
       font-family: screen1;
       font-size: 7px;
+      font-smooth: never; /* not working */
+      text-rendering: optimizeSpeed; /* not working */
+      line-height: 8px;
       transform: scale(1.14,1);
       transform-origin: 0 0;
       color: black;
@@ -223,11 +229,11 @@ ta 360 [ pf 1 pd 1 ]
   </div>
 
   <div id="wmsx-block">
-    <a id="wmsx-header" href="http://webmsx.org" target="_blank">WebMSX</a>
+    <a id="wmsx-header" href="http://github.com/ppeccin/webmsx" target="_blank">WebMSX</a>
     <div id="wmsx"><div id="wmsx-screen"></div></div>
-    <input type="button" value="Internacional" onclick="WMSX.CARTRIDGE1_URL=''; WMSX.room.machine.reset()">
-    <input type="button" value="HotBit"        onclick="WMSX.CARTRIDGE1_URL=url('msxpro.com/hardware/roms/hotbit12.zip'); WMSX.room.machine.reset()">
-    <input type="button" value="Expert"        onclick="WMSX.CARTRIDGE1_URL=url('msxpro.com/hardware/roms/expert11.zip'); WMSX.room.machine.reset()">
+    <input type="button" value="Internacional" onclick="WMSX.room.fileLoader.readFromURL(); WMSX.room.machine.reset()">
+    <input type="button" value="HotBit"        onclick="WMSX.room.fileLoader.readFromURL(url('msxpro.com/hardware/roms/hotbit12.zip'), WMSX.ROM, 'auto', true, true); WMSX.room.machine.reset()">
+    <input type="button" value="Expert"        onclick="WMSX.room.fileLoader.readFromURL(url('msxpro.com/hardware/roms/expert11.zip'), WMSX.ROM, 'auto', true, true); WMSX.room.machine.reset()">
   </div>
 
   <div id="ss-block" onclick="capture()">
@@ -236,7 +242,7 @@ ta 360 [ pf 1 pd 1 ]
   </div>
 
   <div class="ocr-block">
-    <a class="ocr-header" href="http://antimatter15.com/ocrad.js/demo.html" target="_blank">OCR (ocrad)</a>
+    <a class="ocr-header" href="http://github.com/antimatter15/ocrad.js" target="_blank">OCR (ocrad)</a>
     <div class="ocr">
       <div id="ocr-box-ocrad">
       </div>
@@ -244,7 +250,7 @@ ta 360 [ pf 1 pd 1 ]
   </div>
 
   <div class="ocr-block">
-    <a class="ocr-header" href="http://tesseract.projectnaptha.com/" target="_blank">OCR (tesseract)</a>
+    <a class="ocr-header" href="http://github.com/naptha/tesseract.js" target="_blank">OCR (tesseract)</a>
     <div class="ocr">
       <div id="ocr-box-tesseract">
       </div>
