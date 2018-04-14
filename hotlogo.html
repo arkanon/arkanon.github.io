@@ -12,19 +12,23 @@
 
   <script src="https://rawgit.com/turuslan/HackTimer/master/HackTimer.min.js"></script>
   <script src="https://rawgit.com/turuslan/HackTimer/master/HackTimerWorker.min.js"></script>
-  <!--script src="https://rawgit.com/ppeccin/WebMSX/master/release/stable/4.0/embedded/wmsx.js"></script-->
-  <script src="wmsx.js"></script>
+  <script src="https://rawgit.com/ppeccin/WebMSX/master/release/stable/4.0/embedded/wmsx.js"></script>
   <script src="https://rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
   <script src="https://rawgit.com/antimatter15/ocrad.js/master/ocrad.js"></script>
 
   <script>
 
- // WMSX.BASIC_ENTER     = cmd('mudecor 15 1 mudecf 15 mudect 6 mudecl 4 esc proporção')
-    WMSX.BASIC_ENTER     = cmd('esc proporção')
-    WMSX.BASIC_TYPE      = cmd('un pt 30 ul repita 360 [ pf 1 pe 1 ] mudeproporção 1 repita 360 [ pf 1 pd 1 ]')
+    defaul = '@MSX1_NTSC.bios'
+    hotbit = url('msxpro.com/hardware/roms/hotbit12.zip')
+    expert = url('msxpro.com/hardware/roms/expert11.zip')
 
- // WMSX.CARTRIDGE1_URL  = url( 'msxpro.com/hardware/roms/hotbit12.zip'      )
- // WMSX.CARTRIDGE1_URL  = url( 'msxpro.com/hardware/roms/expert11.zip'      )
+ // WMSX.BASIC_ENTER     = tr('mudecor 15 1 mudecf 15 mudect 6 mudecl 4 esc proporção')
+ // WMSX.BASIC_ENTER     = tr('esc proporção')
+ // WMSX.BASIC_TYPE      = tr('un pt 30 ul repita 360 [ pf 1 pe 1 ] mudeproporção 1 repita 360 [ pf 1 pd 1 ]')
+
+    WMSX.CARTRIDGE1_URL  = defaul
+ // WMSX.CARTRIDGE1_URL  = hotbit
+ // WMSX.CARTRIDGE1_URL  = expert
     WMSX.CARTRIDGE2_URL  = url( 'icongames.com.br/msxfiles/apps/hotlogo.zip' )
     WMSX.DISKA_FILES_URL = git( 'arkanon','dipohlo','webmsx-disk.zip'        )
  // WMSX.STATE_URL       = git( 'arkanon','dipohlo','webmsx-hotlogo.wst'     )
@@ -37,32 +41,52 @@
     WMSX.SCREEN_DEFAULT_SCALE  = 0.5
  // WMSX.SCREEN_DEFAULT_SCALE  = 2.2
 
-    function cmd(str)            { return str.replace(/ç/g,'').replace(/ã/g,'±') }
     function url(url)            { return 'https://cors-anywhere.herokuapp.com/' + url } // <http://alternativeto.net/software/cors-proxy>
     function git(user,repo,path) { return 'https://rawgit.com/' + user + '/' + repo + '/gh-pages/' + path }
+    function setMachine(url)     { WMSX.room.fileLoader.readFromURL(url, WMSX.ROM, 'auto', true, true); WMSX.room.machine.reset() }
+
+    map = {
+            'ã': '±'    ,
+            'â': '' ,
+            'é': '' ,
+            'í': '¡'    ,
+            'ó': '¢'    ,
+            'ú': '£'    ,
+            'ç': '' ,
+            'º': '§'    ,
+            'π': '¾'    ,
+          }
+
+    function tr(str)
+    {
+      var re = new RegExp( '['+Object.keys(map).join('')+']', 'g' )
+      return str.replace( re, function(m) { return map[m] } )
+    }
+
+    function transfer(cmd)
+    {
+      cmd = cmd || 0
+      var input = document.getElementById('input-box')
+      if (cmd) input.value = cmd
+      if (input.value.substr(input.value.length-1)!='\n') input.value += '\n'
+      WMSX.room.keyboard.typeString(tr(input.value))
+    }
 
     function progressUpdate(data)
     {
-      var ocr  = document.getElementById('ocr-box-tesseract');
-      var line = document.createElement('div');
-      var pre  = document.createElement('pre')
-      pre.appendChild(document.createTextNode(data.text))
-      line.innerHTML = ''
-      line.appendChild(pre)
+      var ocr  = document.getElementById('ocr-box-tesseract')
+      var line = document.createElement('div')
+      line.appendChild(document.createTextNode(data.text))
       ocr.insertBefore(line, ocr.firstChild)
     }
 
     function capture()
     {
-
       s.src = c.toDataURL('image/png')
-
       document.querySelector('#ocr-box-ocrad').innerHTML = OCRAD(c)
-
       document.querySelector('#ss-screen').src = s.src
       document.querySelector('#ocr-box-tesseract').innerHTML = ''
       Tesseract.recognize( s.src, { lang: 'por' } ).then( function(data) { progressUpdate( data ) } )
-
     }
 
     window.onload = function()
@@ -80,7 +104,7 @@
 
     var c, s
 
-   console.log(WMSX);
+   console.log(WMSX)
 
   </script>
 
@@ -101,7 +125,8 @@
     body
     {
       margin: 5px;
-      background: #292929 ;
+      background: #292929;
+      text-space-collapse: trim-inner; /* not working */
     }
 
     a
@@ -152,7 +177,8 @@
       margin: 0;
     }
 
-    #wmsx-screen
+    #wmsx-screen,
+    #wmsx-bar
     {
       border: 0 !important;
     }
@@ -174,7 +200,7 @@
 
     #input-box,
     #ocr-box-ocrad,
-    #ocr-box-tesseract pre
+    #ocr-box-tesseract
     {
       font-family: screen1;
       font-size: 7px;
@@ -187,7 +213,7 @@
       border: 0;
       margin: 0;
       padding: 0;
-      white-space: pre;
+      white-space: pre-wrap;
     }
 
     #input,
@@ -195,14 +221,49 @@
     {
       padding: 8px 16px;
       width: 240px;
-      height: 192px;
       margin: 0;
     }
+
+    #input
+    {
+      height: 192px;
+    }
+
+    .ocr
+    {
+      min-height: 192px;
+    }
+
+    #ocr-box-ocrad,
+    #ocr-box-tesseract
+    {
+      overflow: none;
+    }
+
+    input
+    {
+      height: 30px;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-top: 3px;
+      margin-left: 3px;
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+
+    input:hover
+    {
+      background: lightgray;
+    }
+
+    :focus { outline: none; }
+    ::-moz-focus-inner { border: 0; }
 
     #input-box
     {
       overflow: hidden;
       resize: none;
+      word-wrap: break-word;
     }
 
   </style>
@@ -214,26 +275,40 @@
   <div id="input-block">
     <a id="input-header" href="http://ateijelo.com/blog/2016/09/13/making-an-msx-font" target="_blank">Input</a>
     <div id="input">
-      <textarea id="input-box" rows="24" cols="30" wrap="soft" spellcheck="false">
-HOT-LOGO versão 1.1
-EPCOM 1986
-Benvindo ao Logo
-?mudecor 15 1 mudecf 15 mudec➜
-t 6 mudecl 4 esc proporção
-1,1
-?un pt 30 ul repita 360 [ pf ➜
-1 pe 1 ] mudeproporção 1 repi➜
-ta 360 [ pf 1 pd 1 ]
+       <textarea id="input-box" rows="24" cols="28" wrap="soft" spellcheck="false">
+
+mudecor 15 1
+mudecf 15
+mudect 6
+mudecl 4
+esc proporção
+
+repita 360 [ pf 1 pe 1 ]
+mudeproporção 1
+repita 360 [ pf 1 pd 1 ]
+
+ad dt mudecor 15 1
+
+esc " esc [ã â é í ó ú ç º π] esc "
 </textarea>
-    </div>
-  </div>
+     </div>
+     <input type="button" value="TYPE"            onclick="transfer()"><!--
+  --><input type="button" value="att"             onclick="transfer('att')"><!--
+  --><input type="button" value="ad"              onclick="transfer('ad')"><!--
+  --><input type="button" value="dt"              onclick="transfer('dt')"><!--
+  --><input type="button" value="at"              onclick="transfer('at')"><!--
+  --><br><!--
+  --><input type="button" value="preto no branco" onclick="transfer('mudecor 15 1 mudecf 15 mudect 1 mudecl 1')"><!--
+  --><input type="button" value="rg"              onclick="transfer('rg')"><!--
+  --><input type="button" value="arquivos"        onclick="transfer('arquivos')"><!--
+--></div>
 
   <div id="wmsx-block">
     <a id="wmsx-header" href="http://github.com/ppeccin/webmsx" target="_blank">WebMSX</a>
     <div id="wmsx"><div id="wmsx-screen"></div></div>
-    <input type="button" value="Internacional" onclick="WMSX.room.fileLoader.readFromURL(); WMSX.room.machine.reset()">
-    <input type="button" value="HotBit"        onclick="WMSX.room.fileLoader.readFromURL(url('msxpro.com/hardware/roms/hotbit12.zip'), WMSX.ROM, 'auto', true, true); WMSX.room.machine.reset()">
-    <input type="button" value="Expert"        onclick="WMSX.room.fileLoader.readFromURL(url('msxpro.com/hardware/roms/expert11.zip'), WMSX.ROM, 'auto', true, true); WMSX.room.machine.reset()">
+    <input type="button" value="Default" onclick="setMachine(defaul)"><!--
+ --><input type="button" value="HotBit"  onclick="setMachine(hotbit)"><!--
+ --><input type="button" value="Expert"  onclick="setMachine(expert)">
   </div>
 
   <div id="ss-block" onclick="capture()">
