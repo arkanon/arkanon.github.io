@@ -13,7 +13,6 @@
   <script src="https://rawgit.com/ppeccin/WebMSX/master/release/stable/4.0/embedded/wmsx.js"></script>
   <script src="https://rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
   <script src="https://rawgit.com/antimatter15/ocrad.js/master/ocrad.js"></script>
-
   <script>
 
     defaul = '@MSX1_NTSC.bios'
@@ -31,6 +30,7 @@
     WMSX.DISKA_FILES_URL = git( 'arkanon','dipohlo','webmsx-disk.zip'        )
  // WMSX.STATE_URL       = git( 'arkanon','dipohlo','webmsx-hotlogo.wst'     )
 
+    WMSX.SCREEN_ELEMENT_ID     = 'wmsx-scr'
     WMSX.MACHINE               = 'MSX1A'
     WMSX.CPU_TURBO_MODE        = 1
     WMSX.AUTO_POWER_ON_DELAY   = 0
@@ -38,6 +38,7 @@
     WMSX.SCREEN_DEFAULT_ASPECT = 1.0
     WMSX.SCREEN_DEFAULT_SCALE  = 0.5
  // WMSX.SCREEN_DEFAULT_SCALE  = 2.2
+    WMSX.SCREEN_FILTER_MODE    = 0
 
     function url(url)            { return 'https://cors-anywhere.herokuapp.com/' + url } // <http://alternativeto.net/software/cors-proxy>
     function git(user,repo,path) { return 'https://rawgit.com/' + user + '/' + repo + '/gh-pages/' + path }
@@ -78,31 +79,143 @@
       ocr.insertBefore(line, ocr.firstChild)
     }
 
-    function capture()
+    function screenshot()
     {
-      s.src = c.toDataURL('image/png')
-      document.querySelector('#ocr-box-ocrad').innerHTML = OCRAD(c)
-      document.querySelector('#ss-screen').src = s.src
+      ss.src = scr.toDataURL('image/png')
+      document.querySelector('#ocr-box-ocrad').innerHTML = OCRAD(scr)
+      document.querySelector('#ss-scr').src = ss.src
       document.querySelector('#ocr-box-tesseract').innerHTML = ''
-      Tesseract.recognize( s.src, { lang: 'por' } ).then( function(data) { progressUpdate( data ) } )
+      Tesseract.recognize( ss.src, { lang: 'por' } ).then( function(data) { progressUpdate( data ) } )
     }
 
-    window.onload = function()
+
+
+    // <https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API>
+    function canvasDraw()
     {
-      c = document.getElementById('wmsx-screen-canvas')
-      s = document.getElementById('ss')
-      var i = document.getElementById('ss-screen')
-      var w = WMSX.SCREEN_DEFAULT_SCALE * c.width
-      var h = WMSX.SCREEN_DEFAULT_SCALE * c.height
-      s.style.width  = w + 'px'
-      s.style.height = h + 'px'
-      i.width        = w
-      i.height       = h
+      overlay_ctx.clearRect(0, 0, overlay.width, overlay.height);
+      overlay_ctx.fillStyle = 'rgba(0,255,0,.5)'
+      overlay_ctx.beginPath()
+      overlay_ctx.fillRect(cx, cy, side, side)
+      overlay_ctx.fill()
     }
 
-    var c, s
+    function lockChangeAlert(e)
+    {
 
-   console.log(WMSX)
+      if (document.pointerLockElement === overlay || document.mozPointerLockElement === overlay)
+      {
+        var rect = overlay.getBoundingClientRect()
+        cx = x - rect.left
+        cy = y - rect.top
+        console.log('The pointer lock status is now locked')
+        document.addEventListener("mousemove", updatePosition, false)
+      }
+      else
+      {
+        console.log('The pointer lock status is now unlocked')
+        document.removeEventListener("mousemove", updatePosition, false)
+      }
+
+    }
+
+    function getMousePos(e)
+    {
+      var ev = (!e) ? window.event : e // IE:Moz
+      x = ev.pageX
+      y = ev.pageY
+    }
+
+    function updatePosition(e)
+    {
+
+   // var x     = (e.layerX-2)/s
+   // var y     = (e.layerY-2)/s
+      var pixel = scr_ctx.getImageData(cx/s, cy/s, s, s)
+      var data  = pixel.data
+      var r     = data[0]
+      var g     = data[1]
+      var b     = data[2]
+      var a     = data[3]/255
+      var rgba  = 'rgba('+r+', '+g+', '+b+', '+a+')'
+      scan.style.background = rgba
+      scan.style.background = rgba
+
+      cx += e.movementX
+      cy += e.movementY
+      if (cx > overlay.width  + side) cx = -side
+      if (cy > overlay.height + side) cy = -side
+      if (cx < -side)                 cx = overlay.width  + side
+      if (cy < -side)                 cy = overlay.height + side
+
+      scan.innerHTML  = '<p>'
+                      + cx+' '+cy
+                      + '<br>'
+                      + '<br>'
+                      + r+' '+g+' '+b+' '+a
+                      + '</p>'
+
+      if (!animation)
+      {
+        animation = requestAnimationFrame(function()
+        {
+          animation = null
+          canvasDraw()
+        })
+      }
+    }
+
+
+
+    window.onmousemove = getMousePos
+
+    window.onload = function(e)
+    {
+
+      scan    = document.getElementById('scan-box')
+      overlay = document.getElementById('overlay')
+      scr     = document.getElementById('wmsx-screen-canvas')
+      ss      = document.getElementById('ss')
+      var i   = document.getElementById('ss-scr')
+
+      scr_ctx     = scr.getContext('2d')
+      overlay_ctx = overlay.getContext('2d')
+
+      var w   = WMSX.SCREEN_DEFAULT_SCALE * scr.width
+      var h   = WMSX.SCREEN_DEFAULT_SCALE * scr.height
+      ss.style.width  = w + 'px'
+      ss.style.height = h + 'px'
+      i.width         = w
+      i.height        = h
+      s               = WMSX.SCREEN_DEFAULT_SCALE
+      side            = 16*s
+      cx              = 0
+      cy              = 0
+
+//    scr.addEventListener('mousemove', colorpick)
+
+      overlay.width   = s*scr.width
+      overlay.height  = s*scr.height
+      overlay.onclick = function() { overlay.requestPointerLock() }
+      canvasDraw()
+
+      // pointer lock object forking for cross browser
+      overlay.requestPointerLock = overlay.requestPointerLock || overlay.mozRequestPointerLock
+        document.exitPointerLock = document.exitPointerLock   ||  document.mozExitPointerLock
+
+      // hook pointer lock state change events for different browsers
+      document.addEventListener('pointerlockchange'   , lockChangeAlert, false)
+      document.addEventListener('mozpointerlockchange', lockChangeAlert, false)
+
+    }
+
+
+
+    var scr, ss, s, side, scan, overlay, scr_ctx, overlay_ctx, x, y, cx, cy, animation
+
+    console.log(WMSX)
+
+
 
   </script>
 
@@ -134,6 +247,7 @@
       color: white;
     }
 
+    #scan-block,
     #input-block,
     #wmsx-block,
     #ss-block,
@@ -148,6 +262,7 @@
       cursor: url(https://www.carambis.com/static/new/programs/icon/ss_icon.png), auto !important;
     }
 
+    #scan-header,
     #input-header,
     #wmsx-header,
     #ss-header,
@@ -167,6 +282,7 @@
 
     #wmsx
     {
+      position: relative;
       text-align: center;
     }
 
@@ -175,12 +291,13 @@
       margin: 0;
     }
 
-    #wmsx-screen,
+    #wmsx-scr,
     #wmsx-bar
     {
       border: 0 !important;
     }
 
+    #scan,
     #input,
     #wmsx-screen-canvas-outer,
     #ss,
@@ -189,6 +306,12 @@
       border: 1px solid red;
     }
 
+    #ss-scr
+    {
+      image-rendering: pixelated;
+    }
+
+    #scan,
     #input,
     #wmsx-screen-canvas-outer,
     .ocr
@@ -205,13 +328,29 @@
       line-height: 8px;
       transform: scale(1.14,1);
       transform-origin: 0 0;
-      color: black;
       border: 0;
       margin: 0;
       padding: 0;
       white-space: pre-wrap;
     }
 
+    #scan-box
+    {
+      font-family: screen1;
+      font-size: 14px;
+      text-align: center;
+      width: 100%;
+      height: 192px;
+      display: table;
+    }
+
+    #scan-box > p
+    {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    #scan,
     #input,
     .ocr
     {
@@ -225,6 +364,7 @@
       height: 192px;
     }
 
+    #scan,
     .ocr
     {
       min-height: 192px;
@@ -260,6 +400,22 @@
       overflow: hidden;
       resize: none;
       word-wrap: break-word;
+    }
+
+    #wmsx-scr
+    {
+      position: relative;
+    }
+
+    #overlay
+    {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      margin: 0;
+      border: 1px solid transparent;
+      z-index: 9999;
     }
 
   </style>
@@ -303,15 +459,28 @@ esc " esc [ã â é í ó ú ç º π] esc "
 
   <div id="wmsx-block">
     <a id="wmsx-header" href="http://github.com/ppeccin/webmsx" target="_blank">WebMSX</a>
-    <div id="wmsx"><div id="wmsx-screen"></div></div>
+    <div id="wmsx">
+      <div id="wmsx-scr"></div>
+      <canvas id="overlay"></canvas>
+    </div>
     <input type="button" value="Default" onclick="setMachine(defaul)"><!--
  --><input type="button" value="HotBit"  onclick="setMachine(hotbit)"><!--
  --><input type="button" value="Expert"  onclick="setMachine(expert)">
   </div>
 
-  <div id="ss-block" onclick="capture()">
+  <div id="scan-block">
+    <div id="scan-header">Screen Scan</div>
+    <div id="scan">
+      <div id="scan-box"></div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div id="ss-block" onclick="screenshot()">
     <div id="ss-header">ScreenShot</div>
-    <div id="ss"><img id="ss-screen"></div>
+    <div id="ss"><img id="ss-scr"></div>
   </div>
 
   <div class="ocr-block">
