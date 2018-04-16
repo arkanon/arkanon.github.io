@@ -100,6 +100,8 @@
       overlay_ctx.fill()
     }
 
+
+
     function lockChangeAlert(e)
     {
 
@@ -119,55 +121,153 @@
 
     }
 
+
+
+/*
     function getMousePos(e)
     {
       var ev = (!e) ? window.event : e // IE:Moz
       x = ev.pageX
       y = ev.pageY
     }
+*/
 
-    function updatePosition(e)
+
+
+    // returns a position based on a mouseevent on a canvas. Based on code
+    // from here: http://miloq.blogspot.nl/2011/05/coordinates-mouse-click-canvas.html
+    function getMousePos(canvas, e)
     {
-
-   // var x     = (e.layerX-2)/s
-   // var y     = (e.layerY-2)/s
-      var pixel = scr_ctx.getImageData(cx/s, cy/s, s, s)
-      var data  = pixel.data
-      var r     = data[0]
-      var g     = data[1]
-      var b     = data[2]
-      var a     = data[3]/255
-      var rgba  = 'rgba('+r+', '+g+', '+b+', '+a+')'
-      scan.style.background = rgba
-      scan.style.background = rgba
-
-      cx += e.movementX
-      cy += e.movementY
-      if (cx > overlay.width  + side) cx = -side
-      if (cy > overlay.height + side) cy = -side
-      if (cx < -side)                 cx = overlay.width  + side
-      if (cy < -side)                 cy = overlay.height + side
-
-      scan.innerHTML  = '<p>'
-                      + cx+' '+cy
-                      + '<br>'
-                      + '<br>'
-                      + r+' '+g+' '+b+' '+a
-                      + '</p>'
-
-      if (!animation)
+      var x = new Number()
+      var y = new Number()
+      if (e.x != undefined && e.y != undefined)
       {
-        animation = requestAnimationFrame(function()
-        {
-          animation = null
-          canvasDraw()
-        })
+        x = e.x
+        y = e.y
       }
+      else // Firefox method to get the position
+      {
+        x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft
+        y = e.clientY + document.body.scrollTop  + document.documentElement.scrollTop
+      }
+      x -= canvas.offsetLeft
+      y -= canvas.offsetTop
+      return { x:x, y:y }
     }
 
 
 
-    window.onmousemove = getMousePos
+/*
+    function updatePosition(e)
+    {
+
+   // <http://smartjava.org/examples/pointerlock>
+
+      if (
+              cx < overlay.width  - side
+           && cy < overlay.height - side
+           && cx > 0
+           && cy > 0
+         )
+      {
+
+     // var x     = (e.layerX-2)/s
+     // var y     = (e.layerY-2)/s
+        var pixel = scr_ctx.getImageData(cx/s, cy/s, s, s)
+        var data  = pixel.data
+        var r     = data[0]
+        var g     = data[1]
+        var b     = data[2]
+        var a     = data[3]/255
+        var rgba  = 'rgba('+r+', '+g+', '+b+', '+a+')'
+        scan.style.background = rgba
+        scan.style.background = rgba
+
+        cx += e.movementX
+        cy += e.movementY
+
+        scan.innerHTML  = '<p>'
+                        + cx+' '+cy
+                        + '<br>'
+                        + '<br>'
+                        + r+' '+g+' '+b+' '+a
+                        + '</p>'
+
+      }
+      else
+      {
+        cx = 0
+        cy = 0
+      }
+
+        if (!animation)
+        {
+          animation = requestAnimationFrame(function()
+          {
+            animation = null
+            canvasDraw()
+          })
+        }
+
+//    if (cx > overlay.width  + side) cx = -side
+//    if (cy > overlay.height + side) cy = -side
+//    if (cx < -side)                 cx = overlay.width  + side
+//    if (cy < -side)                 cy = overlay.height + side
+
+    }
+*/
+
+
+    // handles an event on the canvas for the pointerlock example
+    var entryCoordinates = {x:-1, y:-1}
+
+    function updatePosition(e)
+    {
+
+      var canvas = document.getElementById('overlay')
+      var ctx    = canvas.getContext('2d')
+
+      // if we enter this for the first time, get the initial position
+      if (entryCoordinates.x == -1) entryCoordinates = getMousePos(canvas, e)
+
+      // get a reference to the canvas
+      var movementX = e.movementX || e.mozMovementX || e.webkitMovementX || 0
+      var movementY = e.movementY || e.mozMovementY || e.webkitMovementY || 0
+
+      // calculate the new coordinates where we should draw the ship
+      entryCoordinates.x = entryCoordinates.x + movementX
+      entryCoordinates.y = entryCoordinates.y + movementY
+
+      if      (entryCoordinates.x > canvas.width - 8)
+               entryCoordinates.x = canvas.width - 8
+      else if (entryCoordinates.x < 0)
+               entryCoordinates.x = 0
+
+           if (entryCoordinates.y > canvas.height - 8)
+               entryCoordinates.y = canvas.height - 8
+      else if (entryCoordinates.y < 0)
+               entryCoordinates.y = 0
+
+      // determine the direction
+      var direction = 0
+           if (movementX >  0)
+               direction =  1
+      else if (movementX <  0)
+               direction = -1
+
+      // clear and render the spaceship
+      ctx.clearRect(0, 0, overlay.width, overlay.height);
+      ctx.fillStyle = 'rgba(0,255,0,.5)'
+      ctx.beginPath()
+      ctx.fillRect(entryCoordinates.x, entryCoordinates.y, 8, 8)
+      ctx.fill()
+
+    }
+
+
+
+
+//  window.onmousemove = getMousePos
 
     window.onload = function(e)
     {
@@ -194,18 +294,18 @@
 
 //    scr.addEventListener('mousemove', colorpick)
 
+      // hook pointer lock state change events for different browsers
+      document.addEventListener(    'pointerlockchange', lockChangeAlert, false )
+      document.addEventListener( 'mozpointerlockchange', lockChangeAlert, false )
+
+      // pointer lock object forking for cross browser
+      overlay.requestPointerLock = overlay.requestPointerLock || overlay.mozRequestPointerLock
+        document.exitPointerLock =   document.exitPointerLock ||   document.mozExitPointerLock
+
       overlay.width   = s*scr.width
       overlay.height  = s*scr.height
       overlay.onclick = function() { overlay.requestPointerLock() }
       canvasDraw()
-
-      // pointer lock object forking for cross browser
-      overlay.requestPointerLock = overlay.requestPointerLock || overlay.mozRequestPointerLock
-        document.exitPointerLock = document.exitPointerLock   ||  document.mozExitPointerLock
-
-      // hook pointer lock state change events for different browsers
-      document.addEventListener('pointerlockchange'   , lockChangeAlert, false)
-      document.addEventListener('mozpointerlockchange', lockChangeAlert, false)
 
     }
 
