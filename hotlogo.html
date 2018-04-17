@@ -61,13 +61,16 @@
       return str.replace( re, function(m) { return map[m] } )
     }
 
-    function transfer(cmd)
+    function ktype(cmd)
     {
       cmd = cmd || 0
       var input = document.getElementById('input-box')
       if (cmd) input.value = cmd
       if (input.value.substr(input.value.length-1)!='\n') input.value += '\n'
       WMSX.room.keyboard.typeString(tr(input.value))
+   // WMSX.room.machineControls.processKey(WMSX.CONTROL,WMSX.STOP)
+   // WMSX.room.keyboard.processMSXKey(WMSX.keyboardKeys.CONTROL)
+   // WMSX.room.keyboard.processMSXKey(WMSX.keyboardKeys.STOP)
     }
 
     function progressUpdate(data)
@@ -497,17 +500,17 @@ ad dt mudecor 15 1
 esc " esc [ã â é í ó ú ç º π] esc "
 </textarea>
      </div>
-     <input type="button" value="TYPE"            onclick="transfer()"><!--
-  --><input type="button" value="att"             onclick="transfer('att')"><!--
-  --><input type="button" value="ad"              onclick="transfer('ad')"><!--
-  --><input type="button" value="dt"              onclick="transfer('dt')"><!--
-  --><input type="button" value="at"              onclick="transfer('at')"><!--
+     <input type="button" value="TYPE"            onclick="ktype()"><!--
+  --><input type="button" value="att"             onclick="ktype('att')"><!--
+  --><input type="button" value="ad"              onclick="ktype('ad')"><!--
+  --><input type="button" value="dt"              onclick="ktype('dt')"><!--
+  --><input type="button" value="at"              onclick="ktype('at')"><!--
   --><br><!--
-  --><input type="button" value="preto no branco" onclick="transfer('mudecor 15 1 mudecf 15 mudect 1 mudecl 1')"><!--
-  --><input type="button" value="rg"              onclick="transfer('rg')"><!--
+  --><input type="button" value="preto no branco" onclick="ktype('mudecor 15 1 mudecf 15 mudect 1 mudecl 1')"><!--
+  --><input type="button" value="rg"              onclick="ktype('rg')"><!--
   --><br><!--
-  --><input type="button" value="arquivos"        onclick="transfer('arquivos')"><!--
-  --><input type="button" value="carregue"        onclick="transfer('carregue &quot;bamba')"><!--
+  --><input type="button" value="arquivos"        onclick="ktype('arquivos')"><!--
+  --><input type="button" value="carregue"        onclick="ktype('carregue &quot;bamba')"><!--
 --></div>
 
   <div id="wmsx-block">
