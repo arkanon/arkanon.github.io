@@ -76,10 +76,30 @@
 
     function ctrl_stop()
     {
+
+/*
       WMSX.room.keyboard.processKey(WMSX.room.DOMKeys.CONTROL, true)
       WMSX.room.keyboard.processKey(WMSX.room.DOMKeys.VK_F9.c, true)
       WMSX.room.keyboard.processKey(WMSX.room.DOMKeys.VK_F9.c, false)
       WMSX.room.keyboard.processKey(WMSX.room.DOMKeys.CONTROL, false)
+*/
+
+//    WMSX.room.keyboard.processKey('L-Control')
+//    WMSX.room.keyboard.processMSXKey('CONTROL')
+      WMSX.room.machineControls.processKey(20,true)
+      WMSX.room.machineControls.processKey(20,false)
+
+      console.log(WMSX.room.keyboard.getKeyMapping('CONTROL' )) // c:16777233 n:L-Control
+      console.log(WMSX.room.keyboard.getKeyMapping('STOP'    )) // c:120      n:F9
+      console.log(WMSX.room.keyboard.getKeyMapping('CAPSLOCK')) // c:20       n:CapsLock
+
+/*
+      WMSX.room.keyboard.processMSXKey('CONTROL', true)
+      WMSX.room.keyboard.processMSXKey('STOP'   , true)
+      WMSX.room.keyboard.processMSXKey('STOP'   , false)
+      WMSX.room.keyboard.processMSXKey('CONTROL', false)
+*/
+
     }
 
     function progressUpdate(data)
@@ -240,14 +260,16 @@
     window.onload = function(e)
     {
 
+      console.log(WMSX)
+
       scan    = document.getElementById('scan-box')
-      overlay = document.getElementById('overlay')
+//    overlay = document.getElementById('overlay')
       scr     = document.getElementById('wmsx-screen-canvas')
       ss      = document.getElementById('ss')
       var i   = document.getElementById('ss-scr')
 
       scr_ctx     = scr.getContext('2d')
-      overlay_ctx = overlay.getContext('2d')
+//    overlay_ctx = overlay.getContext('2d')
 
       s               = WMSX.SCREEN_DEFAULT_SCALE
       var w           = s * scr.width
@@ -265,12 +287,12 @@
       document.addEventListener( 'mozpointerlockchange', lockChangeAlert, false )
 
       // pointer lock object forking for cross browser
-      overlay.requestPointerLock = overlay.requestPointerLock || overlay.mozRequestPointerLock
+//    overlay.requestPointerLock = overlay.requestPointerLock || overlay.mozRequestPointerLock
         document.exitPointerLock =   document.exitPointerLock ||   document.mozExitPointerLock
 
-      overlay.width   = s*scr.width
-      overlay.height  = s*scr.height
-      overlay.onclick = function() { overlay.requestPointerLock() }
+//    overlay.width   = s*scr.width
+//    overlay.height  = s*scr.height
+//    overlay.onclick = function() { overlay.requestPointerLock() }
 
     }
 
@@ -284,8 +306,6 @@
 
 
     var scr, ss, s, side, scan, overlay, scr_ctx, overlay_ctx, c, d
-
-    console.log(WMSX)
 
     const CR = 'send'
 
@@ -566,7 +586,7 @@
     <a id="wmsx-header" href="http://github.com/ppeccin/webmsx" target="_blank">WebMSX</a>
     <div id="wmsx">
       <div id="wmsx-scr"></div>
-      <canvas id="overlay"></canvas>
+      <!--canvas id="overlay"></canvas-->
     </div><!--
  --><input type="button" value="Digitar" onclick="document.getElementById('wmsx-screen-canvas').focus()"><!--
  --><input type="button" value="Default" onclick="setMachine(defaul)"><!--
