@@ -285,7 +285,6 @@
       document.addEventListener( 'mozpointerlockchange', lockChangeAlert, false )
 
 
-
       // overlay for screen scan
 
       overlay = document.getElementById('overlay')
@@ -486,15 +485,28 @@
       border-radius: 5px;
     }
 
+  @-moz-document url-prefix()
+  {
+
+    select:-moz-focusring
+    {
+      color: transparent;
+      text-shadow: 0 0 0 #515151;
+    }
+
+    select
+    {
+      padding-left: 0 !important;
+    }
+
+  }
+
     select
     {
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
       background: url(https://github.com/arkanon/arkanon.github.io/blob/master/favicon.ico?raw=true) right / 16px no-repeat #fff;
-      text-indent: -2px;
-      color: rgba(0,0,0,0);
-      text-shadow: 0 0 0 #515151;
       height: 22px;
       padding-left: 5px;
       padding-right: 0;
