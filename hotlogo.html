@@ -263,13 +263,11 @@
       console.log(WMSX)
 
       scan    = document.getElementById('scan-box')
-//    overlay = document.getElementById('overlay')
       scr     = document.getElementById('wmsx-screen-canvas')
       ss      = document.getElementById('ss')
       var i   = document.getElementById('ss-scr')
 
       scr_ctx     = scr.getContext('2d')
-//    overlay_ctx = overlay.getContext('2d')
 
       s               = WMSX.SCREEN_DEFAULT_SCALE
       var w           = s * scr.width
@@ -286,13 +284,20 @@
       document.addEventListener(    'pointerlockchange', lockChangeAlert, false )
       document.addEventListener( 'mozpointerlockchange', lockChangeAlert, false )
 
+
+
+      // overlay for screen scan
+
+      overlay = document.getElementById('overlay')
+      overlay_ctx = overlay.getContext('2d')
+
       // pointer lock object forking for cross browser
-//    overlay.requestPointerLock = overlay.requestPointerLock || overlay.mozRequestPointerLock
+      overlay.requestPointerLock = overlay.requestPointerLock || overlay.mozRequestPointerLock
         document.exitPointerLock =   document.exitPointerLock ||   document.mozExitPointerLock
 
-//    overlay.width   = s*scr.width
-//    overlay.height  = s*scr.height
-//    overlay.onclick = function() { overlay.requestPointerLock() }
+      overlay.width   = s*scr.width
+      overlay.height  = s*scr.height
+      overlay.onclick = function() { overlay.requestPointerLock() }
 
     }
 
