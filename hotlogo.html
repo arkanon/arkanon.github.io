@@ -15,9 +15,14 @@
   <script src="https://rawgit.com/antimatter15/ocrad.js/master/ocrad.js"></script>
   <script>
 
- // start_with = 'MSX-Logo (pt) (Hot-Logo)'
-    start_with = 'H.E.R.O'
- // start_with = 'Road Fighter'
+    start_sysr = 'MSX1'
+
+    start_appr = 'MSX-Logo (pt) (Hot-Logo)'
+ // start_appr = 'H.E.R.O'
+ // start_appr = 'Road Fighter'
+
+ // start_disk = 'Logo'
+    start_disk = 'MSX-DOS'
 
     lib = {
               ocr       : '\nmudecor 15 1\nmudecf 15\nmudect 1\n\nesc proporção\n\n\n\n\n\nesc " esc [ã â é í ó ú ç º π] esc "'
@@ -37,39 +42,50 @@
             , 'π' : '¾'
           }
 
-    msx1    = '@MSX1_NTSC.bios'
-    msx2    = '@MSX2P_NTSC.bios'
-    hotbit  = url('msxpro.com/hardware/roms/hotbit12')
-    expert  = url('msxpro.com/hardware/roms/expert11')
-    roms    = {
-                'ROM'                                               : ''
-              , 'MSX-Logo (pt) (Hot-Logo)'                          : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_por'
-              , 'MSX-Logo (en)'                                     : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_ing'
-              , 'MSX-Logo (es)'                                     : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_esp'
-              , 'MSX-Logo (nl)'                                     : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_hol'
+    sysr    = {
+                'System ROM' : ''
+              , 'MSX1'       : '@MSX1_NTSC.bios'
+              , 'HotBit'     : 'msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/hotbit12.zip'
+              , 'Expert'     : 'msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/expert11.zip'
+              , 'MSX2+'      : '@MSX2P_NTSC.bios'
+              }
+
+    appr    = {
+                'Application ROM'                                   : ''
+              , 'MSX-Logo (pt) (Hot-Logo)'                          : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_por.zip'
+              , 'MSX-Logo (en)'                                     : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_ing.zip'
+              , 'MSX-Logo (es)'                                     : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_esp.zip'
+              , 'MSX-Logo (nl)'                                     : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_hol.zip'
+              , 'MSX-BASIC'                                         : '@[MSXDOS2]v22.rom'
               , ''                                                  : ''
-              , 'Ligue-se ao Expert'                                : 'icongames.com.br/msxfiles/apps/ligue'
-              , 'Music Editor'                                      : 'romsmania.com/statics/data/MSX Computer/L-O/Music Editior'
-              , 'Antarctic Adventure'                               : 'romsmania.com/statics/data/MSX Computer/A-C/Antarctic Adventure'
-              , 'Arkanoid'                                          : 'romsmania.com/statics/data/MSX Computer/A-C/Arkanoid'
-              , 'Arkanoid II - Revenge of Doh'                      : 'romsmania.com/statics/data/MSX 2/Arkanoid II - Revenge of Doh (Japan)'
-              , 'Frogger'                                           : 'romsmania.com/statics/data/MSX Computer/D-F/Frogger'
-              , 'H.E.R.O'                                           : 'romsmania.com/statics/data/MSX Computer/G-K/Hero'
-              , 'Iligks Episode I - Theseus'                        : 'romsmania.com/statics/data/MSX Computer/P-T/Thseus'
-              , 'Iligks Episode IV - Iriegas (The Maze of Illegus)' : 'romsmania.com/statics/data/MSX Computer/G-K/Iriegas'
-              , 'Lode Runner'                                       : 'romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 1'
-              , 'Lode Runner II'                                    : 'romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 2'
-              , 'Magical Tree'                                      : 'romsmania.com/statics/data/MSX Computer/L-O/Magical Tree'
-              , 'PayLoad'                                           : 'romsmania.com/statics/data/MSX Computer/P-T/Payload'
-              , 'Pitfall'                                           : 'romsmania.com/statics/data/MSX Computer/P-T/Pitfall'
-              , 'Pitfall II'                                        : 'romsmania.com/statics/data/MSX Computer/P-T/Pitfall 2'
-              , 'Rally-X'                                           : 'romsmania.com/statics/data/MSX Computer/P-T/Rally-X'
-              , 'River Raid'                                        : 'romsmania.com/statics/data/MSX Computer/P-T/River Raid'
-              , 'Road Fighter'                                      : 'romsmania.com/statics/data/MSX Computer/P-T/Road Fighter'
-              , 'Snake-It'                                          : 'romsmania.com/statics/data/MSX Computer/P-T/Snake-It'
-              , 'Super Billiards'                                   : 'romsmania.com/statics/data/MSX Computer/P-T/Super Billiards'
-              , 'Tetris'                                            : 'romsmania.com/statics/data/MSX 2/Tetris (Japan)'
-              , 'Vampire Killer'                                    : 'romsmania.com/statics/data/MSX 2/Vampire Killer (Japan, Europe)'
+              , 'Ligue-se ao Expert'                                : 'icongames.com.br/msxfiles/apps/ligue.zip'
+              , 'Music Editor'                                      : 'romsmania.com/statics/data/MSX Computer/L-O/Music Editior.zip'
+              , 'Antarctic Adventure'                               : 'romsmania.com/statics/data/MSX Computer/A-C/Antarctic Adventure.zip'
+              , 'Arkanoid'                                          : 'romsmania.com/statics/data/MSX Computer/A-C/Arkanoid.zip'
+              , 'Arkanoid II - Revenge of Doh'                      : 'romsmania.com/statics/data/MSX 2/Arkanoid II - Revenge of Doh (Japan).zip'
+              , 'Frogger'                                           : 'romsmania.com/statics/data/MSX Computer/D-F/Frogger.zip'
+              , 'H.E.R.O'                                           : 'romsmania.com/statics/data/MSX Computer/G-K/Hero.zip'
+              , 'Iligks Episode I - Theseus'                        : 'romsmania.com/statics/data/MSX Computer/P-T/Thseus.zip'
+              , 'Iligks Episode IV - Iriegas (The Maze of Illegus)' : 'romsmania.com/statics/data/MSX Computer/G-K/Iriegas.zip'
+              , 'Lode Runner'                                       : 'romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 1.zip'
+              , 'Lode Runner II'                                    : 'romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 2.zip'
+              , 'Magical Tree'                                      : 'romsmania.com/statics/data/MSX Computer/L-O/Magical Tree.zip'
+              , 'PayLoad'                                           : 'romsmania.com/statics/data/MSX Computer/P-T/Payload.zip'
+              , 'Pitfall'                                           : 'romsmania.com/statics/data/MSX Computer/P-T/Pitfall.zip'
+              , 'Pitfall II'                                        : 'romsmania.com/statics/data/MSX Computer/P-T/Pitfall 2.zip'
+              , 'Rally-X'                                           : 'romsmania.com/statics/data/MSX Computer/P-T/Rally-X.zip'
+              , 'River Raid'                                        : 'romsmania.com/statics/data/MSX Computer/P-T/River Raid.zip'
+              , 'Road Fighter'                                      : 'romsmania.com/statics/data/MSX Computer/P-T/Road Fighter.zip'
+              , 'Snake-It'                                          : 'romsmania.com/statics/data/MSX Computer/P-T/Snake-It.zip'
+              , 'Super Billiards'                                   : 'romsmania.com/statics/data/MSX Computer/P-T/Super Billiards.zip'
+              , 'Tetris'                                            : 'romsmania.com/statics/data/MSX 2/Tetris (Japan).zip'
+              , 'Vampire Killer'                                    : 'romsmania.com/statics/data/MSX 2/Vampire Killer (Japan, Europe).zip'
+              }
+
+    disk    = {
+                'Disk'    : ''
+              , 'Logo'    : 'rawgit.com/arkanon/dipohlo/gh-pages/webmsx-disk.zip'
+              , 'MSX-DOS' : 'files.datassette.org/softwares/msxdos1.4.zip?file=1&type=node&id=2049'
               }
 
  // WMSX.BASIC_ENTER     = tr('mudecor 15 1 mudecf 15 mudect 6 mudecl 4 esc proporção')
@@ -79,11 +95,11 @@
  // WMSX.CARTRIDGE1_URL  = defaul
  // WMSX.CARTRIDGE1_URL  = hotbit
  // WMSX.CARTRIDGE1_URL  = expert
- // WMSX.CARTRIDGE2_URL  = url( roms['MSX-Logo (pt) (Hot-Logo)'] )
-    WMSX.DISKA_FILES_URL = git( 'arkanon','dipohlo','webmsx-disk.zip' )
+ // WMSX.CARTRIDGE2_URL  = url( appr['MSX-Logo (pt) (Hot-Logo)'] )
+ // WMSX.DISKA_FILES_URL = git( 'arkanon','dipohlo','webmsx-disk.zip' )
  // WMSX.STATE_URL       = git( 'arkanon','dipohlo','webmsx-hotlogo.wst' )
 
-    WMSX.MACHINE               = 'MSX1A'
+ // WMSX.MACHINE               = 'MSX1A'
     WMSX.SCREEN_ELEMENT_ID     = 'wmsx-scr'
     WMSX.AUTO_START            = false
     WMSX.CPU_TURBO_MODE        = 1
@@ -93,9 +109,10 @@
     WMSX.SCREEN_DEFAULT_SCALE  = 1
     WMSX.SCREEN_FILTER_MODE    = 0
 
-    function url(url)            { return 'https://cors-anywhere.herokuapp.com/' + url + '.zip' } // <http://alternativeto.net/software/cors-proxy>
+    function url(url)            { return url.charAt(0) == '@' ? url : encodeURI('https://cors-anywhere.herokuapp.com/' + url) } // <http://alternativeto.net/software/cors-proxy>
     function git(user,repo,path) { return 'https://rawgit.com/' + user + '/' + repo + '/gh-pages/' + path }
-    function setROM(url)         { WMSX.room.fileLoader.readFromURL(url, WMSX.ROM, 0, true, true); WMSX.room.machine.reset() }
+    function setROM(url)         { WMSX.room.machine.powerOff(); WMSX.room.fileLoader.readFromURL(url, WMSX.AUTO, 0, true, true); WMSX.room.machine.powerOn() }
+    function setDSK(url)         { WMSX.room.fileLoader.readFromURL(url, WMSX.AUTO, 0, true, true) }
 
     function tr(str)
     {
@@ -303,24 +320,49 @@
     {
 
       WMSX.start()
-      setROM(url(roms[start_with]))
+      setROM(url(sysr[start_sysr]))
+      setROM(url(appr[start_appr]))
+      setDSK(url(disk[start_disk]))
 
-      rommenu = document.getElementById('rom')
-      for (var rom in roms)
+      var file, el
+
+      for (file in sysr)
       {
-        var el = document.createElement('option')
-        el.disabled    = (!roms[rom])
-        el.selected    = (rom==start_with)
-        el.value       = roms[rom]
+        el = document.createElement('option')
+        el.disabled    = (!sysr[file])
+        el.selected    = (file==start_sysr)
+        el.value       = sysr[file]
         el.onclick     = function(){ setROM(url(this.value)) }
-        el.textContent = rom
-        rommenu.appendChild(el)
+        el.textContent = file
+        document.getElementById('sysr').appendChild(el)
       }
 
-      scan    = document.getElementById('scan-box')
-      scr     = document.getElementById('wmsx-screen-canvas')
-      ss      = document.getElementById('ss')
-      var i   = document.getElementById('ss-scr')
+      for (file in appr)
+      {
+        el = document.createElement('option')
+        el.disabled    = (!appr[file])
+        el.selected    = (file==start_appr)
+        el.value       = appr[file]
+        el.onclick     = function(){ setROM(url(this.value)) }
+        el.textContent = file
+        document.getElementById('appr').appendChild(el)
+      }
+
+      for (file in disk)
+      {
+        el = document.createElement('option')
+        el.disabled    = (!disk[file])
+        el.selected    = (file==start_appr)
+        el.value       = disk[file]
+        el.onclick     = function(){ setDSK(url(this.value)) }
+        el.textContent = file
+        document.getElementById('disk').appendChild(el)
+      }
+
+      scan  = document.getElementById('scan-box')
+      scr   = document.getElementById('wmsx-screen-canvas')
+      ss    = document.getElementById('ss')
+      var i = document.getElementById('ss-scr')
 
       scr_ctx = scr.getContext('2d')
 
@@ -338,6 +380,7 @@
       // hook pointer lock state change events for different browsers
       document.addEventListener(    'pointerlockchange', lockChangeAlert, false )
       document.addEventListener( 'mozpointerlockchange', lockChangeAlert, false )
+
 
 
 /*
@@ -569,11 +612,6 @@
       border-radius: 5px;
     }
 
-    #rom
-    {
-      width: 50px;
-    }
-
     input[type=checkbox]
     {
       height: 20px;
@@ -665,11 +703,10 @@
       <!--canvas id="overlay"></canvas-->
     </div><!--
  --><input type="button" value="Digitar" onclick="document.getElementById('wmsx-screen-canvas').focus()"><!--
- --><input type="button" value="Default" onclick="setROM(msx1)"><!--
- --><input type="button" value="HotBit"  onclick="setROM(hotbit)"><!--
- --><input type="button" value="Expert"  onclick="setROM(expert)"><!--
- --><input type="button" value="MSX2+"   onclick="WMSX.room.machine.powerOff(); WMSX.MSX2=true; WMSX.MACHINE='MSX2PA'; WMSX.BIOS_URL=msx2; WMSX.room.machine.powerOn()"><!--
- --><select id="rom"></select><!--
+ --><select id="sysr"></select><!--
+ --><select id="appr"></select><!--
+ --><select id="disk"></select><!--
+ --><br><!--
  --><input type="button" value="Sprites" onclick="WMSX.room.machine.vdp.toggleSpriteDebugModes()"><!--
  --><input type="button" value="Turbo"   onclick="WMSX.room.machine.cpu.toggleTurboMode()"><!--
  --><input type="button" value="Power"   onclick="WMSX.room.machine.powerIsOn ? WMSX.room.machine.powerOff() : WMSX.room.machine.powerOn()"><!--
