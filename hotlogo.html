@@ -318,11 +318,14 @@
     {
 
       WMSX.start()
-      WMSX.room.machine.setMachine('MSX1A')
+
+   // WMSX.room.machine.setMachine('MSX1A')
+   // WMSX.room.machine.setDefaults()
+   // WMSX.room.machine.powerOff()
    // if (typeof start_sysr !== 'undefined') load(url(sysr[start_sysr]))
-      if (typeof start_appr !== 'undefined') load(url(appr[start_appr]))
+   // if (typeof start_appr !== 'undefined') load(url(appr[start_appr]))
    // if (typeof start_disk !== 'undefined') load(url(disk[start_disk]))
-      WMSX.room.machine.powerOn()
+   // WMSX.room.machine.powerOn()
 
       document.getElementById('wmsx-header').innerHTML += ' ' + WMSX.VERSION
 
