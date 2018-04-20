@@ -22,71 +22,69 @@
  // start_appr = 'Road Fighter'
 
  // start_disk = 'Logo'
-    start_disk = 'MSX-DOS'
+ // start_disk = 'MSX-DOS'
 
-    lib = {
-              ocr       : '\nmudecor 15 1\nmudecf 15\nmudect 1\n\nesc proporção\n\n\n\n\n\nesc " esc [ã â é í ó ú ç º π] esc "'
-            , atat      : 'atat todas mudecf 1 tat cada [ mudect 1+resto quem 10 mudecl quem pd quem*12 at pf 80\natt cada [ mudecf quem espere 50'
-            , proporção : 'mudect 6\nmudecl 4\nesc proporção\n\nrepita 360 [ pf 1 pe 1 ]\nmudeproporção 1\nrepita 360 [ pf 1 pd 1 ]\n'
-          }
+    cmap = {
+             'ã' : '±'
+           , 'â' : ''
+           , 'é' : ''
+           , 'í' : '¡'
+           , 'ó' : '¢'
+           , 'ú' : '£'
+           , 'ç' : ''
+           , 'º' : '§'
+           , 'π' : '¾'
+           }
 
-    map = {
-              'ã' : '±'
-            , 'â' : ''
-            , 'é' : ''
-            , 'í' : '¡'
-            , 'ó' : '¢'
-            , 'ú' : '£'
-            , 'ç' : ''
-            , 'º' : '§'
-            , 'π' : '¾'
-          }
+    code = {
+             'ocr'             : '\nmudecor 15 1\nmudecf 15\nmudect 1\n\nesc proporção\n\n\n\n\n\nesc " esc [ã â é í ó ú ç º π] esc "'
+           , 'atat'            : 'atat todas mudecf 1 tat cada [ mudect 1+resto quem 10 mudecl quem pd quem*12 at pf 80\natt cada [ mudecf quem espere 50'
+           , 'proporção'       : 'mudect 6\nmudecl 4\nesc proporção\n\nrepita 360 [ pf 1 pe 1 ]\nmudeproporção 1\nrepita 360 [ pf 1 pd 1 ]\n'
+           , 'preto no branco' : 'mudecor 15 1 mudecf 15 mudect 1 mudecl 1 att'
+           }
 
-    sysr    = {
-                'System ROM' : ''
-              , 'MSX1'       : '@MSX1_NTSC.bios'
-              , 'HotBit'     : 'msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/hotbit12.zip'
-              , 'Expert'     : 'msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/expert11.zip'
-              , 'MSX2+'      : '@MSX2P_NTSC.bios'
-              }
+    sysr = {
+             'MSX1'   : '@MSX1_NTSC.bios'
+           , 'HotBit' : 'msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/hotbit12.zip'
+           , 'Expert' : 'msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/expert11.zip'
+           , 'MSX2+'  : '@MSX2P_NTSC.bios'
+           }
 
-    appr    = {
-                'Application ROM'                                   : ''
-              , 'MSX-Logo (pt) (Hot-Logo)'                          : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_por.zip'
-              , 'MSX-Logo (en)'                                     : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_ing.zip'
-              , 'MSX-Logo (es)'                                     : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_esp.zip'
-              , 'MSX-Logo (nl)'                                     : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_hol.zip'
-              , 'MSX-BASIC'                                         : '@[MSXDOS2]v22.rom'
-              , ''                                                  : ''
-              , 'Ligue-se ao Expert'                                : 'icongames.com.br/msxfiles/apps/ligue.zip'
-              , 'Music Editor'                                      : 'romsmania.com/statics/data/MSX Computer/L-O/Music Editior.zip'
-              , 'Antarctic Adventure'                               : 'romsmania.com/statics/data/MSX Computer/A-C/Antarctic Adventure.zip'
-              , 'Arkanoid'                                          : 'romsmania.com/statics/data/MSX Computer/A-C/Arkanoid.zip'
-              , 'Arkanoid II - Revenge of Doh'                      : 'romsmania.com/statics/data/MSX 2/Arkanoid II - Revenge of Doh (Japan).zip'
-              , 'Frogger'                                           : 'romsmania.com/statics/data/MSX Computer/D-F/Frogger.zip'
-              , 'H.E.R.O'                                           : 'romsmania.com/statics/data/MSX Computer/G-K/Hero.zip'
-              , 'Iligks Episode I - Theseus'                        : 'romsmania.com/statics/data/MSX Computer/P-T/Thseus.zip'
-              , 'Iligks Episode IV - Iriegas (The Maze of Illegus)' : 'romsmania.com/statics/data/MSX Computer/G-K/Iriegas.zip'
-              , 'Lode Runner'                                       : 'romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 1.zip'
-              , 'Lode Runner II'                                    : 'romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 2.zip'
-              , 'Magical Tree'                                      : 'romsmania.com/statics/data/MSX Computer/L-O/Magical Tree.zip'
-              , 'PayLoad'                                           : 'romsmania.com/statics/data/MSX Computer/P-T/Payload.zip'
-              , 'Pitfall'                                           : 'romsmania.com/statics/data/MSX Computer/P-T/Pitfall.zip'
-              , 'Pitfall II'                                        : 'romsmania.com/statics/data/MSX Computer/P-T/Pitfall 2.zip'
-              , 'Rally-X'                                           : 'romsmania.com/statics/data/MSX Computer/P-T/Rally-X.zip'
-              , 'River Raid'                                        : 'romsmania.com/statics/data/MSX Computer/P-T/River Raid.zip'
-              , 'Road Fighter'                                      : 'romsmania.com/statics/data/MSX Computer/P-T/Road Fighter.zip'
-              , 'Snake-It'                                          : 'romsmania.com/statics/data/MSX Computer/P-T/Snake-It.zip'
-              , 'Super Billiards'                                   : 'romsmania.com/statics/data/MSX Computer/P-T/Super Billiards.zip'
-              , 'Tetris'                                            : 'romsmania.com/statics/data/MSX 2/Tetris (Japan).zip'
-              , 'Vampire Killer'                                    : 'romsmania.com/statics/data/MSX 2/Vampire Killer (Japan, Europe).zip'
-              }
+    appr = {
+             'MSX-Logo (pt) (Hot-Logo)'                          : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_por.zip'
+           , 'MSX-Logo (en)'                                     : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_ing.zip'
+           , 'MSX-Logo (es)'                                     : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_esp.zip'
+           , 'MSX-Logo (nl)'                                     : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_hol.zip'
+           , 'MSX-BASIC'                                         : '@[MSXDOS2]v22.rom'
+           , ''                                                  : ''
+           , 'Ligue-se ao Expert'                                : 'icongames.com.br/msxfiles/apps/ligue.zip'
+           , 'Music Editor'                                      : 'romsmania.com/statics/data/MSX Computer/L-O/Music Editior.zip'
+           , 'Antarctic Adventure'                               : 'romsmania.com/statics/data/MSX Computer/A-C/Antarctic Adventure.zip'
+           , 'Arkanoid'                                          : 'romsmania.com/statics/data/MSX Computer/A-C/Arkanoid.zip'
+           , 'Arkanoid II - Revenge of Doh'                      : 'romsmania.com/statics/data/MSX 2/Arkanoid II - Revenge of Doh (Japan).zip'
+           , 'Frogger'                                           : 'romsmania.com/statics/data/MSX Computer/D-F/Frogger.zip'
+           , 'H.E.R.O'                                           : 'romsmania.com/statics/data/MSX Computer/G-K/Hero.zip'
+           , 'Iligks Episode I - Theseus'                        : 'romsmania.com/statics/data/MSX Computer/P-T/Thseus.zip'
+           , 'Iligks Episode IV - Iriegas (The Maze of Illegus)' : 'romsmania.com/statics/data/MSX Computer/G-K/Iriegas.zip'
+           , 'Lode Runner'                                       : 'romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 1.zip'
+           , 'Lode Runner II'                                    : 'romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 2.zip'
+           , 'Magical Tree'                                      : 'romsmania.com/statics/data/MSX Computer/L-O/Magical Tree.zip'
+           , 'PayLoad'                                           : 'romsmania.com/statics/data/MSX Computer/P-T/Payload.zip'
+           , 'Pitfall'                                           : 'romsmania.com/statics/data/MSX Computer/P-T/Pitfall.zip'
+           , 'Pitfall II'                                        : 'romsmania.com/statics/data/MSX Computer/P-T/Pitfall 2.zip'
+           , 'Rally-X'                                           : 'romsmania.com/statics/data/MSX Computer/P-T/Rally-X.zip'
+           , 'River Raid'                                        : 'romsmania.com/statics/data/MSX Computer/P-T/River Raid.zip'
+           , 'Road Fighter'                                      : 'romsmania.com/statics/data/MSX Computer/P-T/Road Fighter.zip'
+           , 'Snake-It'                                          : 'romsmania.com/statics/data/MSX Computer/P-T/Snake-It.zip'
+           , 'Super Billiards'                                   : 'romsmania.com/statics/data/MSX Computer/P-T/Super Billiards.zip'
+           , 'Tetris'                                            : 'romsmania.com/statics/data/MSX 2/Tetris (Japan).zip'
+           , 'Vampire Killer'                                    : 'romsmania.com/statics/data/MSX 2/Vampire Killer (Japan, Europe).zip'
+           }
 
-    disk    = {
-                'Disk'    : ''
-              , 'Logo'    : 'rawgit.com/arkanon/dipohlo/gh-pages/webmsx-disk.zip'
-              , 'MSX-DOS' : 'files.datassette.org/softwares/msxdos1.4.zip?file=1&type=node&id=2049'
-              }
+    disk = {
+             'Projetos Hot-Logo' : 'rawgit.com/arkanon/dipohlo/gh-pages/webmsx-disk.zip'
+           , 'MSX-DOS 1'         : '@DOS1BOOT.zip'
+           }
 
  // WMSX.BASIC_ENTER     = tr('mudecor 15 1 mudecf 15 mudect 6 mudecl 4 esc proporção')
  // WMSX.BASIC_ENTER     = tr('esc proporção')
@@ -107,17 +105,17 @@
     WMSX.SCREEN_CONTROL_BAR    = 1
     WMSX.SCREEN_DEFAULT_ASPECT = 1.0
     WMSX.SCREEN_DEFAULT_SCALE  = 1
-    WMSX.SCREEN_FILTER_MODE    = 0
+    WMSX.SCREEN_FILTER_MODE    = 1
 
+ // function git(user,repo,path) { return 'https://rawgit.com/' + user + '/' + repo + '/gh-pages/' + path }
     function url(url)            { return url.charAt(0) == '@' ? url : encodeURI('https://cors-anywhere.herokuapp.com/' + url) } // <http://alternativeto.net/software/cors-proxy>
-    function git(user,repo,path) { return 'https://rawgit.com/' + user + '/' + repo + '/gh-pages/' + path }
-    function setROM(url)         { WMSX.room.machine.powerOff(); WMSX.room.fileLoader.readFromURL(url, WMSX.AUTO, 0, true, true); WMSX.room.machine.powerOn() }
-    function setDSK(url)         { WMSX.room.fileLoader.readFromURL(url, WMSX.AUTO, 0, true, true) }
+    function load(url)           { WMSX.room.fileLoader.readFromURL(url, WMSX.AUTO, 0, true, true) }
+ // function setROM(url)         { WMSX.room.machine.powerOff(); WMSX.room.fileLoader.readFromURL(url, WMSX.AUTO, 0, true, true); WMSX.room.machine.powerOn() }
 
     function tr(str)
     {
-      var re = new RegExp( '['+Object.keys(map).join('')+']', 'g' )
-      return str.replace( re, function(m) { return map[m] } )
+      var re = new RegExp( '['+Object.keys(cmap).join('')+']', 'g' )
+      return str.replace( re, function(m) { return cmap[m] } )
     }
 
     function ktype(cmd,send)
@@ -320,43 +318,79 @@
     {
 
       WMSX.start()
-      setROM(url(sysr[start_sysr]))
-      setROM(url(appr[start_appr]))
-      setDSK(url(disk[start_disk]))
+      WMSX.room.machine.setMachine('MSX1A')
+   // if (typeof start_sysr !== 'undefined') load(url(sysr[start_sysr]))
+      if (typeof start_appr !== 'undefined') load(url(appr[start_appr]))
+   // if (typeof start_disk !== 'undefined') load(url(disk[start_disk]))
+      WMSX.room.machine.powerOn()
 
-      var file, el
+      document.getElementById('wmsx-header').innerHTML += ' ' + WMSX.VERSION
 
-      for (file in sysr)
+      var item, sel, opt
+
+      sel                          = document.getElementById('code')
+      sel.style.backgroundImage    = 'url(https://github.com/arkanon/arkanon.github.io/blob/master/favicon.ico?raw=true)'
+      sel.style.backgroundPosition = 'right'
+      sel.style.backgroundRepeat   = 'no-repeat'
+      sel.style.backgroundSize     = '16px'
+      for (item in code)
       {
-        el = document.createElement('option')
-        el.disabled    = (!sysr[file])
-        el.selected    = (file==start_sysr)
-        el.value       = sysr[file]
-        el.onclick     = function(){ setROM(url(this.value)) }
-        el.textContent = file
-        document.getElementById('sysr').appendChild(el)
+        opt             = document.createElement('option')
+        opt.disabled    = (!code[item])
+     // opt.selected    = (item==start_code)
+     // opt.value       = code[item]
+     // opt.onclick     = function(){ load(url(this.value)) }
+        opt.textContent = item
+        //  / #fff
+        sel.appendChild(opt)
       }
 
-      for (file in appr)
+      sel                          = document.getElementById('sysr')
+   // sel.style.backgroundImage    = 'url(' + wmsx.Images.urls.sprites + ')'
+      sel.style.backgroundPosition = '-150px -51px'
+      sel.style.backgroundRepeat   = 'no-repeat'
+      sel.style.backgroundSize     = '16px'
+      for (item in sysr)
       {
-        el = document.createElement('option')
-        el.disabled    = (!appr[file])
-        el.selected    = (file==start_appr)
-        el.value       = appr[file]
-        el.onclick     = function(){ setROM(url(this.value)) }
-        el.textContent = file
-        document.getElementById('appr').appendChild(el)
+        opt             = document.createElement('option')
+        opt.disabled    = (!sysr[item])
+        opt.selected    = (item==start_sysr)
+        opt.value       = sysr[item]
+        opt.onclick     = function(){ load(url(this.value)) }
+        opt.textContent = item
+        sel.appendChild(opt)
       }
 
-      for (file in disk)
+      sel                          = document.getElementById('appr')
+   // sel.style.backgroundImage    = 'url(' + wmsx.Images.urls.sprites + ')'
+      sel.style.backgroundPosition = '-150px -51px'
+      sel.style.backgroundRepeat   = 'no-repeat'
+      sel.style.backgroundSize     = '16px'
+      for (item in appr)
       {
-        el = document.createElement('option')
-        el.disabled    = (!disk[file])
-        el.selected    = (file==start_appr)
-        el.value       = disk[file]
-        el.onclick     = function(){ setDSK(url(this.value)) }
-        el.textContent = file
-        document.getElementById('disk').appendChild(el)
+        opt             = document.createElement('option')
+        opt.disabled    = (!appr[item])
+        opt.selected    = (item==start_appr)
+        opt.value       = appr[item]
+        opt.onclick     = function(){ load(url(this.value)) }
+        opt.textContent = item
+        sel.appendChild(opt)
+      }
+
+      sel                          = document.getElementById('disk')
+   // sel.style.backgroundImage    = 'url(' + wmsx.Images.urls.sprites + ')'
+      sel.style.backgroundPosition = '-237px -51px'
+      sel.style.backgroundRepeat   = 'no-repeat'
+      sel.style.backgroundSize     = '16px'
+      for (item in disk)
+      {
+        opt             = document.createElement('option')
+        opt.disabled    = (!disk[item])
+        opt.selected    = (item==start_appr)
+        opt.value       = disk[item]
+        opt.onclick     = function(){ setDSK(url(this.value)) }
+        opt.textContent = item
+        sel.appendChild(opt)
       }
 
       scan  = document.getElementById('scan-box')
@@ -405,6 +439,7 @@
     const CR = 'send'
 
     console.log(WMSX)
+//  console.log(WMSX.wmsx.Images.urls.sprites)
 
   </script>
 
@@ -595,7 +630,7 @@
 
     #code
     {
-      background: url(https://github.com/arkanon/arkanon.github.io/blob/master/favicon.ico?raw=true) right / 16px no-repeat #fff;
+      width: 70px;
     }
 
     select
@@ -660,13 +695,8 @@
     <a id="input-header" href="http://ateijelo.com/blog/2016/09/13/making-an-msx-font" target="_blank">Input</a>
     <div id="input">
        <textarea id="input-box" rows="24" cols="28" wrap="soft" spellcheck="false"></textarea>
-     </div>
-     <select id="code" onchange="document.getElementById('input-box').value=lib[this.value];this.value='Código'">
-       <option selected="selected" disabled="disabled">Código</option>
-       <option>ocr</option>
-       <option>atat</option>
-       <option>proporção</option>
-     </select><!--
+     </div><!--
+  --><select id="code" onchange="document.getElementById('input-box').value=code[this.value];this.value=''"><option selected="selected" disabled="disabled" value="">Código</option></select><!--
   --><input type="button" value="TYPE"            onclick="ktype('',CR)" style="color:red"><!--
   --><input type="button" value="primitivas"      onclick="ktype('primitivas',CR)"><!--
   --><br><!--
@@ -677,7 +707,6 @@
   --><input type="button" value="dt"              onclick="ktype('dt' ,CR)"><!--
   --><input type="button" value="at"              onclick="ktype('at' ,CR)"><!--
   --><br><!--
-  --><input type="button" value="preto no branco" onclick="ktype('mudecor 15 1 mudecf 15 mudect 1 mudecl 1 att',CR)"><!--
   --><input type="button" value="edfig"           onclick="ktype('edfig fig',CR)"><!--
   --><br><!--
   --><input type="button" value="arquivos"        onclick="ktype('dt tat arquivos',CR)"><!--
@@ -702,11 +731,11 @@
       <div id="wmsx-scr"></div>
       <!--canvas id="overlay"></canvas-->
     </div><!--
- --><input type="button" value="Digitar" onclick="document.getElementById('wmsx-screen-canvas').focus()"><!--
- --><select id="sysr"></select><!--
- --><select id="appr"></select><!--
- --><select id="disk"></select><!--
+ --><select id="sysr"><option selected="selected" disabled="disabled">System ROM</option></select><!--
+ --><select id="appr"><option selected="selected" disabled="disabled">Application ROM</option></select><!--
+ --><select id="disk"><option selected="selected" disabled="disabled">Disk</option></select><!--
  --><br><!--
+ --><input type="button" value="Digitar" onclick="document.getElementById('wmsx-screen-canvas').focus()" style="color:red"><!--
  --><input type="button" value="Sprites" onclick="WMSX.room.machine.vdp.toggleSpriteDebugModes()"><!--
  --><input type="button" value="Turbo"   onclick="WMSX.room.machine.cpu.toggleTurboMode()"><!--
  --><input type="button" value="Power"   onclick="WMSX.room.machine.powerIsOn ? WMSX.room.machine.powerOff() : WMSX.room.machine.powerOn()"><!--
