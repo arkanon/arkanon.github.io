@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HotLogo @ WebMSX</title>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="image/x-icon" href="https://github.com/arkanon/arkanon.github.io/blob/master/favicon.ico?raw=true">
+  <script src="https://rawgit.com/ppeccin/WebMSX/master/release/stable/4.0/embedded/wmsx.js"></script>
+  <script>
+
+    start_sysr = 'MSX1'
+ // start_sysr = 'HotBit'
+ // start_sysr = 'Expert'
+ // start_sysr = 'MSX2+'
+
+    start_appr = 'MSX-Logo (pt) (Hot-Logo)'
+ // start_appr = 'H.E.R.O'
+ // start_appr = 'Road Fighter'
+
+    start_disk = 'Projetos Hot-Logo'
+ // start_disk = 'MSX-DOS 1'
+
+    cmap = {
+             'ã' : '±'
+           , 'â' : ''
+           , 'é' : ''
+           , 'í' : '¡'
+           , 'ó' : '¢'
+           , 'ú' : '£'
+           , 'ç' : ''
+           , 'º' : '§'
+           , 'π' : '¾'
+           }
+
+    code = {
+             'ocr'             : '\nmudecor 15 1\nmudecf 15\nmudect 1\n\nesc proporção\n\n\n\n\n\nesc " esc [ã â é í ó ú ç º π] esc "'
+           , 'atat'            : 'atat todas mudecf 1 tat cada [ mudect 1+resto quem 10 mudecl quem pd quem*12 at pf 80\natt cada [ mudecf quem espere 50'
+           , 'proporção'       : 'mudect 6\nmudecl 4\nesc proporção\n\nrepita 360 [ pf 1 pe 1 ]\nmudeproporção 1\nrepita 360 [ pf 1 pd 1 ]\n'
+           , 'preto no branco' : 'mudecor 15 1 mudecf 15 mudect 1 mudecl 1 att'
+           }
+
+    sysr = {
+             'MSX1'   : '@MSX1_NTSC.bios'
+           , 'HotBit' : 'msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/hotbit12.zip'
+           , 'Expert' : 'msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/expert11.zip'
+           , 'MSX2+'  : '@MSX2P_NTSC.bios'
+           }
+
+    appr = {
+             'MSX-Logo (pt) (Hot-Logo)'     : 'msxblog.es/wp-content/uploads/2009/09/msxlogo_por.zip'
+           , 'MSX-BASIC'                    : '@[MSXDOS2]v22.rom'
+           , ''                             : ''
+           , 'Arkanoid'                     : 'romsmania.com/statics/data/MSX Computer/A-C/Arkanoid.zip'
+           , 'Arkanoid II - Revenge of Doh' : 'romsmania.com/statics/data/MSX 2/Arkanoid II - Revenge of Doh (Japan).zip'
+           , 'H.E.R.O'                      : 'romsmania.com/statics/data/MSX Computer/G-K/Hero.zip'
+           , 'Iligks Episode I - Theseus'   : 'romsmania.com/statics/data/MSX Computer/P-T/Thseus.zip'
+           , 'PayLoad'                      : 'romsmania.com/statics/data/MSX Computer/P-T/Payload.zip'
+           , 'Road Fighter'                 : 'romsmania.com/statics/data/MSX Computer/P-T/Road Fighter.zip'
+           , 'Snake-It'                     : 'romsmania.com/statics/data/MSX Computer/P-T/Snake-It.zip'
+           }
+
+    disk = {
+             'Projetos Hot-Logo' : 'rawgit.com/arkanon/dipohlo/gh-pages/webmsx-disk.zip'
+           , 'MSX-DOS 1'         : '@DOS1BOOT.zip'
+           }
+
+    WMSX.BASIC_ENTER     = tr('att dt arquivos')
+ // WMSX.BASIC_ENTER     = tr(code['ocr'])
+ // WMSX.BASIC_TYPE      = tr(code['propoção'])
+
+ // WMSX.CARTRIDGE1_URL  = '@[MSXDOS2]v22.rom'
+ // WMSX.CARTRIDGE1_URL  = '@MSX1_NTSC.bios'
+ // WMSX.CARTRIDGE1_URL  = hotbit
+ // WMSX.CARTRIDGE1_URL  = expert
+ // WMSX.CARTRIDGE2_URL  = url( appr['MSX-Logo (pt) (Hot-Logo)'] )
+ // WMSX.DISKA_FILES_URL = git( 'arkanon','dipohlo','webmsx-disk.zip' )
+ // WMSX.STATE_URL       = git( 'arkanon','dipohlo','webmsx-hotlogo.wst' )
+
+ // WMSX.MACHINE               = 'MSX1A'
+ // WMSX.MACHINE               = 'MSX2PA'
+ // WMSX.PRESETS               = 'DOS2'
+ // WMSX.TOUCH_MODE            = 1
+    WMSX.SCREEN_ELEMENT_ID     = 'wmsx-scr'
+    WMSX.AUTO_START            = false
+    WMSX.CPU_TURBO_MODE        = 1
+    WMSX.AUTO_POWER_ON_DELAY   = 0
+    WMSX.SCREEN_CONTROL_BAR    = 1
+    WMSX.SCREEN_DEFAULT_ASPECT = 1.0
+    WMSX.SCREEN_DEFAULT_SCALE  = 1
+    WMSX.SCREEN_FILTER_MODE    = 0 // 1
+
+    function git(user,repo,path) { return 'https://rawgit.com/' + user + '/' + repo + '/gh-pages/' + path }
+    function url(url)            { return url.charAt(0) == '@' ? url : encodeURI('https://cors-anywhere.herokuapp.com/' + url) } // <http://alternativeto.net/software/cors-proxy>
+
+    function tr(str)
+    {
+      var re = new RegExp( '['+Object.keys(cmap).join('')+']', 'g' )
+      return str.replace( re, function(m) { return cmap[m] } )
+    }
+
+    window.onload = function(e)
+    {
+
+      WMSX.start()
+   // WMSX.room.machine.setMachine('MSX1A')
+   // WMSX.room.machine.setDefaults()
+   // WMSX.room.machine.powerOff()
+      WMSX.room.fileLoader.readFromURL(url(sysr[start_sysr]), WMSX.AUTO, WMSX.AUTO, true, false)
+      WMSX.room.fileLoader.readFromURL(url(appr[start_appr]), WMSX.AUTO, WMSX.AUTO, true, false)
+      WMSX.room.fileLoader.readFromURL('https://'+disk[start_disk], WMSX.ZIP_AS_DISK, 2, true, false)
+   // WMSX.room.machine.powerOn()
+
+    }
+
+    console.log(WMSX)
+
+  </script>
+  <style>
+    body
+    {
+      font-family: sans-serif;
+      color: white;
+      margin: 5px;
+      background: #292929;
+      text-space-collapse: trim-inner; /* not working */
+    }
+    #wmsx-scr,
+    #wmsx-bar { border: 0 !important; }
+    #wmsx-screen-canvas-outer { border: 1px solid red; }
+    #wmsx-screen-canvas-outer { background: white; }
+    #wmsx-scr { position: relative; }
+  </style>
+</head>
+<body><div id="wmsx-scr"></div></body>
+</html>                     
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            

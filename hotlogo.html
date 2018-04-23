@@ -21,8 +21,8 @@
  // start_appr = 'H.E.R.O'
  // start_appr = 'Road Fighter'
 
- // start_disk = 'Logo'
- // start_disk = 'MSX-DOS'
+    start_disk = 'Projetos Hot-Logo'
+ // start_disk = 'MSX-DOS 1'
 
     cmap = {
              'ã' : '±'
@@ -90,7 +90,8 @@
  // WMSX.BASIC_ENTER     = tr('esc proporção')
  // WMSX.BASIC_TYPE      = tr('un pt 30 ul repita 360 [ pf 1 pe 1 ] mudeproporção 1 repita 360 [ pf 1 pd 1 ]')
 
- // WMSX.CARTRIDGE1_URL  = defaul
+ // WMSX.CARTRIDGE1_URL  = '@[MSXDOS2]v22.rom'
+ // WMSX.CARTRIDGE1_URL  = '@MSX1_NTSC.bios'
  // WMSX.CARTRIDGE1_URL  = hotbit
  // WMSX.CARTRIDGE1_URL  = expert
  // WMSX.CARTRIDGE2_URL  = url( appr['MSX-Logo (pt) (Hot-Logo)'] )
@@ -98,6 +99,9 @@
  // WMSX.STATE_URL       = git( 'arkanon','dipohlo','webmsx-hotlogo.wst' )
 
  // WMSX.MACHINE               = 'MSX1A'
+ // WMSX.MACHINE               = 'MSX2PA'
+ // WMSX.PRESETS               = 'DOS2'
+ // WMSX.TOUCH_MODE            = 1
     WMSX.SCREEN_ELEMENT_ID     = 'wmsx-scr'
     WMSX.AUTO_START            = false
     WMSX.CPU_TURBO_MODE        = 1
@@ -107,9 +111,10 @@
     WMSX.SCREEN_DEFAULT_SCALE  = 1
     WMSX.SCREEN_FILTER_MODE    = 1
 
- // function git(user,repo,path) { return 'https://rawgit.com/' + user + '/' + repo + '/gh-pages/' + path }
+    function git(user,repo,path) { return 'https://rawgit.com/' + user + '/' + repo + '/gh-pages/' + path }
     function url(url)            { return url.charAt(0) == '@' ? url : encodeURI('https://cors-anywhere.herokuapp.com/' + url) } // <http://alternativeto.net/software/cors-proxy>
-    function load(url)           { WMSX.room.fileLoader.readFromURL(url, WMSX.AUTO, 0, true, true) }
+    function loadr(url)          { WMSX.room.fileLoader.readFromURL(url, WMSX.AUTO, WMSX.AUTO, true, true) }
+    function loadd(url)          { WMSX.room.fileLoader.readFromURL(url, WMSX.AUTO, WMSX.AUTO, true, false, true) }
  // function setROM(url)         { WMSX.room.machine.powerOff(); WMSX.room.fileLoader.readFromURL(url, WMSX.AUTO, 0, true, true); WMSX.room.machine.powerOn() }
 
     function tr(str)
@@ -322,9 +327,9 @@
    // WMSX.room.machine.setMachine('MSX1A')
    // WMSX.room.machine.setDefaults()
    // WMSX.room.machine.powerOff()
-   // if (typeof start_sysr !== 'undefined') load(url(sysr[start_sysr]))
-   // if (typeof start_appr !== 'undefined') load(url(appr[start_appr]))
-   // if (typeof start_disk !== 'undefined') load(url(disk[start_disk]))
+   // if (typeof start_sysr !== 'undefined') loadr(url(sysr[start_sysr]))
+   // if (typeof start_appr !== 'undefined') loadr(url(appr[start_appr]))
+      if (typeof start_disk !== 'undefined') loadd('https://'+disk[start_disk])
    // WMSX.room.machine.powerOn()
 
       document.getElementById('wmsx-header').innerHTML += ' ' + WMSX.VERSION
@@ -342,7 +347,7 @@
         opt.disabled    = (!code[item])
      // opt.selected    = (item==start_code)
      // opt.value       = code[item]
-     // opt.onclick     = function(){ load(url(this.value)) }
+     // opt.onclick     = function(){ loadd(url(this.value)) }
         opt.textContent = item
         //  / #fff
         sel.appendChild(opt)
@@ -359,7 +364,7 @@
         opt.disabled    = (!sysr[item])
         opt.selected    = (item==start_sysr)
         opt.value       = sysr[item]
-        opt.onclick     = function(){ load(url(this.value)) }
+        opt.onclick     = function(){ loadr(url(this.value)) }
         opt.textContent = item
         sel.appendChild(opt)
       }
@@ -375,7 +380,7 @@
         opt.disabled    = (!appr[item])
         opt.selected    = (item==start_appr)
         opt.value       = appr[item]
-        opt.onclick     = function(){ load(url(this.value)) }
+        opt.onclick     = function(){ loadr(url(this.value)) }
         opt.textContent = item
         sel.appendChild(opt)
       }
