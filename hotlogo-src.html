@@ -162,6 +162,7 @@
 
     function git(user,repo,path) { return 'https://rawgit.com/' + user + '/' + repo + '/gh-pages/' + path }
     function url(url)            { return url.charAt(0) == '@' ? url : encodeURI('https://cors-anywhere.herokuapp.com/' + url) } // <http://alternativeto.net/software/cors-proxy>
+    function load(urlpart)       { WMSX.room.fileLoader.readFromURL(url(urlpart), wmsx.FileLoader.OPEN_TYPE.AUTO) }
 
     function tr(str)
     {
@@ -182,23 +183,26 @@
    // WMSX.CARTRIDGE1_URL  = expert
    // WMSX.CARTRIDGE2_URL  = url( appr['MSX-Logo (pt) (Hot-Logo)'] )
    // WMSX.DISKA_FILES_URL = git( 'arkanon','dipohlo','webmsx-disk.zip' )
+   // WMSX.DISKA_FILES_URL = '@DOS1Boot.zip'
    // WMSX.STATE_URL       = git( 'arkanon','dipohlo','webmsx-hotlogo.wst' )
 
       WMSX.start()
       WMSX.room.machine.setMachine('MSX1A')
-      WMSX.room.fileLoader.readFromURL( url(sysr[start_sysr]), WMSX.AUTO, WMSX.AUTO, true, false )
-      WMSX.room.fileLoader.readFromURL( url(appr[start_appr]), WMSX.AUTO, WMSX.AUTO, true, false )
+      load(sysr[start_sysr])
+      load(appr[start_appr])
+   // load(disk[start_disk])
+      WMSX.room.fileLoader.loadFromFile('@DOS1Boot.zip', wmsx.FileLoader.OPEN_TYPE.AUTO)
 
-var entire = WMSX.room.fileLoader.readFromURL.toString()
-var body   = entire.slice(entire.indexOf("{") + 1, entire.lastIndexOf("}"))
-console.log(body)
+/*
+      var entire = WMSX.room.fileLoader.readFromURL.toString()
+      var body   = entire.slice(entire.indexOf("{") + 1, entire.lastIndexOf("}"))
+      console.log(body)
 
-var funct  = wmsx.MultiDownloader
-var entire = funct.toString()
-var body   = entire.slice(entire.indexOf("{") + 1, entire.lastIndexOf("}"))
-console.log(body)
-
-      WMSX.room.fileLoader.readFromURL( 'https://'+disk[start_disk], wmsx.FileLoader.OPEN_TYPE.ZIP_AS_DISK, WMSX.AUTO, true, true, true )
+      var funct  = wmsx.MultiDownloader
+      var entire = funct.toString()
+      var body   = entire.slice(entire.indexOf("{") + 1, entire.lastIndexOf("}"))
+      console.log(body)
+*/
 
     }
 
@@ -209,11 +213,11 @@ console.log(body)
  // start_sysr = 'Expert'
  // start_sysr = 'MSX2+'
 
-    start_appr = 'MSX-Logo (pt) (Hot-Logo)'
+ // start_appr = 'MSX-Logo (pt) (Hot-Logo)'
  // start_appr = 'H.E.R.O'
  // start_appr = 'Road Fighter'
 
-    start_disk = 'Projetos Hot-Logo'
+ // start_disk = 'Projetos Hot-Logo'
  // start_disk = 'MSX-DOS 1'
 
     cmap = {
@@ -257,7 +261,7 @@ console.log(body)
 
     disk = {
              'Projetos Hot-Logo' : 'rawgit.com/arkanon/dipohlo/gh-pages/webmsx-disk.zip'
-           , 'MSX-DOS 1'         : '@DOS1BOOT.zip'
+           , 'MSX-DOS 1'         : '@DOS1Boot.zip'
            }
 
   </script>
@@ -278,16 +282,16 @@ console.log(body)
   </style>
 </head>
 <body><div id="wmsx-scr"></div></body>
-</html>                     
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
