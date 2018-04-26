@@ -158,8 +158,9 @@
   <script>
 
     snippet = {
-                'def' : ''
+                'def' : 'Nenhum'
 
+              , 'Nenhum'          : ''
               , 'ocr'             : '\nmudecor 15 1\nmudecf 15\nmudect 1\n\nesc proporção\n\n\n\n\n\nesc " esc [ã â é í ó ú ç º π] esc "'
               , 'atat'            : 'atat todas mudecf 1 tat cada [ mudect 1+resto quem 10 mudecl quem pd quem*12 at pf 80\natt cada [ mudecf quem espere 50'
               , 'proporção'       : 'mudect 6\nmudecl 4\nesc proporção\n\nrepita 360 [ pf 1 pe 1 ]\nmudeproporção 1\nrepita 360 [ pf 1 pd 1 ]\n'
@@ -169,15 +170,17 @@
     sysrom  = {
                 'def' : 'MSX1'
 
-              , 'MSX1'   : '@MSX1_NTSC.bios'
-              , 'HotBit' : 'http://msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/hotbit12.zip'
-              , 'Expert' : 'http://msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/expert11.zip'
-              , 'MSX2+'  : '@MSX2P_NTSC.bios'
+              , 'Nenhuma' : ''
+              , 'MSX1'    : '@MSX1_NTSC.bios'
+              , 'HotBit'  : 'http://msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/hotbit12.zip'
+              , 'Expert'  : 'http://msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/expert11.zip'
+              , 'MSX2+'   : '@MSX2P_NTSC.bios'
               }
 
     approm  = {
                 'def' : 'MSX-Logo (pt) (Hot-Logo)'
 
+              , 'Nenhuma'                                           : ''
               , 'MSX-Logo (pt) (Hot-Logo)'                          : 'http://msxblog.es/wp-content/uploads/2009/09/msxlogo_por.zip'
               , 'MSX-Logo (en)'                                     : 'http://msxblog.es/wp-content/uploads/2009/09/msxlogo_ing.zip'
               , 'MSX-Logo (es)'                                     : 'http://msxblog.es/wp-content/uploads/2009/09/msxlogo_esp.zip'
@@ -211,8 +214,10 @@
     floppy  = {
                 'def' : 'Projetos Hot-Logo'
 
-              , 'MSX-DOS 1'         : '@DOS1Boot.zip'
+              , 'Nenhum'            : ''
               , 'Projetos Hot-Logo' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-disk.zip'
+              , ''                  : '-'
+              , 'MSX-DOS 1'         : '@DOS1Boot.zip'
               , 'UZIX 1'            : 'http://uzix.sourceforge.net/uzix1.0/files/uzix1.0.zip'     // msx2
               , 'UZIX 1 Apps'       : 'http://uzix.sourceforge.net/uzix1.0/files/uzix1.0appl.zip' // msx2
               , 'UZIX 2'            : 'http://uzix.sourceforge.net/uzix2.0/files/uzix0.2.0.zip'   // msx2
@@ -224,8 +229,9 @@
               }
 
     savstat = {
-                'def' : ''
+                'def' : 'Nenhum'
 
+              , 'Nenhum'   : ''
               , 'Hot-Logo' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo.wst'
               , 'Hugo'     : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-hugo.wst'
               , 'Bamba'    : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-bamba.wst'
@@ -236,7 +242,7 @@
     proxy   = { /* Cross-Origin Resource Sharing free proxies */
                 'def' : 'CORSify Me'
 
-              , 'NONE'          : ''
+              , 'Nenhum'        : ''
               , 'CORS Anywhere' : 'https://cors-anywhere.herokuapp.com/'
               , 'CORSify Me'    : 'http://www.corsify.me/'
               , 'CORS Now'      : 'https://cors.now.sh/'
@@ -288,9 +294,16 @@
 
 
     function db(str)         { console.log('--- DEBUG --- '+str) }
-    function curl(addr)      { db(addr.def); var url = typeof addr === 'object' ? addr[addr.def] : addr; return url.charAt(0) == '@' ? url : encodeURI(proxy[proxy.def]+url) }
-    function load(addr,port) { port=port||0; WMSX.room.fileLoader.readFromURL(curl(addr), wmsx.FileLoader.OPEN_TYPE.AUTO, port) }
+    function curl(addr)      { var url = typeof addr === 'object' ? addr[addr.def] : addr; db(url); return url.charAt(0) == '@' ? url : encodeURI(proxy[proxy.def]+url) }
     function wait(ms,cmd)    { setTimeout( function(){ ktype(cmd) }, ms ) }
+    function settype(type)   { WMSX.room.machine.setMachine( type.charAt(3) == '2' ? 'MSX2PA' : 'MSX1A' ); load(sysrom[type]) }
+
+    function load(addr,port)
+    {
+      if (addr=='Nenhuma') alert('oi')
+      port=port||0
+      WMSX.room.fileLoader.readFromURL(curl(addr), wmsx.FileLoader.OPEN_TYPE.AUTO, port)
+    }
 
     function ktype(cmd,send)
     {
@@ -499,15 +512,16 @@
     window.onload = function(e)
     {
 
+      document.getElementById('wmsx-header').innerHTML += ' ' + WMSX.VERSION
+
       WMSX.start()
 
-      WMSX.room.machine.setMachine( sysrom.def.charAt(3) == '2' ? 'MSX2PA' : 'MSX1A' )
+      settype(sysrom.def)
+   // settype('HotBit')
 
       load(sysrom)
       load(approm)
       load(floppy)
-
-      document.getElementById('wmsx-header').innerHTML += ' ' + WMSX.VERSION
 
       var item, sel, opt
 
@@ -524,7 +538,7 @@
         opt.disabled    = (snippet[item]=='-')
      // opt.selected    = (item==snippet.def)
      // opt.value       = snippet[item]
-     // opt.onclick     = function(){ load(snippet[this.value]) }
+     // opt.onclick     = function(){ load(this.value) }
         opt.textContent = item
         //  / #fff
         if (item != 'def') sel.appendChild(opt)
@@ -543,7 +557,7 @@
         opt.disabled    = (sysrom[item]=='-')
         opt.selected    = (item==sysrom.def)
         opt.value       = sysrom[item]
-        opt.onclick     = function(){ load(sysrom[this.value]) }
+        opt.onclick     = function(){ settype(this.text) }
         opt.textContent = item
         if (item != 'def') sel.appendChild(opt)
       }
@@ -561,7 +575,7 @@
         opt.disabled    = (approm[item]=='-')
         opt.selected    = (item==approm.def)
         opt.value       = approm[item]
-        opt.onclick     = function(){ load(approm[this.value]) }
+        opt.onclick     = function(){ load(this.value) }
         opt.textContent = item
         if (item != 'def') sel.appendChild(opt)
       }
@@ -579,7 +593,7 @@
         opt.disabled    = (floppy[item]=='-')
         opt.selected    = (item==floppy.def)
         opt.value       = floppy[item]
-        opt.onclick     = function(){ load(floppy[this.value]) }
+        opt.onclick     = function(){ load(this.value) }
         opt.textContent = item
         if (item != 'def') sel.appendChild(opt)
       }
@@ -597,7 +611,7 @@
         opt.disabled    = (savstat[item]=='-')
         opt.selected    = (item==savstat.def)
         opt.value       = savstat[item]
-        opt.onclick     = function(){ load(savstat[this.value]) }
+        opt.onclick     = function(){ load(this.value) }
         opt.textContent = item
         if (item != 'def') sel.appendChild(opt)
       }
@@ -615,7 +629,7 @@
         opt.disabled    = (proxy[item]=='-')
         opt.selected    = (item==proxy.def)
         opt.value       = proxy[item]
-        opt.onclick     = function(){ load(proxy[this.value]) }
+        opt.onclick     = function(){ load(this.value) }
         opt.textContent = item
         if (item != 'def') sel.appendChild(opt)
       }
