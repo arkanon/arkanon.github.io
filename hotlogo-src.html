@@ -5,155 +5,43 @@
   <meta charset="UTF-8">
   <link rel="shortcut icon" type="image/x-icon" href="https://github.com/arkanon/arkanon.github.io/blob/master/favicon.ico?raw=true">
 
-  <base href="https://rawgit.com/ppeccin/WebMSX/master/src/main/">
-
-<!--
-  <script src="../../release/stable/4.0/embedded/wmsx.js"></script>
--->
-
-  <script src="room/screen/FullScreenSetup.js"></script>
-  <script src="WMSX.js"></script>
-  <script src="room/screen/FullScreenSetup.js"></script>
-  <script src="util/Util.js"></script>
-  <script src="util/SHA1.js"></script>
-  <script src="util/ZIP.js"></script>
-  <script src="util/EmbeddedFiles.js"></script>
-  <script src="util/MultiDownloader.js"></script>
-  <script src="util/MultiFileReader.js"></script>
-  <script src="msx/cpu/Z80.js"></script>
-  <script src="msx/ppi/PPI.js"></script>
-  <script src="msx/video/VDP.js"></script>
-  <script src="msx/video/VDPCommandProcessor.js"></script>
-  <script src="msx/video/VideoSignal.js"></script>
-  <script src="msx/video/VideoStandard.js"></script>
-  <script src="msx/audio/PSG.js"></script>
-  <script src="msx/audio/AudioSignal.js"></script>
-  <script src="msx/audio/PSGAudio.js"></script>
-  <script src="msx/audio/PCM8BitAudio.js"></script>
-  <script src="msx/audio/SCCIAudio.js"></script>
-  <script src="msx/audio/YM2413Tables.js"></script>
-  <script src="msx/audio/YM2413Audio.js"></script>
-  <script src="msx/miscdevices/RTC.js"></script>
-  <script src="msx/miscdevices/SystemFlags.js"></script>
-  <script src="msx/miscdevices/ImageCassetteDriver.js"></script>
-  <script src="msx/miscdevices/TurboDriver.js"></script>
-  <script src="msx/miscdevices/BIOSKeyboardExtension.js"></script>
-  <script src="msx/miscdevices/ImageDiskDriver.js"></script>
-  <script src="msx/miscdevices/ImageNextorDeviceDriver.js"></script>
-  <script src="msx/rom/ROM.js"></script>
-  <script src="msx/rom/ROMDatabase.js"></script>
-  <script src="msx/slots/SlotCreator.js"></script>
-  <script src="msx/slots/SlotFormats.js"></script>
-  <script src="msx/slots/Slot.js"></script>
-  <script src="msx/slots/SlotEmpty.js"></script>
-  <script src="msx/slots/SlotExpanded.js"></script>
-  <script src="msx/slots/SlotExpandedSpecial.js"></script>
-  <script src="msx/slots/SlotNormal.js"></script>
-  <script src="msx/slots/ram/SlotRAM64K.js"></script>
-  <script src="msx/slots/ram/SlotRAMMapper.js"></script>
-  <script src="msx/slots/bios/SlotBIOS.js"></script>
-  <script src="msx/slots/bios/SlotMSX2BIOSExt.js"></script>
-  <script src="msx/slots/cartridges/CartridgeASCII8K.js"></script>
-  <script src="msx/slots/cartridges/CartridgeASCII16K.js"></script>
-  <script src="msx/slots/cartridges/CartridgeKonami.js"></script>
-  <script src="msx/slots/cartridges/CartridgeRType.js"></script>
-  <script src="msx/slots/cartridges/CartridgeCrossBlaim.js"></script>
-  <script src="msx/slots/cartridges/CartridgeDOS2.js"></script>
-  <script src="msx/slots/cartridges/CartridgeHarryFox.js"></script>
-  <script src="msx/slots/cartridges/CartridgeAlQuran.js"></script>
-  <script src="msx/slots/cartridges/CartridgeSuperSwangi.js"></script>
-  <script src="msx/slots/cartridges/CartridgeZemina80.js"></script>
-  <script src="msx/slots/cartridges/CartridgeZemina90.js"></script>
-  <script src="msx/slots/cartridges/CartridgeZemina126.js"></script>
-  <script src="msx/slots/cartridges/CartridgeSuperLodeRunner.js"></script>
-  <script src="msx/slots/cartridges/CartridgeDooly.js"></script>
-  <script src="msx/slots/cartridges/special/disk/CartridgeDiskPatched.js"></script>
-  <script src="msx/slots/cartridges/special/disk/CartridgeNextorPatched.js"></script>
-  <script src="msx/slots/cartridges/special/scc/CartridgeKonamiSCC.js"></script>
-  <script src="msx/slots/cartridges/special/scc/CartridgeSCCExpansion.js"></script>
-  <script src="msx/slots/cartridges/special/scc/CartridgeSCCIExpansion.js"></script>
-  <script src="msx/slots/cartridges/special/scc/CartridgeManbow2.js"></script>
-  <script src="msx/slots/cartridges/special/kanji/CartridgeKanjiFont.js"></script>
-  <script src="msx/slots/cartridges/special/sram/CartridgePAC.js"></script>
-  <script src="msx/slots/cartridges/special/msx-music/CartridgeMSXMUSIC.js"></script>
-  <script src="msx/slots/cartridges/special/msx-music/CartridgeFMPAC.js"></script>
-  <script src="msx/slots/cartridges/special/sram/CartridgeGameMaster2.js"></script>
-  <script src="msx/slots/cartridges/special/sram/CartridgeASCII8KSRAM.js"></script>
-  <script src="msx/slots/cartridges/special/sram/CartridgeASCII16KSRAM.js"></script>
-  <script src="msx/slots/cartridges/special/sram/CartridgeHalnote.js"></script>
-  <script src="msx/slots/cartridges/special/pcm/CartridgeMajutsushi.js"></script>
-  <script src="msx/slots/cartridges/special/pcm/CartridgeSynthesizer.js"></script>
-  <script src="msx/machine/MachineTypeSocket.js"></script>
-  <script src="msx/machine/ExtensionsSocket.js"></script>
-  <script src="msx/machine/DeviceMissing.js"></script>
-  <script src="msx/machine/BUS.js"></script>
-  <script src="msx/machine/Machine.js"></script>
-  <script src="msx/controls/KeyboardKeys.js"></script>
-  <script src="msx/controls/JoystickButtons.js"></script>
-  <script src="msx/controls/MachineControls.js"></script>
-  <script src="images/Images.js"></script>
-  <script src="userprefs/UserPreferences.js"></script>
-  <script src="userprefs/UserROMFormats.js"></script>
-  <script src="room/clock/Clock.js"></script>
-  <script src="room/files/FileLoader.js"></script>
-  <script src="room/files/FileDownloader.js"></script>
-  <script src="room/controls/DOMKeys.js"></script>
-  <script src="room/controls/GamepadButtons.js"></script>
-  <script src="room/controls/TouchControls.js"></script>
-  <script src="room/controls/BuiltInKeyboards.js"></script>
-  <script src="room/controls/DOMKeyboard.js"></script>
-  <script src="room/controls/GamepadJoysticksControls.js"></script>
-  <script src="room/controls/DOMJoykeysControls.js"></script>
-  <script src="room/controls/DOMMouseControls.js"></script>
-  <script src="room/controls/DOMTouchControls.js"></script>
-  <script src="room/controls/ControllersHub.js"></script>
-  <script src="room/controls/DOMMachineControls.js"></script>
-  <script src="room/controls/DOMVirtualKeyboard.js"></script>
-  <script src="room/screen/es6/ScreenGUI.js"></script>
-  <script src="room/screen/virtualkeyboard/VirtualKeyboard.js"></script>
-  <script src="room/screen/Monitor.js"></script>
-  <script src="room/screen/CanvasDisplay.js"></script>
-  <script src="room/screen/es6/SettingsGUI.js"></script>
-  <script src="room/screen/settings/ControlMappingPopup.js"></script>
-  <script src="room/screen/settings/KeyboardConfigurator.js"></script>
-  <script src="room/screen/settings/PortsConfigurator.js"></script>
-  <script src="room/screen/settings/Settings.js"></script>
-  <script src="room/screen/dialogs/PasteDialog.js"></script>
-  <script src="room/screen/dialogs/TextEntryDialog.js"></script>
-  <script src="room/screen/dialogs/SaveStateDialog.js"></script>
-  <script src="room/screen/dialogs/CartridgeFormatDialog.js"></script>
-  <script src="room/screen/dialogs/DiskSelectDialog.js"></script>
-  <script src="room/screen/dialogs/NewHardDiskDialog.js"></script>
-  <script src="room/screen/dialogs/MachineSelectDialog.js"></script>
-  <script src="room/screen/dialogs/TouchConfigDialog.js"></script>
-  <script src="room/screen/dialogs/QuickOptionsDialog.js"></script>
-  <script src="room/screen/dialogs/NetPlayDialog.js"></script>
-  <script src="room/speaker/WebAudioSpeaker.js"></script>
-  <script src="room/savestate/SaveStateMedia.js"></script>
-  <script src="room/savestate/LocalStoragePersistence.js"></script>
-  <script src="room/savestate/IndexedDBPersistence.js"></script>
-  <script src="room/cartridge/FileCartridgeSlot.js"></script>
-  <script src="room/cassette/FileCassetteDeck.js"></script>
-  <script src="room/disk/DiskImages.js"></script>
-  <script src="room/disk/FileDiskDrive.js"></script>
-  <script src="room/controls/PeripheralControls.js"></script>
-  <script src="room/controls/DOMPeripheralControls.js"></script>
-  <script src="room/netplay/NetServer.js"></script>
-  <script src="room/netplay/NetClient.js"></script>
-  <script src="room/Room.js"></script>
-  <script src="../runtime/images/EmbeddedImages.js"></script>
-  <script src="../runtime/sysfiles/CompressedSystemFiles.js"></script>
-  <script src="../runtime/sysfiles/EmbeddedSystemFiles.js"></script>
-  <script src="Configurator.js"></script>
-  <script src="Launcher.js"></script>
+  <base href="https://rawgit.com/ppeccin/WebMSX/master/">
 
   <script>
+
+    // <http://trevweb.me.uk/javascripthtml-synchronous-and-asynchronous-loading/>
+    function loadjs(url)
+    {
+      var req = new XMLHttpRequest()
+      req.open("GET", url, false) // 'false': synchronous
+      req.send(null)
+      var script = document.createElement('script')
+      script.text = req.responseText
+      document.head.appendChild(script)
+      var count = typeof n === 'undefined' ? '' : ' '.repeat(N.toString().length-n.toString().length)+n+' / '+N+' '
+      console.log('SCRIPT '+count+'loaded  --  '+url)
+     }
+
+    module = new Object()
+    loadjs('gruntfile.js')
+    str = module.exports.toString()
+    str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
+    str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
+    str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
+    str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
+    str = str.slice( str.indexOf("[") + 0 , str.    indexOf("]") + 1 )
+    arr = JSON.parse(str)
+    arr.splice(0, 0, 'src/main/WMSX.js');
+    n = 1
+    N = arr.length
+    for (i in arr) { loadjs(arr[i]); n++ }
 
 
 
     snippet = {
-                'def' : 'preto no branco'
+                'set' : 'preto no branco'
 
+              , 'Nenhum'          : ''
               , 'ocr'             : '\nmudecor 15 1\nmudecf 15\nmudect 1\n\nesc proporção\n\n\n\n\n\nesc " esc [ã â é í ó ú ç º π] esc "'
               , 'atat'            : 'atat todas mudecf 1 tat cada [ mudect 1+resto quem 10 mudecl quem pd quem*12 at pf 80\natt cada [ mudecf quem espere 50'
               , 'proporção'       : 'mudect 6\nmudecl 4\nesc proporção\n\nrepita 360 [ pf 1 pe 1 ]\nmudeproporção 1\nrepita 360 [ pf 1 pd 1 ]\n'
@@ -161,39 +49,41 @@
               }
 
     sysrom  = {
-                'def' : 'MSX1'
+                'set' : 'MSX1'
 
-              , 'MSX1'   : '@MSX1_NTSC.bios'
-              , 'HotBit' : 'http://msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/hotbit12.zip'
-              , 'Expert' : 'http://msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/expert11.zip'
-              , 'MSX2+'  : '@MSX2P_NTSC.bios'
+              , 'Nenhuma' : ''
+              , 'MSX1'    : '@MSX1_NTSC.bios'
+              , 'HotBit'  : 'http://msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/hotbit12.zip'
+              , 'Expert'  : 'http://msxarchive.msxinfo.net/mirrors/mep/BIOS ROMs/expert11.zip'
+              , 'MSX2'    : '@MSX2P_NTSC.bios'
               }
 
     approm  = {
-                'def' : 'MSX-Logo (pt) (Hot-Logo)'
+                'set' : 'MSX-Logo (pt) (Hot-Logo)'
 
+              , 'Nenhuma'                                           : ''
               , 'MSX-Logo (pt) (Hot-Logo)'                          : 'http://msxblog.es/wp-content/uploads/2009/09/msxlogo_por.zip'
               , 'MSX-Logo (en)'                                     : 'http://msxblog.es/wp-content/uploads/2009/09/msxlogo_ing.zip'
               , 'MSX-Logo (es)'                                     : 'http://msxblog.es/wp-content/uploads/2009/09/msxlogo_esp.zip'
               , 'MSX-Logo (nl)'                                     : 'http://msxblog.es/wp-content/uploads/2009/09/msxlogo_hol.zip'
-              , 'MSX-BASIC'                                         : '@[MSXDOS2]v22.rom'
               , ''                                                  : ''
+              , 'MSX-BASIC'                                         : '@[MSXDOS2]v22.rom'
               , 'Ligue-se ao Expert'                                : 'http://icongames.com.br/msxfiles/apps/ligue.zip'
               , 'Antarctic Adventure'                               : 'http://romsmania.com/statics/data/MSX Computer/A-C/Antarctic Adventure.zip'
-              , 'Arkanoid II - Revenge of Doh'                      : 'http://romsmania.com/statics/data/MSX 2/Arkanoid II - Revenge of Doh (Japan).zip' // msx2
               , 'Arkanoid'                                          : 'http://romsmania.com/statics/data/MSX Computer/A-C/Arkanoid.zip'
+              , 'Arkanoid II - Revenge of Doh'                      : 'http://romsmania.com/statics/data/MSX 2/Arkanoid II - Revenge of Doh (Japan).zip' // msx2
               , 'Frogger'                                           : 'http://romsmania.com/statics/data/MSX Computer/D-F/Frogger.zip'
               , 'H.E.R.O'                                           : 'http://romsmania.com/statics/data/MSX Computer/G-K/Hero.zip'
+              , 'Hyper Rally'                                       : 'http://romsmania.com/statics/data/MSX Computer/G-K/Hyper Rally.zip'
               , 'Iligks Episode I - Theseus'                        : 'http://romsmania.com/statics/data/MSX Computer/P-T/Thseus.zip'
               , 'Iligks Episode IV - Iriegas (The Maze of Illegus)' : 'http://romsmania.com/statics/data/MSX Computer/G-K/Iriegas.zip'
-              , 'Lode Runner II'                                    : 'http://romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 2.zip'
               , 'Lode Runner'                                       : 'http://romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 1.zip'
+              , 'Lode Runner II'                                    : 'http://romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 2.zip'
               , 'Magical Tree'                                      : 'http://romsmania.com/statics/data/MSX Computer/L-O/Magical Tree.zip'
               , 'Music Editor'                                      : 'http://romsmania.com/statics/data/MSX Computer/L-O/Music Editior.zip'
               , 'PayLoad'                                           : 'http://romsmania.com/statics/data/MSX Computer/P-T/Payload.zip'
-              , 'Pitfall II'                                        : 'http://romsmania.com/statics/data/MSX Computer/P-T/Pitfall 2.zip'
               , 'Pitfall'                                           : 'http://romsmania.com/statics/data/MSX Computer/P-T/Pitfall.zip'
-              , 'Rally-X'                                           : 'http://romsmania.com/statics/data/MSX Computer/P-T/Rally-X.zip'
+              , 'Pitfall II'                                        : 'http://romsmania.com/statics/data/MSX Computer/P-T/Pitfall 2.zip'
               , 'River Raid'                                        : 'http://romsmania.com/statics/data/MSX Computer/P-T/River Raid.zip'
               , 'Road Fighter'                                      : 'http://romsmania.com/statics/data/MSX Computer/P-T/Road Fighter.zip'
               , 'Snake-It'                                          : 'http://romsmania.com/statics/data/MSX Computer/P-T/Snake-It.zip'
@@ -203,10 +93,12 @@
               }
 
     floppy  = {
-                'def' : 'Projetos Hot-Logo'
+                'set' : 'Projetos Hot-Logo'
 
-              , 'MSX-DOS 1'         : '@DOS1Boot.zip'
+              , 'Nenhum'            : ''
               , 'Projetos Hot-Logo' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-disk.zip'
+              , ''                  : '-'
+              , 'MSX-DOS 1'         : '@DOS1Boot.zip'
               , 'UZIX 1'            : 'http://uzix.sourceforge.net/uzix1.0/files/uzix1.0.zip'     // msx2
               , 'UZIX 1 Apps'       : 'http://uzix.sourceforge.net/uzix1.0/files/uzix1.0appl.zip' // msx2
               , 'UZIX 2'            : 'http://uzix.sourceforge.net/uzix2.0/files/uzix0.2.0.zip'   // msx2
@@ -218,19 +110,26 @@
               }
 
     savstat = {
-                'def' : 'Hot-Logo'
+                'set' : 'Hot-Logo'
 
-              , 'Hot-Logo' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo.wst'
-              , 'Hugo'     : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-hugo.wst'
-              , 'Bamba'    : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-bamba.wst'
-              , 'Tio Iri'  : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-tioiri.wst'
-              , 'Parabéns' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-parabens.wst'
+              , 'Nenhum'              : ''
+              , 'Hot-Logo'            : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo.wst'
+              , 'Hugo'                : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-hugo.wst'
+              , 'Bamba'               : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-bamba.wst'
+              , 'Tio Iri'             : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-tioiri.wst'
+              , 'Parabéns'            : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-parabens.wst'
+              , ''                    : '-'
+              , 'Road Fighter Part 2' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-2.wst'
+              , 'Road Fighter Part 3' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-3.wst'
+              , 'Road Fighter Part 4' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-4.wst'
+              , 'Road Fighter Part 5' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-5.wst'
+              , 'Road Fighter Part 6' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-6.wst'
               }
 
     proxy   = { /* Cross-Origin Resource Sharing free proxies */
-                'def' : 'CORSify Me'
+                'set' : 'CORSify Me'
 
-              , 'none'          : ''
+              , 'Nenhum'        : ''
               , 'CORS Anywhere' : 'https://cors-anywhere.herokuapp.com/'
               , 'CORSify Me'    : 'http://www.corsify.me/'
               , 'CORS Now'      : 'https://cors.now.sh/'
@@ -254,9 +153,7 @@
 
 
 
- // wmsx.Images.urls.sprites   = "../runtime/images/files/sprites.png"
-
- // WMSX.MACHINE               = sysrom.def.charAt(3) == '2' ? 'MSX2PA' : 'MSX1A'
+ // WMSX.MACHINE               = sysrom.set.charAt(3) == '2' ? 'MSX2PA' : 'MSX1A'
  // WMSX.TOUCH_MODE            = 1
     WMSX.SCREEN_ELEMENT_ID     = 'wmsx-scr'
     WMSX.AUTO_START            = false
@@ -276,15 +173,16 @@
  // WMSX.STATE_URL             = curl(savstat)
 
  // WMSX.BASIC_ENTER           = tr('dt arquivos')
- // WMSX.BASIC_ENTER           = tr(snippet[snippet.def])
+ // WMSX.BASIC_ENTER           = tr(snippet[snippet.set])
  // WMSX.BASIC_TYPE            =
 
 
 
-    function curl  (db)      { var url = typeof db === 'object' ? db[db.def] : db; return url.charAt(0) == '@' ? url : encodeURI(proxy[proxy.def]+url) }
-    function load  (db,port) { port=port||0; WMSX.room.fileLoader.readFromURL(curl(db), wmsx.FileLoader.OPEN_TYPE.AUTO, port) }
-    function ktype (cmd)     { WMSX.room.keyboard.typeString(tr(cmd)) }
-    function wait  (ms,cmd)  { setTimeout( function(){ ktype(cmd) }, ms ) }
+    function curl(addr)      { var url = typeof addr === 'object' ? addr[addr.set] : addr; return url.charAt(0) == '@' ? url : encodeURI(proxy[proxy.set]+url) }
+    function load(addr,port) { port=port||0; WMSX.room.fileLoader.readFromURL(curl(addr), wmsx.FileLoader.OPEN_TYPE.AUTO, port) }
+    function ktype(cmd)      { WMSX.room.keyboard.typeString(tr(cmd)) }
+    function wait(ms,cmd)    { setTimeout( function(){ ktype(cmd) }, ms ) }
+    function settype(type)   { WMSX.room.machine.setMachine( type.charAt(3) == '2' ? 'MSX2PA' : 'MSX1A' ); load(sysrom[type]) }
 
     function tr(str)
     {
@@ -292,19 +190,27 @@
       return str.replace( re, function(m) { return charmap[m] } )
     }
 
-
     window.onload = function(e)
     {
 
       WMSX.start()
-      WMSX.room.machine.setMachine( sysrom.def.charAt(3) == '2' ? 'MSX2PA' : 'MSX1A' )
-      load(sysrom)
+
+      settype(sysrom.set)
+   // settype('Expert')
+
       load(approm)
 
-      load(floppy)
-      ktype('dt arquivos\n')
-      ktype('carregue "mru\n')
+   // settype('MSX2')
+   // load(approm['Arkanoid II - Revenge of Doh'])
 
+   // ktype(snippet[snippet.set]+'\n')
+   // ktype(snippet['atat'     ]+'\n')
+
+      load(floppy)
+   // ktype('dt arquivos\n')
+   // ktype('carregue "mru\n')
+
+   // settype('MSX2')
    // load(floppy['UZIX 2'])
    // load(floppy['UZIX 1 Apps'], 1)
    // wait( 7000, 'root\nmount /dev/fd1 /mnt\nls /mnt\n/mnt/cal ' + dt.getFullYear() + ' ' + (dt.getMonth()+1) + '\n' )
@@ -321,24 +227,13 @@
 
    // load(savstat)
    // load(savstat['Hugo'])
-
-/*
-      var funct  = wmsx.MultiDownloader
-      var entire = funct.toString()
-      var body   = entire.slice(entire.indexOf("{") + 1, entire.lastIndexOf("}"))
-      console.log(body)
-*/
+   // load(savstat['Road Fighter Part 6'])
 
     }
 
 
 
     console.log(WMSX)
-    console.log( 'CARTRIDGE_1__URL = ' + WMSX.CARTRIDGE1_URL  )
-    console.log( 'CARTRIDGE_2__URL = ' + WMSX.CARTRIDGE2_URL  )
-    console.log( 'DISK_A_FILES_URL = ' + WMSX.DISKA_FILES_URL )
-    console.log( 'STATE________URL = ' + WMSX.STATE_URL       )
-    console.log( 'BASIC______ENTER = ' + WMSX.BASIC_ENTER     )
 
   </script>
 

@@ -4,7 +4,7 @@
 
 <head>
 
-  <title>HotLogo@WebMSX</title>
+  <title>HotLogo @ WebMSX</title>
 
   <meta charset="UTF-8">
 
@@ -13,6 +13,8 @@
   <base href="https://rawgit.com/ppeccin/WebMSX/master/">
 
   <script>
+
+    use_devel = 1
 
 
 
@@ -25,6 +27,8 @@
       var script = document.createElement('script')
       script.text = req.responseText
       document.head.appendChild(script)
+      var count = typeof n === 'undefined' ? '' : ' '.repeat(N.toString().length-n.toString().length)+n+' / '+N+' '
+      console.log('SCRIPT '+count+'loaded  --  '+url)
     }
 
 
@@ -34,17 +38,26 @@
 
 
 
-    module = new Object()
-    loadjs('gruntfile.js')
-    str = module.exports.toString()
-    str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
-    str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
-    str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
-    str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
-    str = str.slice( str.indexOf("[") + 0 , str.    indexOf("]") + 1 )
-    arr = JSON.parse(str)
-    loadjs('src/main/WMSX.js')
-    for (i in arr) { loadjs(arr[i]) }
+    if (use_devel)
+    {
+      module = new Object()
+      loadjs('gruntfile.js')
+      str = module.exports.toString()
+      str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
+      str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
+      str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
+      str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
+      str = str.slice( str.indexOf("[") + 0 , str.    indexOf("]") + 1 )
+      arr = JSON.parse(str)
+      arr.splice(0, 0, 'src/main/WMSX.js');
+      n = 1
+      N = arr.length
+      for (i in arr) { loadjs(arr[i]); n++ }
+    }
+    else
+    {
+      loadjs('release/stable/4.0/embedded/wmsx.js')
+    }
 
 
 
@@ -87,13 +100,13 @@
               , 'Hyper Rally'                                       : 'http://romsmania.com/statics/data/MSX Computer/G-K/Hyper Rally.zip'
               , 'Iligks Episode I - Theseus'                        : 'http://romsmania.com/statics/data/MSX Computer/P-T/Thseus.zip'
               , 'Iligks Episode IV - Iriegas (The Maze of Illegus)' : 'http://romsmania.com/statics/data/MSX Computer/G-K/Iriegas.zip'
-              , 'Lode Runner II'                                    : 'http://romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 2.zip'
               , 'Lode Runner'                                       : 'http://romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 1.zip'
+              , 'Lode Runner II'                                    : 'http://romsmania.com/statics/data/MSX Computer/L-O/Lode Runner 2.zip'
               , 'Magical Tree'                                      : 'http://romsmania.com/statics/data/MSX Computer/L-O/Magical Tree.zip'
               , 'Music Editor'                                      : 'http://romsmania.com/statics/data/MSX Computer/L-O/Music Editior.zip'
               , 'PayLoad'                                           : 'http://romsmania.com/statics/data/MSX Computer/P-T/Payload.zip'
-              , 'Pitfall II'                                        : 'http://romsmania.com/statics/data/MSX Computer/P-T/Pitfall 2.zip'
               , 'Pitfall'                                           : 'http://romsmania.com/statics/data/MSX Computer/P-T/Pitfall.zip'
+              , 'Pitfall II'                                        : 'http://romsmania.com/statics/data/MSX Computer/P-T/Pitfall 2.zip'
               , 'River Raid'                                        : 'http://romsmania.com/statics/data/MSX Computer/P-T/River Raid.zip'
               , 'Road Fighter'                                      : 'http://romsmania.com/statics/data/MSX Computer/P-T/Road Fighter.zip'
               , 'Snake-It'                                          : 'http://romsmania.com/statics/data/MSX Computer/P-T/Snake-It.zip'
@@ -418,7 +431,6 @@
       settype(sysrom.set)
    // settype('HotBit')
 
-      load(sysrom)
       load(approm)
       load(floppy)
 
