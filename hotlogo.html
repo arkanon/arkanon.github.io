@@ -135,18 +135,18 @@
     savstat = {
                 'set' : 'Nenhum'
 
-              , 'Nenhum'              : ''
-              , 'Hot-Logo'            : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo.wst'
-              , 'Hugo'                : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-hugo.wst'
-              , 'Bamba'               : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-bamba.wst'
-              , 'Tio Iri'             : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-tioiri.wst'
-              , 'Parabéns'            : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-parabens.wst'
-              , ''                    : '-'
-              , 'Road Fighter Part 2' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-2.wst'
-              , 'Road Fighter Part 3' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-3.wst'
-              , 'Road Fighter Part 4' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-4.wst'
-              , 'Road Fighter Part 5' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-5.wst'
-              , 'Road Fighter Part 6' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-6.wst'
+              , 'Nenhum'               : ''
+              , 'Hot-Logo'             : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo.wst'
+              , 'Hugo'                 : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-hugo.wst'
+              , 'Bamba'                : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-bamba.wst'
+              , 'Tio Iri'              : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-tioiri.wst'
+              , 'Parabéns'             : 'https://rawgit.com/arkanon/dipohlo/gh-pages/webmsx-hotlogo-parabens.wst'
+              , ''                     : '-'
+              , 'Road Fighter Stage 2' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-2.wst'
+              , 'Road Fighter Stage 3' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-3.wst'
+              , 'Road Fighter Stage 4' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-4.wst'
+              , 'Road Fighter Stage 5' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-5.wst'
+              , 'Road Fighter Stage 6' : 'https://rawgit.com/arkanon/dipohlo/gh-pages/savestate/road-6.wst'
               }
 
     proxy   = { /* Cross-Origin Resource Sharing free proxies */
@@ -160,17 +160,460 @@
               , 'Thing Proxy'   : 'https://thingproxy.freeboard.io/fetch/'
               }
 
-    charmap = {
-                'ã' : '±'
-              , 'â' : ''
-              , 'é' : ''
-              , 'í' : '¡'
-              , 'ó' : '¢'
-              , 'ú' : '£'
-              , 'ç' : ''
-              , 'º' : '§'
-              , 'π' : '¾'
+    charmap = { }
+
+   _charmap = {
+                '!'  : '!'
+              , '"'  : '"'
+              , '#'  : '#'
+              , '$'  : '$'
+              , '%'  : '%'
+              , '&'  : '&'
+              , '\'' : '\''
+              , '('  : '('
+              , ')'  : ')'
+              , '*'  : '*'
+              , '+'  : '+'
+              , ','  : ','
+              , '-'  : '-'
+              , '.'  : '.'
+              , '/'  : '/'
+              , '0'  : '0'
+              , '1'  : '1'
+              , '2'  : '2'
+              , '3'  : '3'
+              , '4'  : '4'
+              , '5'  : '5'
+              , '6'  : '6'
+              , '7'  : '7'
+              , '8'  : '8'
+              , '9'  : '9'
+              , ':'  : ':'
+              , ';'  : ';'
+              , '<'  : '<'
+              , '='  : '='
+              , '>'  : '>'
+              , '?'  : '?'
+              , '@'  : '@'
+              , 'A'  : 'A'
+              , 'B'  : 'B'
+              , 'C'  : 'C'
+              , 'D'  : 'D'
+              , 'E'  : 'E'
+              , 'F'  : 'F'
+              , 'G'  : 'G'
+              , 'H'  : 'H'
+              , 'I'  : 'I'
+              , 'J'  : 'J'
+              , 'K'  : 'K'
+              , 'L'  : 'L'
+              , 'M'  : 'M'
+              , 'N'  : 'N'
+              , 'O'  : 'O'
+              , 'P'  : 'P'
+              , 'Q'  : 'Q'
+              , 'R'  : 'R'
+              , 'S'  : 'S'
+              , 'T'  : 'T'
+              , 'U'  : 'U'
+              , 'V'  : 'V'
+              , 'W'  : 'W'
+              , 'X'  : 'X'
+              , 'Y'  : 'Y'
+              , 'Z'  : 'Z'
+              , '['  : '['
+              , '\\' : '\\'
+              , ']'  : ']'
+              , '^'  : '^'
+              , '_'  : '_'
+              , '`'  : '`'
+              , 'a'  : 'a'
+              , 'b'  : 'b'
+              , 'c'  : 'c'
+              , 'd'  : 'd'
+              , 'e'  : 'e'
+              , 'f'  : 'f'
+              , 'g'  : 'g'
+              , 'h'  : 'h'
+              , 'i'  : 'i'
+              , 'j'  : 'j'
+              , 'k'  : 'k'
+              , 'l'  : 'l'
+              , 'm'  : 'm'
+              , 'n'  : 'n'
+              , 'o'  : 'o'
+              , 'p'  : 'p'
+              , 'q'  : 'q'
+              , 'r'  : 'r'
+              , 's'  : 's'
+              , 't'  : 't'
+              , 'u'  : 'u'
+              , 'v'  : 'v'
+              , 'w'  : 'w'
+              , 'x'  : 'x'
+              , 'y'  : 'y'
+              , 'z'  : 'z'
+              , '{'  : '{'
+              , '|'  : '|'
+              , '}'  : '}'
+              , '~'  : '~'
+              , 'Ç'  : 'Ç'
+              , 'ü'  : 'ü'
+              , 'é'  : 'é'
+              , 'â'  : 'â'
+              , 'ä'  : 'ä'
+              , 'à'  : 'à'
+              , 'ç'  : 'ç'
+              , 'ê'  : 'ê'
+              , 'ë'  : 'ë'
+              , 'è'  : 'è'
+              , 'ï'  : 'ï'
+              , 'î'  : 'î'
+              , 'ì'  : 'ì'
+              , 'Ä'  : 'Ä'
+              , 'É'  : 'É'
+              , 'Æ'  : 'ƒ'
+              , 'ô'  : 'ô'
+              , 'ö'  : 'ö'
+              , 'ò'  : 'ò'
+              , 'û'  : 'û'
+              , 'ù'  : 'ù'
+              , 'ÿ'  : 'ÿ'
+              , 'Ö'  : 'Ö'
+              , 'Ü'  : 'Ü'
+              , 'í'  : 'í'
+              , 'ó'  : 'ó'
+              , 'ú'  : 'ú'
+              , 'ñ'  : 'ñ'
+              , 'Ñ'  : 'Ñ'
+              , 'ª'  : 'ª'
+              , 'º'  : 'º'
+              , '½'  : '«'
+              , '¼'  : '¬'
+              , 'Ã'  : 'Ã'
+              , 'ã'  : 'ã'
+              , 'Ĩ'  : 'Ĩ'
+              , 'ĩ'  : 'ĩ'
+              , 'Õ'  : 'Õ'
+              , 'õ'  : 'õ'
+              , 'Ũ'  : 'Ũ'
+              , 'ũ'  : 'ũ'
+              , '◊'  : '¼'
+              , '‰'  : '½'
+              , '§'  : '¿'
+              , '▎'  : 'Æ'
+              , 'π'  : '¾'
+              , 'σ'  : 'å'
+              , 'µ'  : 'æ'
               }
+
+/*
+
+    charmap = {
+                'π':{'00','¾'   }
+                'π':{'00','¾'   }
+
+              , 'á':{'00',' '   } , 'é':{'82',''} , 'í':{'00','¡'   } , 'ó':{'00','¢'   } , 'ú':{'00','£'   }
+              , 'Á':{'00','?'   } , 'É':{'90',''} , 'Í':{'00','?'   } , 'Ó':{'00','?'   } , 'Ú':{'00','?'
+
+              , 'â':{'83',''} , 'ê':{'88',''} , 'î':{'8c',''} , 'ô':{'93',''} , 'û':{'96',''}
+              , 'Â':{'00','?'   } , 'Ê':{'00','?'   } , 'Î':{'00','?'   } , 'Ô':{'00','?'   } , 'Û':{'00','?'
+
+              , 'ä':{'84',''} , 'ë':{'89',''} , 'ï':{'8b',''} , 'ö':{'94',''} , 'ü':{'81',''} , 'ÿ':{00,''}
+              , 'Ä':{'8e',''} , 'Ë':{'00','?'   } , 'Ï':{'00','?'   } , 'Ö':{'99',''} , 'Ü':{'9a',''} , 'Ÿ':{00,'?'   }
+
+              , 'à':{'85',''} , 'è':{'8a',''} , 'ì':{'8d',''} , 'ò':{'95',''} , 'ù':{'97',''}
+              , 'À':{'00','?'   } , 'È':{'00','?'   } , 'Ì':{'00','?'   } , 'Ò':{'00','?'   } , 'Ù':{'00','?'
+
+              , 'ã':{'00','±'   } , 'ẽ':{'00','?'   } , 'ĩ':{'00','³'   } , 'õ':{'00','µ'   } , 'ũ':{'00','·'   } , 'ñ':{00,'¤'   }
+              , 'Ã':{'00','°'   } , 'Ẽ':{'00','?'   } , 'Ĩ':{'00','²'   } , 'Õ':{'00','´'   } , 'Ũ':{'00','¶'   } , 'Ñ':{00,'¥'   }
+
+              , 'ç':{'87',''} , 'ª':{'00','¦'   }
+              , 'Ç':{'80',''} , 'º':{'00','§'   }
+
+
+
+             // <http://chexed.com/ComputerTips/asciicodes.php>
+             // <http://en.wikipedia.org/wiki/MSX_character_set>
+             // <http://msx.org/wiki/images/7/7a/MSX_font-international.png>
+             // <http://en.wikipedia.org/wiki/Block_Elements>
+             // <http://fileformat.info>
+
+             // direct mapping
+             //   esc " esc "\(\)\*\+\-\/\<\=\>\[\\\] esc "
+             //   esc " esc "!"#$%&',.0123456789:;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz{|}~ esc "
+
+
+             // mapping
+             //   esc " esc "{Çüéâäà}{çêëèïîìÄ}{É}{ôöòûùÿÖÜ}{íóúñÑªº}{ÃãĨĩÕõŨũ} esc "
+             //
+             //
+             //   esc " esc "{⌂}{å}{Å}{æÆ}{¢£¥₧ƒ\á}{¿⌐¬½¼¡«»}{Ĳĳ¾\∽◊‰¶§} esc "
+             //   esc " esc "{.}{σ}{.}{µ▎}{óúÑºÆ..}{§.¼‰◊í½~}{23π\=.0Ũº} esc "
+
+             //         --msx---------------   --pc---------------
+             // asc : [ [ chr   dec   hex  ] , [ chr   dec  hex  ] , obs  , name                                                     ]
+
+                  0 : [ [ ' ' ,   0 , '00' ] , [ ' ' , 000, '00' ] , '  ' , '                                                      ' ]
+              ,   1 : [ [ '☺' ,   1 , '01' ] , [ ' ' , 000, '00' ] , '  ' , 'White smiling face                                    ' ]
+              ,   2 : [ [ '☻' ,   2 , '02' ] , [ ' ' , 000, '00' ] , '  ' , 'Black smiling face                                    ' ]
+              ,   3 : [ [ '♥' ,   3 , '03' ] , [ ' ' , 000, '00' ] , '  ' , 'Black heart   suit                                    ' ]
+              ,   4 : [ [ '♦' ,   4 , '04' ] , [ ' ' , 000, '00' ] , '  ' , 'Black diamond suit                                    ' ]
+              ,   5 : [ [ '♣' ,   5 , '05' ] , [ ' ' , 000, '00' ] , '  ' , 'Black club    suit                                    ' ]
+              ,   6 : [ [ '♠' ,   6 , '06' ] , [ ' ' , 000, '00' ] , '  ' , 'Black spade   suit                                    ' ]
+              ,   7 : [ [ '•' ,   7 , '07' ] , [ ' ' , 000, '00' ] , '  ' , 'Bullet                                                ' ]
+              ,   8 : [ [ '◘' ,   8 , '08' ] , [ ' ' , 000, '00' ] , '  ' , 'Inverse bullet                                        ' ]
+              ,   9 : [ [ '○' ,   9 , '09' ] , [ ' ' , 000, '00' ] , '  ' , 'White circle                                          ' ]
+              ,  10 : [ [ '◙' ,  10 , '0a' ] , [ ' ' , 000, '00' ] , '  ' , 'Inverse white circle                                  ' ]
+              ,  11 : [ [ '♂' ,  11 , '0b' ] , [ ' ' , 000, '00' ] , '  ' , 'Male         sign                                     ' ]
+              ,  12 : [ [ '♀' ,  12 , '0c' ] , [ ' ' , 000, '00' ] , '  ' , 'Female       sign                                     ' ]
+              ,  13 : [ [ '♪' ,  13 , '0d' ] , [ ' ' , 000, '00' ] , '  ' , 'Eighth note                                           ' ]
+              ,  14 : [ [ '♫' ,  14 , '0e' ] , [ ' ' , 000, '00' ] , '  ' , 'Beamed eighth notes                                   ' ]
+              ,  15 : [ [ '☼' ,  15 , '0f' ] , [ ' ' , 000, '00' ] , '  ' , 'White sun with rays                                   ' ]
+              ,  16 : [ [ '┼' ,  16 , '10' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light vertical and horizontal            ' ]
+              ,  17 : [ [ '┴' ,  17 , '11' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light up   and horizontal                ' ]
+              ,  18 : [ [ '┬' ,  18 , '12' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light down and horizontal                ' ]
+              ,  19 : [ [ '┤' ,  19 , '13' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light vertical and left                  ' ]
+              ,  20 : [ [ '├' ,  20 , '14' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light vertical and right                 ' ]
+              ,  21 : [ [ ' ' ,  21 , '15' ] , [ ' ' , 000, '00' ] , 'no' , '                                                      ' ]
+              ,  22 : [ [ '│' ,  22 , '16' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light vertical                           ' ]
+              ,  23 : [ [ '─' ,  23 , '17' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light horizontal                         ' ]
+              ,  24 : [ [ '┌' ,  24 , '18' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light down and right                     ' ]
+              ,  25 : [ [ '┐' ,  25 , '19' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light down and left                      ' ]
+              ,  26 : [ [ '└' ,  26 , '1a' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light up and right                       ' ]
+              ,  27 : [ [ '┘' ,  27 , '1b' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light up and left                        ' ]
+              ,  28 : [ [ '╳' ,  28 , '1c' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light diagonal cross                     ' ]
+              ,  29 : [ [ '╱' ,  29 , '1d' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light diagonal upper right to lower left ' ]
+              ,  30 : [ [ '╲' ,  30 , '1e' ] , [ ' ' , 000, '00' ] , '  ' , 'Box drawings light diagonal upper left  to lower right' ]
+              ,  31 : [ [ ' ' ,  31 , '1f' ] , [ ' ' , 000, '00' ] , 'no' , '                                                      ' ]
+              ,  32 : [ [ ' ' ,  32 , '20' ] , [ ' ' , 000, '00' ] , 'eq' , 'Space                                                 ' ]
+              ,  33 : [ [ '!' ,  33 , '21' ] , [ '!' , 000, '00' ] , 'eq' , 'Exclamation  mark                                     ' ]
+              ,  34 : [ [ '"' ,  34 , '22' ] , [ '"' , 000, '00' ] , 'eq' , 'Quotation    mark                                     ' ]
+              ,  35 : [ [ '#' ,  35 , '23' ] , [ '#' , 000, '00' ] , 'eq' , 'Number       sign                                     ' ]
+              ,  36 : [ [ '$' ,  36 , '24' ] , [ '$' , 000, '00' ] , 'eq' , 'Dollar       sign                                     ' ]
+              ,  37 : [ [ '%' ,  37 , '25' ] , [ '%' , 000, '00' ] , 'eq' , 'Per cent     sign                                     ' ]
+              ,  38 : [ [ '&' ,  38 , '26' ] , [ '&' , 000, '00' ] , 'eq' , 'Ampersand                                             ' ]
+              ,  39 : [ [ '\'',  39 , '27' ] , [ '\'', 000, '00' ] , 'eq' , 'Apostrophe                                            ' ]
+              ,  40 : [ [ '(' ,  40 , '28' ] , [ '(' , 000, '00' ] , 'eq' , 'Left  parenthesis                                     ' ]
+              ,  41 : [ [ ')' ,  41 , '29' ] , [ ')' , 000, '00' ] , 'eq' , 'Right parenthesis                                     ' ]
+              ,  42 : [ [ '*' ,  42 , '2a' ] , [ '*' , 000, '00' ] , 'eq' , 'Asterisk                                              ' ]
+              ,  43 : [ [ '+' ,  43 , '2b' ] , [ '+' , 000, '00' ] , 'eq' , 'Plus         sign                                     ' ]
+              ,  44 : [ [ ',' ,  44 , '2c' ] , [ ',' , 000, '00' ] , 'eq' , 'Comma                                                 ' ]
+              ,  45 : [ [ '-' ,  45 , '2d' ] , [ '-' , 000, '00' ] , 'eq' , 'Hyphen-minus                                          ' ]
+              ,  46 : [ [ '.' ,  46 , '2e' ] , [ '.' , 000, '00' ] , 'eq' , 'Full stop                                             ' ]
+              ,  47 : [ [ '/' ,  47 , '2f' ] , [ '/' , 000, '00' ] , 'eq' , 'Slash                                                 ' ]
+              ,  48 : [ [ '0' ,  48 , '30' ] , [ '0' , 000, '00' ] , 'eq' , 'Digit zero                                          ‰ ' ]
+              ,  49 : [ [ '1' ,  49 , '31' ] , [ '1' , 000, '00' ] , 'eq' , 'Digit one                                             ' ]
+              ,  50 : [ [ '2' ,  50 , '32' ] , [ '2' , 000, '00' ] , 'eq' , 'Digit two                                           Ĳ ' ]
+              ,  51 : [ [ '3' ,  51 , '33' ] , [ '3' , 000, '00' ] , 'eq' , 'Digit three                                         ĳ ' ]
+              ,  52 : [ [ '4' ,  52 , '34' ] , [ '4' , 000, '00' ] , 'eq' , 'Digit four                                            ' ]
+              ,  53 : [ [ '5' ,  53 , '35' ] , [ '5' , 000, '00' ] , 'eq' , 'Digit five                                            ' ]
+              ,  54 : [ [ '6' ,  54 , '36' ] , [ '6' , 000, '00' ] , 'eq' , 'Digit six                                             ' ]
+              ,  55 : [ [ '7' ,  55 , '37' ] , [ '7' , 000, '00' ] , 'eq' , 'Digit seven                                           ' ]
+              ,  56 : [ [ '8' ,  56 , '38' ] , [ '8' , 000, '00' ] , 'eq' , 'Digit eight                                           ' ]
+              ,  57 : [ [ '9' ,  57 , '39' ] , [ '9' , 000, '00' ] , 'eq' , 'Digit nine                                            ' ]
+              ,  58 : [ [ ':' ,  58 , '3a' ] , [ ':' , 000, '00' ] , 'eq' , 'Colon                                                 ' ]
+              ,  59 : [ [ ';' ,  59 , '3b' ] , [ ';' , 000, '00' ] , 'eq' , 'Semicolon                                             ' ]
+              ,  60 : [ [ '<' ,  60 , '3c' ] , [ '<' , 000, '00' ] , 'eq' , 'Less-than    sign                                     ' ]
+              ,  61 : [ [ '=' ,  61 , '3d' ] , [ '=' , 000, '00' ] , 'eq' , 'Equal        sign                                   ∽ ' ]
+              ,  62 : [ [ '>' ,  62 , '3e' ] , [ '>' , 000, '00' ] , 'eq' , 'Greater-than sign                                     ' ]
+              ,  63 : [ [ '?' ,  63 , '3f' ] , [ '?' , 000, '00' ] , 'eq' , 'Question     mark                                     ' ]
+              ,  64 : [ [ '@' ,  64 , '40' ] , [ '@' , 000, '00' ] , 'eq' , 'Commercial at                                         ' ]
+              ,  65 : [ [ 'A' ,  65 , '41' ] , [ 'A' , 000, '00' ] , 'eq' , 'Latin        capital letter A                         ' ]
+              ,  66 : [ [ 'B' ,  66 , '42' ] , [ 'B' , 000, '00' ] , 'eq' , 'Latin        capital letter B                         ' ]
+              ,  67 : [ [ 'C' ,  67 , '43' ] , [ 'C' , 000, '00' ] , 'eq' , 'Latin        capital letter C                         ' ]
+              ,  68 : [ [ 'D' ,  68 , '44' ] , [ 'D' , 000, '00' ] , 'eq' , 'Latin        capital letter D                         ' ]
+              ,  69 : [ [ 'E' ,  69 , '45' ] , [ 'E' , 000, '00' ] , 'eq' , 'Latin        capital letter E                         ' ]
+              ,  70 : [ [ 'F' ,  70 , '46' ] , [ 'F' , 000, '00' ] , 'eq' , 'Latin        capital letter F                         ' ]
+              ,  71 : [ [ 'G' ,  71 , '47' ] , [ 'G' , 000, '00' ] , 'eq' , 'Latin        capital letter G                         ' ]
+              ,  72 : [ [ 'H' ,  72 , '48' ] , [ 'H' , 000, '00' ] , 'eq' , 'Latin        capital letter H                         ' ]
+              ,  73 : [ [ 'I' ,  73 , '49' ] , [ 'I' , 000, '00' ] , 'eq' , 'Latin        capital letter I                         ' ]
+              ,  74 : [ [ 'J' ,  74 , '4a' ] , [ 'J' , 000, '00' ] , 'eq' , 'Latin        capital letter J                         ' ]
+              ,  75 : [ [ 'K' ,  75 , '4b' ] , [ 'K' , 000, '00' ] , 'eq' , 'Latin        capital letter K                         ' ]
+              ,  76 : [ [ 'L' ,  76 , '4c' ] , [ 'L' , 000, '00' ] , 'eq' , 'Latin        capital letter L                         ' ]
+              ,  77 : [ [ 'M' ,  77 , '4d' ] , [ 'M' , 000, '00' ] , 'eq' , 'Latin        capital letter M                         ' ]
+              ,  78 : [ [ 'N' ,  78 , '4e' ] , [ 'N' , 000, '00' ] , 'eq' , 'Latin        capital letter N                         ' ]
+              ,  79 : [ [ 'O' ,  79 , '4f' ] , [ 'O' , 000, '00' ] , 'eq' , 'Latin        capital letter O                         ' ]
+              ,  80 : [ [ 'P' ,  80 , '50' ] , [ 'P' , 000, '00' ] , 'eq' , 'Latin        capital letter P                         ' ]
+              ,  81 : [ [ 'Q' ,  81 , '51' ] , [ 'Q' , 000, '00' ] , 'eq' , 'Latin        capital letter Q                         ' ]
+              ,  82 : [ [ 'R' ,  82 , '52' ] , [ 'R' , 000, '00' ] , 'eq' , 'Latin        capital letter R                         ' ]
+              ,  83 : [ [ 'S' ,  83 , '53' ] , [ 'S' , 000, '00' ] , 'eq' , 'Latin        capital letter S                         ' ]
+              ,  84 : [ [ 'T' ,  84 , '54' ] , [ 'T' , 000, '00' ] , 'eq' , 'Latin        capital letter T                         ' ]
+              ,  85 : [ [ 'U' ,  85 , '55' ] , [ 'U' , 000, '00' ] , 'eq' , 'Latin        capital letter U                         ' ]
+              ,  86 : [ [ 'V' ,  86 , '56' ] , [ 'V' , 000, '00' ] , 'eq' , 'Latin        capital letter V                         ' ]
+              ,  87 : [ [ 'W' ,  87 , '57' ] , [ 'W' , 000, '00' ] , 'eq' , 'Latin        capital letter W                         ' ]
+              ,  88 : [ [ 'X' ,  88 , '58' ] , [ 'X' , 000, '00' ] , 'eq' , 'Latin        capital letter X                         ' ]
+              ,  89 : [ [ 'Y' ,  89 , '59' ] , [ 'Y' , 000, '00' ] , 'eq' , 'Latin        capital letter Y                         ' ]
+              ,  90 : [ [ 'Z' ,  90 , '5a' ] , [ 'Z' , 000, '00' ] , 'eq' , 'Latin        capital letter Z                         ' ]
+              ,  91 : [ [ '[' ,  91 , '5b' ] , [ '[' , 000, '00' ] , 'eq' , 'Left square  bracket                                  ' ]
+              ,  92 : [ [ '\' ,  92 , '5c' ] , [ '\' , 000, '00' ] , 'eq' , 'Backslash                                             ' ]
+              ,  93 : [ [ ']' ,  93 , '5d' ] , [ ']' , 000, '00' ] , 'eq' , 'Right square bracket                                  ' ]
+              ,  94 : [ [ '^' ,  94 , '5e' ] , [ '^' , 000, '00' ] , 'eq' , 'Circumflex   accent                                   ' ]
+              ,  95 : [ [ '_' ,  95 , '5f' ] , [ '_' , 000, '00' ] , 'eq' , 'Underscore                                            ' ]
+              ,  96 : [ [ '`' ,  96 , '60' ] , [ '`' , 000, '00' ] , 'eq' , 'Grave        accent                                   ' ]
+              ,  97 : [ [ 'a' ,  97 , '61' ] , [ 'a' , 000, '00' ] , 'eq' , 'Latin        small   letter A                         ' ]
+              ,  98 : [ [ 'b' ,  98 , '62' ] , [ 'b' , 000, '00' ] , 'eq' , 'Latin        small   letter B                         ' ]
+              ,  99 : [ [ 'c' ,  99 , '63' ] , [ 'c' , 000, '00' ] , 'eq' , 'Latin        small   letter C                         ' ]
+              , 100 : [ [ 'd' , 100 , '64' ] , [ 'd' , 000, '00' ] , 'eq' , 'Latin        small   letter D                         ' ]
+              , 101 : [ [ 'e' , 101 , '65' ] , [ 'e' , 000, '00' ] , 'eq' , 'Latin        small   letter E                         ' ]
+              , 102 : [ [ 'f' , 102 , '66' ] , [ 'f' , 000, '00' ] , 'eq' , 'Latin        small   letter F                         ' ]
+              , 103 : [ [ 'g' , 103 , '67' ] , [ 'g' , 000, '00' ] , 'eq' , 'Latin        small   letter G                         ' ]
+              , 104 : [ [ 'h' , 104 , '68' ] , [ 'h' , 000, '00' ] , 'eq' , 'Latin        small   letter H                         ' ]
+              , 105 : [ [ 'i' , 105 , '69' ] , [ 'i' , 000, '00' ] , 'eq' , 'Latin        small   letter I                         ' ]
+              , 106 : [ [ 'j' , 106 , '6a' ] , [ 'j' , 000, '00' ] , 'eq' , 'Latin        small   letter J                         ' ]
+              , 107 : [ [ 'k' , 107 , '6b' ] , [ 'k' , 000, '00' ] , 'eq' , 'Latin        small   letter K                         ' ]
+              , 108 : [ [ 'l' , 108 , '6c' ] , [ 'l' , 000, '00' ] , 'eq' , 'Latin        small   letter L                         ' ]
+              , 109 : [ [ 'm' , 109 , '6d' ] , [ 'm' , 000, '00' ] , 'eq' , 'Latin        small   letter M                         ' ]
+              , 110 : [ [ 'n' , 110 , '6e' ] , [ 'n' , 000, '00' ] , 'eq' , 'Latin        small   letter N                         ' ]
+              , 111 : [ [ 'o' , 111 , '6f' ] , [ 'o' , 000, '00' ] , 'eq' , 'Latin        small   letter O                         ' ]
+              , 112 : [ [ 'p' , 112 , '70' ] , [ 'p' , 000, '00' ] , 'eq' , 'Latin        small   letter P                         ' ]
+              , 113 : [ [ 'q' , 113 , '71' ] , [ 'q' , 000, '00' ] , 'eq' , 'Latin        small   letter Q                         ' ]
+              , 114 : [ [ 'r' , 114 , '72' ] , [ 'r' , 000, '00' ] , 'eq' , 'Latin        small   letter R                         ' ]
+              , 115 : [ [ 's' , 115 , '73' ] , [ 's' , 000, '00' ] , 'eq' , 'Latin        small   letter S                         ' ]
+              , 116 : [ [ 't' , 116 , '74' ] , [ 't' , 000, '00' ] , 'eq' , 'Latin        small   letter T                         ' ]
+              , 117 : [ [ 'u' , 117 , '75' ] , [ 'u' , 000, '00' ] , 'eq' , 'Latin        small   letter U                         ' ]
+              , 118 : [ [ 'v' , 118 , '76' ] , [ 'v' , 000, '00' ] , 'eq' , 'Latin        small   letter V                         ' ]
+              , 119 : [ [ 'w' , 119 , '77' ] , [ 'w' , 000, '00' ] , 'eq' , 'Latin        small   letter W                         ' ]
+              , 120 : [ [ 'x' , 120 , '78' ] , [ 'x' , 000, '00' ] , 'eq' , 'Latin        small   letter X                         ' ]
+              , 121 : [ [ 'y' , 121 , '79' ] , [ 'y' , 000, '00' ] , 'eq' , 'Latin        small   letter Y                         ' ]
+              , 122 : [ [ 'z' , 122 , '7a' ] , [ 'z' , 000, '00' ] , 'eq' , 'Latin        small   letter Z                         ' ]
+              , 123 : [ [ '{' , 123 , '7b' ] , [ '{' , 000, '00' ] , 'eq' , 'Left curly   bracket                                  ' ]
+              , 124 : [ [ '|' , 124 , '7c' ] , [ '|' , 000, '00' ] , 'eq' , 'Vertical bar                                          ' ]
+              , 125 : [ [ '}' , 125 , '7d' ] , [ '}' , 000, '00' ] , 'eq' , 'Right curly  bracket                                  ' ]
+              , 126 : [ [ '~' , 126 , '7e' ] , [ '~' , 000, '00' ] , 'eq' , 'Tilde        accent                                 » ' ]
+              , 127 : [ [ '⌂' , 127 , '7f' ] , [ ' ' , 000, '00' ] , '  ' , 'House                                                 ' ]
+              , 128 : [ [ 'Ç' , 128 , '80' ] , [ 'Ç' , 000, '00' ] , 'eq' , 'Latin        capital letter   C  with cedilla         ' ]
+              , 129 : [ [ 'ü' , 129 , '81' ] , [ 'ü' , 000, '00' ] , 'eq' , 'Latin        small   letter   U  with diaeresis       ' ]
+              , 130 : [ [ 'é' , 130 , '82' ] , [ 'é' , 000, '00' ] , 'eq' , 'Latin        small   letter   E  with acute           ' ]
+              , 131 : [ [ 'â' , 131 , '83' ] , [ 'â' , 000, '00' ] , 'eq' , 'Latin        small   letter   A  with circumflex      ' ]
+              , 132 : [ [ 'ä' , 132 , '84' ] , [ 'ä' , 000, '00' ] , 'eq' , 'Latin        small   letter   A  with diaeresis       ' ]
+              , 133 : [ [ 'à' , 133 , '85' ] , [ 'à' , 000, '00' ] , 'eq' , 'Latin        small   letter   A  with grave           ' ]
+              , 134 : [ [ 'å' , 134 , '86' ] , [ ' ' , 000, '00' ] , '  ' , 'Latin        small   letter   A  with ring above      ' ]
+              , 135 : [ [ 'ç' , 135 , '87' ] , [ 'ç' , 000, '00' ] , 'eq' , 'Latin        small   letter   C  with cedilla         ' ]
+              , 136 : [ [ 'ê' , 136 , '88' ] , [ 'ê' , 000, '00' ] , 'eq' , 'Latin        small   letter   E  with circumflex      ' ]
+              , 137 : [ [ 'ë' , 137 , '89' ] , [ 'ë' , 000, '00' ] , 'eq' , 'Latin        small   letter   E  with diaeresis       ' ]
+              , 138 : [ [ 'è' , 138 , '8a' ] , [ 'è' , 000, '00' ] , 'eq' , 'Latin        small   letter   E  with grave           ' ]
+              , 139 : [ [ 'ï' , 139 , '8b' ] , [ 'ï' , 000, '00' ] , 'eq' , 'Latin        small   letter   I  with diaeresis       ' ]
+              , 140 : [ [ 'î' , 140 , '8c' ] , [ 'î' , 000, '00' ] , 'eq' , 'Latin        small   letter   I  with circumflex      ' ]
+              , 141 : [ [ 'ì' , 141 , '8d' ] , [ 'ì' , 000, '00' ] , 'eq' , 'Latin        small   letter   I  with grave           ' ]
+              , 142 : [ [ 'Ä' , 142 , '8e' ] , [ 'Ä' , 000, '00' ] , 'eq' , 'Latin        capital letter   A  with diaeresis       ' ]
+              , 143 : [ [ 'Å' , 143 , '8f' ] , [ ' ' , 000, '00' ] , '  ' , 'Latin        capital letter   A  with ring above      ' ]
+              , 144 : [ [ 'É' , 144 , '90' ] , [ 'É' , 000, '00' ] , 'eq' , 'Latin        capital letter   E  with acute           ' ]
+              , 145 : [ [ 'æ' , 145 , '91' ] , [ ' ' , 000, '00' ] , '  ' , 'Latin        small   ligature AE                      ' ]
+              , 146 : [ [ 'Æ' , 146 , '92' ] , [ 'ƒ' , 000, '00' ] , '  ' , 'Latin        capital ligature AE                      ' ]
+              , 147 : [ [ 'ô' , 147 , '93' ] , [ 'ô' , 000, '00' ] , 'eq' , 'Latin        small   letter   O  with circumflex      ' ]
+              , 148 : [ [ 'ö' , 148 , '94' ] , [ 'ö' , 000, '00' ] , 'eq' , 'Latin        small   letter   O  with diaeresis       ' ]
+              , 149 : [ [ 'ò' , 149 , '95' ] , [ 'ò' , 000, '00' ] , 'eq' , 'Latin        small   letter   O  with grave           ' ]
+              , 150 : [ [ 'û' , 150 , '96' ] , [ 'û' , 000, '00' ] , 'eq' , 'Latin        small   letter   U  with circumflex      ' ]
+              , 151 : [ [ 'ù' , 151 , '97' ] , [ 'ù' , 000, '00' ] , 'eq' , 'Latin        small   letter   U  with grave           ' ]
+              , 152 : [ [ 'ÿ' , 152 , '98' ] , [ 'ÿ' , 000, '00' ] , 'eq' , 'Latin        small   letter   Y  with diaeresis       ' ]
+              , 153 : [ [ 'Ö' , 153 , '99' ] , [ 'Ö' , 000, '00' ] , 'eq' , 'Latin        capital letter   O  with diaeresis       ' ]
+              , 154 : [ [ 'Ü' , 154 , '9a' ] , [ 'Ü' , 000, '00' ] , 'eq' , 'Latin        capital letter   U  with diaeresis       ' ]
+              , 155 : [ [ '¢' , 155 , '9b' ] , [ ' ' , 000, '00' ] , '  ' , 'Cent         sign                                     ' ]
+              , 156 : [ [ '£' , 156 , '9c' ] , [ ' ' , 000, '00' ] , '  ' , 'Pound        sign                                     ' ]
+              , 157 : [ [ '¥' , 157 , '9d' ] , [ ' ' , 000, '00' ] , '  ' , 'Yen          sign                                     ' ]
+              , 158 : [ [ '₧' , 158 , '9e' ] , [ ' ' , 000, '00' ] , '  ' , 'Peseta       sign                                     ' ]
+              , 159 : [ [ 'ƒ' , 159 , '9f' ] , [ ' ' , 000, '00' ] , '  ' , 'Florin       sign                                     ' ]
+              , 160 : [ [ 'á' , 160 , 'a0' ] , [ ' ' , 000, '00' ] , '  ' , 'Latin        small   letter   A  with acute           ' ]
+              , 161 : [ [ 'í' , 161 , 'a1' ] , [ 'í' , 000, '00' ] , 'eq' , 'Latin        small   letter   I  with acute         ¡ ' ]
+              , 162 : [ [ 'ó' , 162 , 'a2' ] , [ 'ó' , 000, '00' ] , 'eq' , 'Latin        small   letter   O  with acute         ¢ ' ]
+              , 163 : [ [ 'ú' , 163 , 'a3' ] , [ 'ú' , 000, '00' ] , 'eq' , 'Latin        small   letter   O  with acute         £ ' ]
+              , 164 : [ [ 'ñ' , 164 , 'a4' ] , [ 'ñ' , 000, '00' ] , 'eq' , 'Latin        small   letter   N  with tilde           ' ]
+              , 165 : [ [ 'Ñ' , 165 , 'a5' ] , [ 'Ñ' , 000, '00' ] , 'eq' , 'Latin        capital letter   N  with tilde         ¥ ' ]
+              , 166 : [ [ 'ª' , 166 , 'a6' ] , [ 'ª' , 000, '00' ] , 'eq' , 'Feminine  ordinal indicator                           ' ]
+              , 167 : [ [ 'º' , 167 , 'a7' ] , [ 'º' , 000, '00' ] , 'eq' , 'Masculine ordinal indicator                        §₧ ' ]
+              , 168 : [ [ '¿' , 168 , 'a8' ] , [ ' ' , 000, '00' ] , '  ' , 'Inverted question mark                                ' ]
+              , 169 : [ [ '⌐' , 169 , 'a9' ] , [ ' ' , 000, '00' ] , '  ' , 'Reversed not sign                                     ' ]
+              , 170 : [ [ '¬' , 170 , 'aa' ] , [ ' ' , 000, '00' ] , '  ' , 'Not          sign                                     ' ]
+              , 171 : [ [ '½' , 171 , 'ab' ] , [ '«' , 000, '00' ] , '  ' , 'Vulgar fraction one half                              ' ]
+              , 172 : [ [ '¼' , 172 , 'ac' ] , [ '¬' , 000, '00' ] , '  ' , 'Vulgar fraction one quarter                           ' ]
+              , 173 : [ [ '¡' , 173 , 'ad' ] , [ ' ' , 000, '00' ] , '  ' , 'Inverted exclamation mark                             ' ]
+              , 174 : [ [ '«' , 174 , 'ae' ] , [ ' ' , 000, '00' ] , '  ' , 'Left-pointing  double angle quotation mark            ' ]
+              , 175 : [ [ '»' , 175 , 'af' ] , [ ' ' , 000, '00' ] , '  ' , 'Right-pointing double angle quotation mark            ' ]
+              , 176 : [ [ 'Ã' , 176 , 'b0' ] , [ 'Ã' , 000, '00' ] , 'eq' , 'Latin        capital letter   A  with tilde           ' ]
+              , 177 : [ [ 'ã' , 177 , 'b1' ] , [ 'ã' , 000, '00' ] , 'eq' , 'Latin        small   letter   A  with tilde           ' ]
+              , 178 : [ [ 'Ĩ' , 178 , 'b2' ] , [ 'Ĩ' , 000, '00' ] , 'eq' , 'Latin        capital letter   I  with tilde           ' ]
+              , 179 : [ [ 'ĩ' , 179 , 'b3' ] , [ 'ĩ' , 000, '00' ] , 'eq' , 'Latin        small   letter   I  with tilde           ' ]
+              , 180 : [ [ 'Õ' , 180 , 'b4' ] , [ 'Õ' , 000, '00' ] , 'eq' , 'Latin        capital letter   O  with tilde           ' ]
+              , 181 : [ [ 'õ' , 181 , 'b5' ] , [ 'õ' , 000, '00' ] , 'eq' , 'Latin        small   letter   O  with tilde           ' ]
+              , 182 : [ [ 'Ũ' , 182 , 'b6' ] , [ 'Ũ' , 000, '00' ] , 'eq' , 'Latin        capital letter   U  with tilde         ¶ ' ]
+              , 183 : [ [ 'ũ' , 183 , 'b7' ] , [ 'ũ' , 000, '00' ] , 'eq' , 'Latin        small   letter   U  with tilde           ' ]
+              , 184 : [ [ 'Ĳ' , 184 , 'b8' ] , [ ' ' , 000, '00' ] , '  ' , 'Latin        capital ligature IJ                      ' ]
+              , 185 : [ [ 'ĳ' , 185 , 'b9' ] , [ ' ' , 000, '00' ] , '  ' , 'Latin        small   ligature IJ                      ' ]
+              , 186 : [ [ '¾' , 186 , 'ba' ] , [ ' ' , 000, '00' ] , '  ' , 'Vulgar fraction three quarters                        ' ]
+              , 187 : [ [ '∽' , 187 , 'bb' ] , [ ' ' , 000, '00' ] , '  ' , 'Reversed tilde                                        ' ]
+              , 188 : [ [ '◊' , 188 , 'bc' ] , [ '¼' , 000, '00' ] , '  ' , 'Lozenge                                               ' ]
+              , 189 : [ [ '‰' , 189 , 'bd' ] , [ '½' , 000, '00' ] , '  ' , 'Per mille    sign                                     ' ]
+              , 190 : [ [ '¶' , 190 , 'be' ] , [ ' ' , 000, '00' ] , '  ' , 'Pilcrow      sign                                     ' ]
+              , 191 : [ [ '§' , 191 , 'bf' ] , [ '¿' , 000, '00' ] , '  ' , 'Section      sign                                     ' ]
+              , 192 : [ [ '▂' , 192 , 'c0' ] , [ ' ' , 000, '00' ] , '  ' , 'Lower one quarter block                               ' ]
+              , 193 : [ [ '▚' , 193 , 'c1' ] , [ ' ' , 000, '00' ] , '  ' , 'Quadrant upper left and lower right                   ' ]
+              , 194 : [ [ '▆' , 194 , 'c2' ] , [ ' ' , 000, '00' ] , '  ' , 'Lower three quarters block                            ' ]
+              , 195 : [ [ ' ' , 195 , 'c3' ] , [ ' ' , 000, '00' ] , '  ' , 'Upper one quarter block                               ' ]
+              , 196 : [ [ '▬' , 196 , 'c4' ] , [ ' ' , 000, '00' ] , '  ' , 'Black rectangle                                       ' ]
+              , 197 : [ [ ' ' , 197 , 'c5' ] , [ ' ' , 000, '00' ] , '  ' , 'Upper three quarters block                            ' ]
+              , 198 : [ [ '▎' , 198 , 'c6' ] , [ 'Æ' , 000, '00' ] , '  ' , 'Left one quarter block                                ' ]
+              , 199 : [ [ '▞' , 199 , 'c7' ] , [ ' ' , 000, '00' ] , '  ' , 'Quadrant upper right and lower left                   ' ]
+              , 200 : [ [ ' ' , 200 , 'c8' ] , [ ' ' , 000, '00' ] , '  ' , 'Left three quarters block                             ' ]
+              , 201 : [ [ ' ' , 201 , 'c9' ] , [ ' ' , 000, '00' ] , '  ' , 'Right one quarter block                               ' ]
+              , 202 : [ [ ' ' , 202 , 'ca' ] , [ ' ' , 000, '00' ] , '  ' , 'Right three quarters block                            ' ]
+              , 203 : [ [ ' ' , 203 , 'cb' ] , [ ' ' , 000, '00' ] , '  ' , 'Right hashured                                        ' ]
+              , 204 : [ [ ' ' , 204 , 'cc' ] , [ ' ' , 000, '00' ] , '  ' , 'Left  hashured                                        ' ]
+              , 205 : [ [ '▼' , 205 , 'cd' ] , [ ' ' , 000, '00' ] , '  ' , 'Down       solid arrow                                ' ]
+              , 206 : [ [ '▲' , 206 , 'ce' ] , [ ' ' , 000, '00' ] , '  ' , 'Up         solid arrow                                ' ]
+              , 207 : [ [ '▶' , 207 , 'cf' ] , [ ' ' , 000, '00' ] , '  ' , 'Right      solid arrow                                ' ]
+              , 208 : [ [ '◀' , 208 , 'd0' ] , [ ' ' , 000, '00' ] , '  ' , 'Left       solid arrow                                ' ]
+              , 209 : [ [ ' ' , 209 , 'd1' ] , [ ' ' , 000, '00' ] , '  ' , 'Up-down    solid arrow                                ' ]
+              , 210 : [ [ ' ' , 210 , 'd2' ] , [ ' ' , 000, '00' ] , '  ' , 'Left-right solid arrow                                ' ]
+              , 211 : [ [ '▘' , 211 , 'd3' ] , [ ' ' , 000, '00' ] , '  ' , 'Quadrant upper left                                   ' ]
+              , 212 : [ [ '▗' , 212 , 'd4' ] , [ ' ' , 000, '00' ] , '  ' , 'Quadrant lower right                                  ' ]
+              , 213 : [ [ '▝' , 213 , 'd5' ] , [ ' ' , 000, '00' ] , '  ' , 'Quadrant upper right                                  ' ]
+              , 214 : [ [ '▖' , 214 , 'd6' ] , [ ' ' , 000, '00' ] , '  ' , 'Quadrant lower left                                   ' ]
+              , 215 : [ [ '▒' , 215 , 'd7' ] , [ ' ' , 000, '00' ] , '  ' , 'Medium shaded block                                   ' ]
+              , 216 : [ [ 'Δ' , 216 , 'd8' ] , [ ' ' , 000, '00' ] , '  ' , 'Greek        capital letter delta                     ' ]
+              , 217 : [ [ '‡' , 217 , 'd9' ] , [ ' ' , 000, '00' ] , '  ' , 'Double dagger                                         ' ]
+              , 218 : [ [ 'ω' , 218 , 'da' ] , [ ' ' , 000, '00' ] , '  ' , 'Greek        small   letter omega                     ' ]
+              , 219 : [ [ '█' , 219 , 'db' ] , [ ' ' , 000, '00' ] , '  ' , 'Full block                                            ' ]
+              , 220 : [ [ '▄' , 220 , 'dc' ] , [ ' ' , 000, '00' ] , '  ' , 'Lower half block                                      ' ]
+              , 221 : [ [ '▌' , 221 , 'dd' ] , [ ' ' , 000, '00' ] , '  ' , 'Left  half block                                      ' ]
+              , 222 : [ [ '▐' , 222 , 'de' ] , [ ' ' , 000, '00' ] , '  ' , 'Right half block                                      ' ]
+              , 223 : [ [ '▀' , 223 , 'df' ] , [ ' ' , 000, '00' ] , '  ' , 'Upper half block                                      ' ]
+              , 224 : [ [ 'α' , 224 , 'e0' ] , [ ' ' , 000, '00' ] , '  ' , 'Greek        small   letter alpha                     ' ]
+              , 225 : [ [ 'ß' , 225 , 'e1' ] , [ ' ' , 000, '00' ] , '  ' , 'Greek        small   letter beta                      ' ]
+              , 226 : [ [ 'Γ' , 226 , 'e2' ] , [ ' ' , 000, '00' ] , '  ' , 'Greek        capital letter gamma                     ' ]
+              , 227 : [ [ 'π' , 227 , 'e3' ] , [ '¾' , 000, '00' ] , '  ' , 'Greek        small   letter pi                        ' ]
+              , 228 : [ [ 'Σ' , 228 , 'e4' ] , [ ' ' , 000, '00' ] , '  ' , 'Greek        capital letter sigma                     ' ]
+              , 229 : [ [ 'σ' , 229 , 'e5' ] , [ 'å' , 000, '00' ] , '  ' , 'Greek        small   letter sigma                     ' ]
+              , 230 : [ [ 'µ' , 230 , 'e6' ] , [ 'æ' , 000, '00' ] , '  ' , 'Greek        small   letter mu                        ' ]
+              , 231 : [ [ 'τ' , 231 , 'e7' ] , [ ' ' , 000, '00' ] , '  ' , 'Greek        small   letter tau                       ' ]
+              , 232 : [ [ 'Φ' , 232 , 'e8' ] , [ ' ' , 000, '00' ] , '  ' , 'Greek        capital letter phi                       ' ]
+              , 233 : [ [ 'Θ' , 233 , 'e9' ] , [ ' ' , 000, '00' ] , '  ' , 'Greek        capital letter theta                     ' ]
+              , 234 : [ [ 'Ω' , 234 , 'ea' ] , [ ' ' , 000, '00' ] , '  ' , 'Greek        capital letter omega                     ' ]
+              , 235 : [ [ 'δ' , 235 , 'eb' ] , [ ' ' , 000, '00' ] , '  ' , 'Greek        small   letter delta                     ' ]
+              , 236 : [ [ '∞' , 236 , 'ec' ] , [ ' ' , 000, '00' ] , '  ' , 'Infinity                                              ' ]
+              , 237 : [ [ 'φ' , 237 , 'ed' ] , [ ' ' , 000, '00' ] , '  ' , 'Greek        small   letter phi                       ' ]
+              , 238 : [ [ 'ε' , 238 , 'ee' ] , [ ' ' , 000, '00' ] , '  ' , 'Greek        small   letter epsilon                   ' ]
+              , 239 : [ [ '∩' , 239 , 'ef' ] , [ ' ' , 000, '00' ] , '  ' , 'Intersection                                          ' ]
+              , 240 : [ [ '≡' , 240 , 'f0' ] , [ ' ' , 000, '00' ] , '  ' , 'Identical to                                          ' ]
+              , 241 : [ [ '±' , 241 , 'f1' ] , [ ' ' , 000, '00' ] , '  ' , 'Plus-minus sign                                       ' ]
+              , 242 : [ [ '≥' , 242 , 'f2' ] , [ ' ' , 000, '00' ] , '  ' , 'Greater-than or equal to                              ' ]
+              , 243 : [ [ '≤' , 243 , 'f3' ] , [ ' ' , 000, '00' ] , '  ' , 'Less-than    or equal to                              ' ]
+              , 244 : [ [ '⌠' , 244 , 'f4' ] , [ ' ' , 000, '00' ] , '  ' , 'Top    half integral                                  ' ]
+              , 245 : [ [ '⌡' , 245 , 'f5' ] , [ ' ' , 000, '00' ] , '  ' , 'Bottom half integral                                  ' ]
+              , 246 : [ [ '÷' , 246 , 'f6' ] , [ ' ' , 000, '00' ] , '  ' , 'Division     sign                                     ' ]
+              , 247 : [ [ '≈' , 247 , 'f7' ] , [ ' ' , 000, '00' ] , '  ' , 'Almost equal to                                       ' ]
+              , 248 : [ [ '°' , 248 , 'f8' ] , [ ' ' , 000, '00' ] , '  ' , 'Degree       sign                                     ' ]
+              , 249 : [ [ '∙' , 249 , 'f9' ] , [ ' ' , 000, '00' ] , '  ' , 'Bullet operator                                       ' ]
+              , 250 : [ [ '·' , 250 , 'fa' ] , [ ' ' , 000, '00' ] , '  ' , 'Middle dot                                            ' ]
+              , 251 : [ [ '√' , 251 , 'fb' ] , [ ' ' , 000, '00' ] , '  ' , 'Square root                                           ' ]
+              , 252 : [ [ 'ⁿ' , 252 , 'fc' ] , [ ' ' , 000, '00' ] , '  ' , 'Super script n                                        ' ]
+              , 253 : [ [ '²' , 253 , 'fd' ] , [ ' ' , 000, '00' ] , '  ' , 'Super script 2                                        ' ]
+              , 254 : [ [ '■' , 254 , 'fe' ] , [ ' ' , 000, '00' ] , '  ' , 'Black square                                          ' ]
+              , 255 : [ [ ' ' , 255 , 'ff' ] , [ ' ' , 000, '00' ] , '  ' , 'Space                                                 ' ]
+
+              }
+
+*/
 
     dt = new Date()
 
@@ -208,6 +651,12 @@
     function wait(ms,cmd)    { setTimeout( function(){ ktype(cmd) }, ms ) }
     function settype(type)   { WMSX.room.machine.setMachine( type.charAt(3) == '2' ? 'MSX2PA' : 'MSX1A' ); load(sysrom[type]) }
 
+    function ascii(code)
+    {
+      code = code.charAt(0) == 'x' ? parseInt(code.substring(1),16) : code
+      document.getElementById('input-box').value = String.fromCharCode( code )
+    }
+
     function load(addr,port)
     {
       port=port||0
@@ -215,6 +664,7 @@
          WMSX.room.cartridgeSlot.removeCartridge(port)
       else
          WMSX.room.fileLoader.readFromURL(curl(addr), wmsx.FileLoader.OPEN_TYPE.AUTO, port)
+      document.getElementById('wmsx-screen-canvas').focus()
     }
 
     function ktype(cmd,send)
@@ -678,11 +1128,17 @@
 
     #scan,
     #input,
-    #wmsx-screen-canvas-outer,
+    #wmsx-logo,
+    #wmsx-screen-canvas,
     #ss,
     .ocr
     {
       border: 1px solid red;
+    }
+
+    #wmsx-screen-canvas:focus
+    {
+      border: 1px solid goldenrod;
     }
 
     #ss-scr
@@ -692,7 +1148,7 @@
 
     #scan,
     #input,
-    #wmsx-screen-canvas-outer,
+    #wmsx-screen-canvas,
     .ocr
     {
       background: white;
@@ -767,6 +1223,24 @@
       border-radius: 5px;
     }
 
+    input[type=text]
+    {
+      height: 18px;
+      width: 23px;
+    }
+
+    input[type=checkbox]
+    {
+      height: 20px;
+      vertical-align: top;
+      margin-left: 10px;
+    }
+
+    input[type=button]:hover
+    {
+      background: lightgray;
+    }
+
   @-moz-document url-prefix()
   {
 
@@ -800,18 +1274,6 @@
       margin-left: 3px;
       border: 1px solid black;
       border-radius: 5px;
-    }
-
-    input[type=checkbox]
-    {
-      height: 20px;
-      vertical-align: top;
-      margin-left: 10px;
-    }
-
-    input:hover
-    {
-      background: lightgray;
     }
 
     :focus { outline: none; }
@@ -859,6 +1321,8 @@
      </div><!--
   --><select id="snippet" onchange="document.getElementById('input-box').value=snippet[this.value];this.value=''"><option selected="selected" disabled="disabled" value="">Código</option></select><!--
   --><input type="button" value="TYPE"       onclick="ktype('',CR)" style="color:red"><!--
+  --><input type="text"   value=""           id="char" maxlength="3"><!--
+  --><input type="button" value="Send"       onclick="asci( document.getElementById('char').value )" style="color:red"><!--
   --><input type="button" value="primitivas" onclick="ktype('primitivas',CR)"><!--
   --><br><!--
   --><input type="button" value="rg"         onclick="ktype('rg' ,CR)"><!--
