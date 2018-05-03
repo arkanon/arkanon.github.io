@@ -1,0 +1,41 @@
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <script>
+
+    function launch()
+    {
+      console.log('fim: f1a='+f1a)
+      console.log('fim: f1b='+f1b)
+    }
+
+    function loadljs(url,func)
+    {
+      var script = document.createElement('script')
+      script.src = url
+   // if (typeof func !== 'undefined') { script.onload = function () { func }}
+      document.head.appendChild(script)
+      var count = typeof n === 'undefined' ? '' : ' '.repeat(N.toString().length-n.toString().length)+n+' / '+N+' '
+      console.log('SCRIPT '+count+'loaded  --  '+url)
+    }
+
+    module = new Object()
+    arr = [ 'f1.js', 'f2.js', 'f3.js' ]
+    console.log(arr)
+    n = 1
+    N = arr.length
+    for (i in arr) { loadljs(arr[i]); n++ }
+
+    window.onload = launch
+
+  </script>
+
+</head>
+
+<body>
+</body>
+
+</html>
