@@ -13,7 +13,6 @@
 <!--
   <base href="https://rawgit.com/ppeccin/WebMSX/master/">
 -->
-
   <base href="webmsx/">
 
 
@@ -21,254 +20,17 @@
   <script>
 
 
-    var WMSX = {}
-    var wmsx = {}
 
-
-    function db(str)         { console.log('--- DEBUG --- '+str) }
-    function curl(addr)      { var url = typeof addr === 'object' ? addr[addr.set] : addr; db(url); return url.charAt(0) == '@' ? url : encodeURI(proxy[proxy.set]+url) }
-    function wait(ms,cmd)    { setTimeout( function(){ ktype(cmd) }, ms ) }
-    function settype(type)   { WMSX.room.machine.setMachine( type.charAt(3) == '2' ? 'MSX2PA' : 'MSX1A' ); load(sysrom[type]) }
-
-    function ascii(code)
-    {
-      code = code.charAt(0) == 'x' ? parseInt(code.substring(1),16) : code
-      document.getElementById('input-box').value += String.fromCharCode( code )
-    }
-
-    function load(addr,port)
-    {
-      port=port||0
-      if (addr=='')
-         WMSX.room.cartridgeSlot.removeCartridge(port)
-      else
-         WMSX.room.fileLoader.readFromURL(curl(addr), wmsx.FileLoader.OPEN_TYPE.AUTO, port)
-      document.getElementById('wmsx-screen-canvas').focus()
-    }
-
-    function ktype(cmd,send)
-    {
-      cmd  = cmd  || 0
-      send = send || 0
-      var input = document.getElementById('input-box')
-      if (cmd) input.value = cmd
-      if (send=='send')
-      {
-        if (input.value.substr(input.value.length-1)!='\n') input.value += '\n'
-        WMSX.room.keyboard.typeString(tr(input.value))
-      }
-    }
-
-    function tr(str)
-    {
-      var re = new RegExp( '['+Object.keys(charmap).join('')+']', 'g' )
-      return str.replace( re, function(m)
-      {
-        var a = charmap[m]
-        var c = String.fromCharCode(a)
-        console.log('--- ASCII --- '+m+' - '+a+' - '+c)
-        return c
-       } )
-    }
+    use_devel = 1
+    lprefix   = 'file:///export/backup-export/projetos/___arkanon/git/outros/webmsx/'
 
 
 
-    function ctrl_stop()
-    {
-
-/*
-      WMSX.room.keyboard.processKey(WMSX.room.DOMKeys.CONTROL, true)
-      WMSX.room.keyboard.processKey(WMSX.room.DOMKeys.VK_F9.c, true)
-      WMSX.room.keyboard.processKey(WMSX.room.DOMKeys.VK_F9.c, false)
-      WMSX.room.keyboard.processKey(WMSX.room.DOMKeys.CONTROL, false)
-*/
-
-//    WMSX.room.keyboard.processKey('L-Control')
-//    WMSX.room.keyboard.processMSXKey('CONTROL')
-      WMSX.room.machineControls.processKey(20,true)
-      WMSX.room.machineControls.processKey(20,false)
-
-      console.log(WMSX.room.keyboard.getKeyMapping('CONTROL' )) // c:16777233 n:L-Control
-      console.log(WMSX.room.keyboard.getKeyMapping('STOP'    )) // c:120      n:F9
-      console.log(WMSX.room.keyboard.getKeyMapping('CAPSLOCK')) // c:20       n:CapsLock
-
-/*
-      WMSX.room.keyboard.processMSXKey('CONTROL', true)
-      WMSX.room.keyboard.processMSXKey('STOP'   , true)
-      WMSX.room.keyboard.processMSXKey('STOP'   , false)
-      WMSX.room.keyboard.processMSXKey('CONTROL', false)
-*/
-
-    }
-
-    function progressUpdate(data)
-    {
-      var ocr  = document.getElementById('ocr-box-tesseract')
-      var line = document.createElement('div')
-      line.appendChild(document.createTextNode(data.text))
-      ocr.insertBefore(line, ocr.firstChild)
-    }
-
-    function screenshot()
-    {
-      ss.src = scr.toDataURL('image/png')
-      document.querySelector('#ocr-box-ocrad').innerHTML = OCRAD(scr)
-      document.querySelector('#ss-scr').src = ss.src
-      document.querySelector('#ocr-box-tesseract').innerHTML = ''
-      Tesseract.recognize( ss.src, { lang: 'por' } ).then( function(data) { progressUpdate( data ) } )
-    }
-
-
-
-    function lockChangeAlert(e)
-    {
-
-      if (document.pointerLockElement === overlay || document.mozPointerLockElement === overlay)
-      {
-     // var rect = overlay.getBoundingClientRect()
-     // c.x = x - rect.left
-     // c.y = y - rect.top
-        console.log('The pointer lock status is now locked')
-        document.addEventListener('mousemove' , updatePosition , false)
-          window.addEventListener('keydown'   , updatePosition , false)
-      }
-      else
-      {
-        console.log('The pointer lock status is now unlocked')
-        document.removeEventListener('mousemove' , updatePosition , false)
-          window.removeEventListener('keydown'   , updatePosition , false)
-      }
-
-    }
-
-
-
-    // returns a position based on a mouseevent on a canvas. Based on code
-    // <http://miloq.blogspot.nl/2011/05/coordinates-mouse-click-canvas.html>
-    function mousePos(canvas, e)
-    {
-      var x = new Number()
-      var y = new Number()
-      if (e.x != undefined && e.y != undefined)
-      {
-        x = e.x
-        y = e.y
-      }
-      else // Firefox method to get the position
-      {
-        x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft
-        y = e.clientY + document.body.scrollTop  + document.documentElement.scrollTop
-      }
-      x -= canvas.offsetLeft
-      y -= canvas.offsetTop
-      return { x:x, y:y }
-    }
-
-
-
-    // <http://kirupa.com/canvas/moving_shapes_canvas_keyboard.htm>
-    function cursorMov(e)
-    {
-      var x = new Number()
-      var y = new Number()
-      switch(e.keyCode)
-      {
-        case 37: // left
-         x = -1
-         y =  0
-         break
-        case 38: // up
-         x =  0
-         y = -1
-         break
-        case 39: // right
-         x =  1
-         y =  0
-         break
-        case 40: // down
-         x =  0
-         y =  1
-         break
-      }
-      console.log('--  keyb  '+e.keyCode+'  '+x+'  '+y)
-      return { x:x, y:y }
-    }
-
-
-
-    function updatePosition(e)
-    {
-
-      e.preventDefault()
-
-      if (c.x == -1) c =  mousePos(overlay, e)
-                     d = cursorMov(e)
-
-      var movX = e.movementX || e.mozMovementX || e.webkitMovementX || 0
-      var movY = e.movementY || e.mozMovementY || e.webkitMovementY || 0
-
-      c.x += movX*side
-      c.y += movY*side
-
-      c.x +=  d.x*side
-      c.y +=  d.y*side
-
-      console.log('--  mous  '+movX+'  '+movY+'  '+d.x+'  '+d.y+'  '+c.x+'  '+c.y)
-
-   // var x     = (e.layerX-2)/s
-   // var y     = (e.layerY-2)/s
-
-      var pixel = scr_ctx.getImageData(c.x/s, c.y/s, s, s)
-      var data  = pixel.data
-      var r     = data[0]
-      var g     = data[1]
-      var b     = data[2]
-      var a     = data[3]/255
-      var rgba  = 'rgba('+r+', '+g+', '+b+', '+a+')'
-      scan.style.background = rgba
-      scan.style.background = rgba
-      scan.innerHTML = '<p>'
-                     + c.x+' '+c.y
-                     + '<br>'
-                     + '<br>'
-                     + r+' '+g+' '+b+' '+a
-                     + '</p>'
-
-      if      (c.x > overlay.width - side)
-               c.x = overlay.width - side
-      else if (c.x < 0)
-               c.x = 0
-
-           if (c.y > overlay.height - side)
-               c.y = overlay.height - side
-      else if (c.y < 0)
-               c.y = 0
-
-      overlay_ctx.clearRect(0, 0, overlay.width, overlay.height);
-      overlay_ctx.fillStyle = 'rgba(0,255,0,.5)'
-      overlay_ctx.beginPath()
-      overlay_ctx.fillRect(c.x, c.y, side, side)
-      overlay_ctx.fill()
-
-    }
-
-
-
- // window.onmousemove = function(e){mousePos(overlay,e)}
-
- // window.onload = function(e)
     function launch(e)
     {
 
       console.log(wmsx)
       console.log(WMSX)
-
-      return true
-
-    }
-
-    function rem(e)
-    {
 
       snippet = {
                   'set' : 'Nenhum'
@@ -359,7 +121,7 @@
                 }
 
       proxy   = { /* Cross-Origin Resource Sharing free proxies */
-                  'set' : 'CORSify Me'
+                  'set' : 'CORS Anywhere'
 
                 , 'Nenhum'        : ''
                 , 'CORS Anywhere' : 'https://cors-anywhere.herokuapp.com/'
@@ -650,18 +412,19 @@
    // wmsx.Images.urls.sprites   = "../runtime/images/files/sprites.png"
 
    // WMSX.MACHINE               = sysrom.set.charAt(3) == '2' ? 'MSX2PA' : 'MSX1A'
-   // WMSX.TOUCH_MODE            = 1
-      WMSX.SCREEN_ELEMENT_ID     = 'wmsx-scr'
+   // WMSX.SCREEN_ELEMENT_ID     = 'wmsx-scr'
       WMSX.AUTO_START            = false
       WMSX.SPEED                 = 100
-      WMSX.CPU_TURBO_MODE        = 8
-      WMSX.VDP_TURBO_MODE        = 9
-      WMSX.AUTO_POWER_ON_DELAY   = 0
-      WMSX.SCREEN_CONTROL_BAR    = 1
-      WMSX.SCREEN_DEFAULT_ASPECT = 1
-      WMSX.SCREEN_DEFAULT_SCALE  = 1
-      WMSX.SCREEN_FILTER_MODE    = 0 // 1
-      WMSX.SPRITES_DEBUG_MODE    = 1
+   // WMSX.TOUCH_MODE            =  1
+      WMSX.FAST_BOOT             =  1
+      WMSX.CPU_TURBO_MODE        =  8 // 0..8
+      WMSX.VDP_TURBO_MODE        =  9 // 0..9
+      WMSX.AUTO_POWER_ON_DELAY   = -1
+      WMSX.SCREEN_CONTROL_BAR    =  1
+      WMSX.SCREEN_DEFAULT_ASPECT =  1
+      WMSX.SCREEN_DEFAULT_SCALE  =  1
+      WMSX.SCREEN_FILTER_MODE    =  0 // 0..1
+      WMSX.SPRITES_DEBUG_MODE    =  1
 
    // WMSX.CARTRIDGE1_URL        = curl(sysrom)
    // WMSX.CARTRIDGE2_URL        = curl(approm)
@@ -674,7 +437,8 @@
 
       document.getElementById('wmsx-header').innerHTML += ' ' + WMSX.VERSION
 
-      WMSX.start()
+   // WMSX.screenElement.id = 'wmsx-scr'
+      WMSX.room.start()
 
       settype(sysrom.set)
    // settype('HotBit')
@@ -836,74 +600,294 @@
 
     }
 
+
+
+    function db(str)         { console.log('--- DEBUG --- '+str) }
+    function curl(addr)      { var url = typeof addr === 'object' ? addr[addr.set] : addr; db(url); return url.charAt(0) == '@' ? url : encodeURI(proxy[proxy.set]+url) }
+    function wait(ms,cmd)    { setTimeout( function(){ ktype(cmd) }, ms ) }
+    function settype(type)   { WMSX.room.machine.setMachine( type.charAt(3) == '2' ? 'MSX2PA' : 'MSX1A' ); load(sysrom[type]) }
+
+    function ascii(code)
+    {
+      code = code.charAt(0) == 'x' ? parseInt(code.substring(1),16) : code
+      document.getElementById('input-box').value += String.fromCharCode( code )
+    }
+
+    function load(addr,port)
+    {
+      port=port||0
+      if (addr=='')
+         WMSX.room.cartridgeSlot.removeCartridge(port)
+      else
+         WMSX.room.fileLoader.readFromURL(curl(addr), wmsx.FileLoader.OPEN_TYPE.AUTO, port)
+      document.getElementById('wmsx-screen-canvas').focus()
+    }
+
+    function ktype(cmd,send)
+    {
+      cmd  = cmd  || 0
+      send = send || 0
+      var input = document.getElementById('input-box')
+      if (cmd) input.value = cmd
+      if (send=='send')
+      {
+        if (input.value.substr(input.value.length-1)!='\n') input.value += '\n'
+        WMSX.room.keyboard.typeString(tr(input.value))
+      }
+    }
+
+    function tr(str)
+    {
+      var re = new RegExp( '['+Object.keys(charmap).join('')+']', 'g' )
+      return str.replace( re, function(m)
+      {
+        var a = charmap[m]
+        var c = String.fromCharCode(a)
+        console.log('--- ASCII --- '+m+' - '+a+' - '+c)
+        return c
+       } )
+    }
+
+
+
+    function ctrl_stop()
+    {
+
+/*
+      WMSX.room.keyboard.processKey(WMSX.room.DOMKeys.CONTROL, true)
+      WMSX.room.keyboard.processKey(WMSX.room.DOMKeys.VK_F9.c, true)
+      WMSX.room.keyboard.processKey(WMSX.room.DOMKeys.VK_F9.c, false)
+      WMSX.room.keyboard.processKey(WMSX.room.DOMKeys.CONTROL, false)
+*/
+
+//    WMSX.room.keyboard.processKey('L-Control')
+//    WMSX.room.keyboard.processMSXKey('CONTROL')
+      WMSX.room.machineControls.processKey(20,true)
+      WMSX.room.machineControls.processKey(20,false)
+
+      console.log(WMSX.room.keyboard.getKeyMapping('CONTROL' )) // c:16777233 n:L-Control
+      console.log(WMSX.room.keyboard.getKeyMapping('STOP'    )) // c:120      n:F9
+      console.log(WMSX.room.keyboard.getKeyMapping('CAPSLOCK')) // c:20       n:CapsLock
+
+/*
+      WMSX.room.keyboard.processMSXKey('CONTROL', true)
+      WMSX.room.keyboard.processMSXKey('STOP'   , true)
+      WMSX.room.keyboard.processMSXKey('STOP'   , false)
+      WMSX.room.keyboard.processMSXKey('CONTROL', false)
+*/
+
+    }
+
+    function progressUpdate(data)
+    {
+      var ocr  = document.getElementById('ocr-box-tesseract')
+      var line = document.createElement('div')
+      line.appendChild(document.createTextNode(data.text))
+      ocr.insertBefore(line, ocr.firstChild)
+    }
+
+    function screenshot()
+    {
+      ss.src = scr.toDataURL('image/png')
+      document.querySelector('#ocr-box-ocrad').innerHTML = OCRAD(scr)
+      document.querySelector('#ss-scr').src = ss.src
+      document.querySelector('#ocr-box-tesseract').innerHTML = ''
+      Tesseract.recognize( ss.src, { lang: 'por' } ).then( function(data) { progressUpdate( data ) } )
+    }
+
+
+
+    function lockChangeAlert(e)
+    {
+
+      if (document.pointerLockElement === overlay || document.mozPointerLockElement === overlay)
+      {
+     // var rect = overlay.getBoundingClientRect()
+     // c.x = x - rect.left
+     // c.y = y - rect.top
+        console.log('The pointer lock status is now locked')
+        document.addEventListener('mousemove' , updatePosition , false)
+          window.addEventListener('keydown'   , updatePosition , false)
+      }
+      else
+      {
+        console.log('The pointer lock status is now unlocked')
+        document.removeEventListener('mousemove' , updatePosition , false)
+          window.removeEventListener('keydown'   , updatePosition , false)
+      }
+
+    }
+
+
+
+    // returns a position based on a mouseevent on a canvas. Based on code
+    // <http://miloq.blogspot.nl/2011/05/coordinates-mouse-click-canvas.html>
+    function mousePos(canvas, e)
+    {
+      var x = new Number()
+      var y = new Number()
+      if (e.x != undefined && e.y != undefined)
+      {
+        x = e.x
+        y = e.y
+      }
+      else // Firefox method to get the position
+      {
+        x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft
+        y = e.clientY + document.body.scrollTop  + document.documentElement.scrollTop
+      }
+      x -= canvas.offsetLeft
+      y -= canvas.offsetTop
+      return { x:x, y:y }
+    }
+
+
+
+    // <http://kirupa.com/canvas/moving_shapes_canvas_keyboard.htm>
+    function cursorMov(e)
+    {
+      var x = new Number()
+      var y = new Number()
+      switch(e.keyCode)
+      {
+        case 37: // left
+         x = -1
+         y =  0
+         break
+        case 38: // up
+         x =  0
+         y = -1
+         break
+        case 39: // right
+         x =  1
+         y =  0
+         break
+        case 40: // down
+         x =  0
+         y =  1
+         break
+      }
+      console.log('--  keyb  '+e.keyCode+'  '+x+'  '+y)
+      return { x:x, y:y }
+    }
+
+
+
+    function updatePosition(e)
+    {
+
+      e.preventDefault()
+
+      if (c.x == -1) c =  mousePos(overlay, e)
+                     d = cursorMov(e)
+
+      var movX = e.movementX || e.mozMovementX || e.webkitMovementX || 0
+      var movY = e.movementY || e.mozMovementY || e.webkitMovementY || 0
+
+      c.x += movX*side
+      c.y += movY*side
+
+      c.x +=  d.x*side
+      c.y +=  d.y*side
+
+      console.log('--  mous  '+movX+'  '+movY+'  '+d.x+'  '+d.y+'  '+c.x+'  '+c.y)
+
+   // var x     = (e.layerX-2)/s
+   // var y     = (e.layerY-2)/s
+
+      var pixel = scr_ctx.getImageData(c.x/s, c.y/s, s, s)
+      var data  = pixel.data
+      var r     = data[0]
+      var g     = data[1]
+      var b     = data[2]
+      var a     = data[3]/255
+      var rgba  = 'rgba('+r+', '+g+', '+b+', '+a+')'
+      scan.style.background = rgba
+      scan.style.background = rgba
+      scan.innerHTML = '<p>'
+                     + c.x+' '+c.y
+                     + '<br>'
+                     + '<br>'
+                     + r+' '+g+' '+b+' '+a
+                     + '</p>'
+
+      if      (c.x > overlay.width - side)
+               c.x = overlay.width - side
+      else if (c.x < 0)
+               c.x = 0
+
+           if (c.y > overlay.height - side)
+               c.y = overlay.height - side
+      else if (c.y < 0)
+               c.y = 0
+
+      overlay_ctx.clearRect(0, 0, overlay.width, overlay.height);
+      overlay_ctx.fillStyle = 'rgba(0,255,0,.5)'
+      overlay_ctx.beginPath()
+      overlay_ctx.fillRect(c.x, c.y, side, side)
+      overlay_ctx.fill()
+
+    }
+
+
+
+ // window.onmousemove = function(e){mousePos(overlay,e)}
+
+
+
+    // <http://trevweb.me.uk/javascripthtml-synchronous-and-asynchronous-loading>
+    // <http://github.com/processing/p5.js-sound/issues/16#issuecomment-48782514> Access to restricted URI denied
+    // <http://threejs.org/docs/#manual/introduction/How-to-run-things-locally>
+    //  about:config > security.fileuri.strict_origin_policy : false
+    function loadjs(url)
+    {
+      var count  = typeof n === 'undefined' ? '' : ' '.repeat(N.toString().length-n.toString().length)+n+' / '+N+' '
+      var script = document.createElement('script')
+      var req = new XMLHttpRequest()
+      req.open('GET', url, false) // false: synchronous
+      req.overrideMimeType('text/plain')
+      req.send(null)
+      script.text = req.responseText
+      document.head.appendChild(script)
+      console.log('SCRIPT '+count+'loaded  --  '+url)
+    }
+
+
+
     var scr, ss, s, side, scan, overlay, scr_ctx, overlay_ctx, c, d
 
     const CR = 'send'
 
 
 
-    use_devel = 1
-
-    // <http://trevweb.me.uk/javascripthtml-synchronous-and-asynchronous-loading/>
-    function loadrjs(url)
-    {
-      var script = document.createElement('script')
-
-      var req = new XMLHttpRequest()
-      req.open('GET', url, false) // false: synchronous
-      req.send(null)
-      script.text = req.responseText
-      document.head.appendChild(script)
-
-      var count = typeof n === 'undefined' ? '' : ' '.repeat(N.toString().length-n.toString().length)+n+' / '+N+' '
-      console.log('SCRIPT '+count+'loaded  --  '+url)
-    }
-
-    function loadljs(url,func)
-    {
-      var script = document.createElement('script')
-
-      script.src = url
-
-   // if (typeof func !== 'undefined') { script.onload = function () { func }}
-
-      document.head.appendChild(script)
-
-      var count = typeof n === 'undefined' ? '' : ' '.repeat(N.toString().length-n.toString().length)+n+' / '+N+' '
-      console.log('SCRIPT '+count+'loaded  --  '+url)
-    }
-
-
-
-    loadrjs('https://rawgit.com/naptha/tesseract.js/master/dist/tesseract.js')
-    loadrjs('https://rawgit.com/antimatter15/ocrad.js/master/ocrad.js')
+    loadjs('https://rawgit.com/naptha/tesseract.js/master/dist/tesseract.js')
+    loadjs('https://rawgit.com/antimatter15/ocrad.js/master/ocrad.js')
 
 
 
     if (use_devel)
     {
       module = new Object()
-      loadrjs('https://rawgit.com/ppeccin/WebMSX/master/gruntfile.js')
+      loadjs('https://rawgit.com/ppeccin/WebMSX/master/gruntfile.js')
       str = module.exports.toString()
       str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
       str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
       str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
       str = str.slice( str.indexOf("{") + 1 , str.lastIndexOf("}") + 0 )
       str = str.slice( str.indexOf("[") + 0 , str.    indexOf("]") + 1 )
-   // arr = JSON.parse(str)
-   // arr = JSON.parse(str).concat(['src/main/WMSX.js'])
-      arr = ['src/main/WMSX.js'].concat(JSON.parse(str))
-      console.log(arr)
+      arr = JSON.parse(str)
+      arr = ['src/main/WMSX.js'].concat(arr)
       n = 1
       N = arr.length
-      for (i in arr) { loadljs(arr[i]); n++ }
-   // loadljs('src/main/WMSX.js')
-      window.onload = function(e){launch(e)}
+      for (i in arr) { loadjs(arr[i]); n++ }
+      console.log(arr)
     }
     else
     {
-      loadljs('release/stable/5.0/embedded/wmsx.js')
+      loadjs('release/stable/5.0/embedded/wmsx.js')
     }
+
+    window.onload = function(e) { launch(e) }
 
   </script>
 
@@ -981,6 +965,7 @@
       margin: 0;
     }
 
+    #wmsx-screen,
     #wmsx-scr,
     #wmsx-bar
     {
@@ -1215,7 +1200,7 @@
   <div id="wmsx-block">
     <a id="wmsx-header" href="http://github.com/ppeccin/webmsx" target="_blank">WebMSX</a>
     <div id="wmsx">
-      <div id="wmsx-scr"></div>
+      <div id="wmsx-screen"></div>
       <!--canvas id="overlay"></canvas-->
     </div><!--
  --><select id="sysrom" ><option selected="selected" disabled="disabled">System ROM</option></select><!--
